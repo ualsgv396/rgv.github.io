@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aula Método · Clases de refuerzo universitario, Bachillerato y ESO</title>
+  <meta name="description" content="Clases particulares de Cálculo, Álgebra, Física, Estadística, Programación, Bachillerato, PAU/EBAU y ESO. Método guiado con exámenes reales y seguimiento personalizado.">
+  <meta name="theme-color" content="#0F1E36">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0F1E36',
+            brand: { 50: '#EEF3FF', 100: '#DCE6FF', 600: '#1F4FD1', 700: '#183FA8', 800: '#142F7A' },
+            marker: '#F5C542',
+            wa: '#128C4A'
+          },
+          fontFamily: {
+            display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+            sans: ['Figtree', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- QR generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    .hl { background: linear-gradient(transparent 58%, #F5C542 58%, #F5C542 92%, transparent 92%); padding: 0 .1em; }
+    .tab-active { background: #0F1E36; color: #fff; }
+    #qrcode img, #qrcode canvas { width: 100% !important; height: auto !important; image-rendering: pixelated; }
+    :focus-visible { outline: 3px solid #1F4FD1; outline-offset: 2px; }
+  </style>
+</head>
+<body class="bg-[#F7F8FB] font-sans text-ink antialiased">
+
+<!-- ============ CABECERA ============ -->
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6" aria-label="Principal">
+    <a href="#inicio" class="flex items-center gap-2.5">
+      <span class="grid h-10 w-10 place-items-center rounded-xl bg-ink text-marker"><i data-lucide="graduation-cap" class="h-5 w-5"></i></span>
+      <span class="leading-tight">
+        <span class="block font-display text-lg font-extrabold">Aula Método</span>
+        <span class="block text-xs text-slate-600">[Nombre Apellido] · Refuerzo académico</span>
+      </span>
+    </a>
+    <ul class="hidden items-center gap-7 text-sm font-medium text-slate-700 lg:flex">
+      <li><a class="hover:text-brand-600" href="#profesor">Profesor</a></li>
+      <li><a class="hover:text-brand-600" href="#asignaturas">Asignaturas</a></li>
+      <li><a class="hover:text-brand-600" href="#tarifas">Tarifas</a></li>
+      <li><a class="hover:text-brand-600" href="#opiniones">Opiniones</a></li>
+      <li><a class="hover:text-brand-600" href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="flex items-center gap-2">
+      <a href="#contacto" class="hidden rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-700 sm:inline-flex">Reservar clase</a>
+      <button id="menuBtn" class="grid h-11 w-11 place-items-center rounded-lg border border-slate-200 lg:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><i data-lucide="menu" class="h-5 w-5"></i></button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white lg:hidden">
+    <ul class="mx-auto grid max-w-6xl gap-1 px-4 py-3 text-base font-medium">
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-slate-100" href="#profesor">Profesor</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-slate-100" href="#asignaturas">Asignaturas</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-slate-100" href="#tarifas">Tarifas</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-slate-100" href="#opiniones">Opiniones</a></li>
+      <li><a class="block rounded-lg px-3 py-3 hover:bg-slate-100" href="#contacto">Contacto</a></li>
+      <li><a class="mt-2 block rounded-full bg-brand-600 px-5 py-3 text-center font-semibold text-white" href="#contacto">Reservar clase</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="inicio">
+
+<!-- ============ HERO ============ -->
+<section class="relative overflow-hidden">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.15fr_.85fr] lg:pb-24 lg:pt-20">
+    <div>
+      <p class="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3 py-1 text-sm font-semibold text-brand-700">
+        <i data-lucide="calendar-check" class="h-4 w-4"></i> Plazas abiertas para este cuatrimestre
+      </p>
+      <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+        Supera tus asignaturas de <span class="hl">universidad y bachillerato</span> con un método guiado y práctico.
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-slate-600">
+        Clases individuales y en grupos reducidos, trabajando sobre exámenes reales de tu facultad o de la PAU. Sabrás exactamente qué estudiar, cómo y cuándo.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a data-wa href="#" target="_blank" rel="noopener" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-wa px-6 font-semibold text-white shadow-sm hover:brightness-110">
+          <i data-lucide="message-circle" class="h-5 w-5"></i> Contactar por WhatsApp
+        </a>
+        <a href="#asignaturas" class="inline-flex min-h-[48px] items-center gap-2 rounded-full border-2 border-ink px-6 font-semibold hover:bg-ink hover:text-white">
+          Ver asignaturas <i data-lucide="arrow-down" class="h-4 w-4"></i>
+        </a>
+      </div>
+      <dl class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Grado</dt>
+          <dd class="mt-1 font-display text-base font-bold leading-tight">[Ing. / Matemáticas / Física]</dd>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Máster</dt>
+          <dd class="mt-1 font-display text-base font-bold leading-tight">[Máster en Profesorado]</dd>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Experiencia</dt>
+          <dd class="mt-1 font-display text-2xl font-extrabold">[X] años</dd>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+          <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Aprobados</dt>
+          <dd class="mt-1 font-display text-2xl font-extrabold text-brand-600">[XX]%</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-sm lg:max-w-none">
+      <div class="absolute -right-6 -top-6 h-40 w-40 rounded-3xl bg-marker" aria-hidden="true"></div>
+      <figure class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+        <!-- Sustituye el src por la foto real del profesor -->
+        <img src="https://placehold.co/600x720/E6ECF7/0F1E36?text=Foto+del+profesor" alt="Foto de [Nombre Apellido], profesor de Aula Método" class="aspect-[5/6] w-full object-cover" width="600" height="720">
+        <figcaption class="flex items-center justify-between gap-3 border-t border-slate-200 p-4">
+          <span>
+            <span class="block font-display font-bold">[Nombre Apellido]</span>
+            <span class="block text-sm text-slate-600">Profesor de Matemáticas, Física y Programación</span>
+          </span>
+          <span class="inline-flex items-center gap-1 rounded-full bg-brand-50 px-3 py-1 text-sm font-bold text-brand-700"><i data-lucide="badge-check" class="h-4 w-4"></i> Titulado</span>
+        </figcaption>
+      </figure>
+      <div class="absolute -bottom-5 -left-4 flex items-center gap-3 rounded-2xl bg-ink px-4 py-3 text-white shadow-lg sm:-left-8">
+        <i data-lucide="file-check-2" class="h-6 w-6 text-marker"></i>
+        <span class="text-sm leading-tight"><b class="block">Exámenes reales</b>de convocatorias anteriores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE EL PROFESOR ============ -->
+<section id="profesor" class="scroll-mt-20 border-y border-slate-200 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Sobre el profesor</p>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Formación sólida, explicación sencilla.</h2>
+      <p class="mt-4 text-lg text-slate-600">[Breve presentación: quién eres, por qué das clase y qué tipo de alumno consigue mejores resultados contigo.]</p>
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+      <div>
+        <h3 class="flex items-center gap-2 font-display text-xl font-bold"><i data-lucide="book-open-check" class="h-5 w-5 text-brand-600"></i> Formación y trayectoria</h3>
+        <ol class="mt-6 space-y-6 border-l-2 border-slate-200 pl-6">
+          <li class="relative">
+            <span class="absolute -left-[33px] top-1 h-4 w-4 rounded-full border-4 border-white bg-brand-600 ring-2 ring-brand-600"></span>
+            <p class="text-sm font-semibold text-slate-500">[Año – Año] · [Universidad]</p>
+            <p class="font-semibold">Grado en [Titulación]</p>
+            <p class="text-slate-600">Especialidad en [mención / especialidad]. [Expediente, premios o matrícula de honor, si aplica.]</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[33px] top-1 h-4 w-4 rounded-full border-4 border-white bg-brand-600 ring-2 ring-brand-600"></span>
+            <p class="text-sm font-semibold text-slate-500">[Año] · [Universidad]</p>
+            <p class="font-semibold">Máster en [Profesorado / especialidad]</p>
+            <p class="text-slate-600">[Línea de trabajo o prácticas docentes.]</p>
+          </li>
+          <li class="relative">
+            <span class="absolute -left-[33px] top-1 h-4 w-4 rounded-full border-4 border-white bg-brand-600 ring-2 ring-brand-600"></span>
+            <p class="text-sm font-semibold text-slate-500">[Año] – actualidad</p>
+            <p class="font-semibold">Profesor de refuerzo universitario y de Bachillerato</p>
+            <p class="text-slate-600">[X] años preparando asignaturas de primeros cursos de Ingeniería, Ciencias y ADE, PAU y ESO.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 class="flex items-center gap-2 font-display text-xl font-bold"><i data-lucide="route" class="h-5 w-5 text-brand-600"></i> Metodología</h3>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          <article class="rounded-2xl border border-slate-200 bg-[#F7F8FB] p-5">
+            <i data-lucide="user" class="h-6 w-6 text-brand-600"></i>
+            <h4 class="mt-3 font-bold">Individual o grupo reducido</h4>
+            <p class="mt-1 text-sm text-slate-600">Clase 1:1 a tu ritmo, o grupos de máximo [4] alumnos de la misma asignatura.</p>
+          </article>
+          <article class="rounded-2xl border border-slate-200 bg-[#F7F8FB] p-5">
+            <i data-lucide="file-text" class="h-6 w-6 text-brand-600"></i>
+            <h4 class="mt-3 font-bold">Exámenes reales</h4>
+            <p class="mt-1 text-sm text-slate-600">Resolvemos convocatorias anteriores de tu facultad o de la PAU, paso a paso.</p>
+          </article>
+          <article class="rounded-2xl border border-slate-200 bg-[#F7F8FB] p-5">
+            <i data-lucide="messages-square" class="h-6 w-6 text-brand-600"></i>
+            <h4 class="mt-3 font-bold">Dudas 24/7</h4>
+            <p class="mt-1 text-sm text-slate-600">Envía una foto del ejercicio por chat y recibe la explicación sin esperar a la siguiente clase.</p>
+          </article>
+          <article class="rounded-2xl border border-slate-200 bg-[#F7F8FB] p-5">
+            <i data-lucide="line-chart" class="h-6 w-6 text-brand-600"></i>
+            <h4 class="mt-3 font-bold">Seguimiento personal</h4>
+            <p class="mt-1 text-sm text-slate-600">Plan de estudio semanal y, en menores, informe de progreso para las familias.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASIGNATURAS ============ -->
+<section id="asignaturas" class="scroll-mt-20">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Asignaturas y niveles</p>
+        <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Elige tu nivel y tu asignatura.</h2>
+      </div>
+      <div class="inline-flex rounded-full border border-slate-300 bg-white p-1" role="tablist" aria-label="Nivel educativo">
+        <button role="tab" id="tab-uni" aria-controls="panel-uni" aria-selected="true" class="tab-btn tab-active min-h-[44px] rounded-full px-5 text-sm font-semibold">Universidad</button>
+        <button role="tab" id="tab-bach" aria-controls="panel-bach" aria-selected="false" class="tab-btn min-h-[44px] rounded-full px-5 text-sm font-semibold text-slate-700">Bachillerato · PAU · ESO</button>
+      </div>
+    </div>
+
+    <!-- Universidad -->
+    <div id="panel-uni" role="tabpanel" aria-labelledby="tab-uni" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+    <!-- Bachillerato -->
+    <div id="panel-bach" role="tabpanel" aria-labelledby="tab-bach" class="mt-10 hidden grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</section>
+
+<!-- ============ TARIFAS ============ -->
+<section id="tarifas" class="scroll-mt-20 bg-ink text-white">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-marker">Modalidades y tarifas</p>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Precios claros, sin matrícula ni permanencia.</h2>
+      <p class="mt-4 text-lg text-slate-300">Primera clase de diagnóstico para valorar tu nivel y preparar un plan. Pago por Bizum o transferencia.</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      <article class="flex flex-col rounded-3xl bg-white p-7 text-ink">
+        <h3 class="font-display text-xl font-bold">Clase suelta</h3>
+        <p class="mt-1 text-sm text-slate-600">Para una duda concreta o un examen cercano.</p>
+        <p class="mt-6"><span class="font-display text-5xl font-extrabold">[XX] €</span> <span class="text-slate-600">/ hora</span></p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Clase individual 1:1</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Apuntes de la sesión</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Dudas por chat 48 h después</li>
+          <li class="flex gap-2 text-slate-400"><i data-lucide="minus" class="h-5 w-5 shrink-0"></i> Simulacros corregidos</li>
+        </ul>
+        <a data-wa data-wa-text="Hola, me interesa una clase suelta de" href="#" target="_blank" rel="noopener" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Reservar clase</a>
+      </article>
+
+      <article class="relative flex flex-col rounded-3xl bg-marker p-7 text-ink ring-4 ring-marker/40">
+        <span class="absolute -top-3 right-6 rounded-full bg-ink px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">Más elegido</span>
+        <h3 class="font-display text-xl font-bold">Bono mensual</h3>
+        <p class="mt-1 text-sm text-ink/80">[8] horas al mes para llevar la asignatura al día.</p>
+        <p class="mt-6"><span class="font-display text-5xl font-extrabold">[XXX] €</span> <span class="text-ink/80">/ mes</span></p>
+        <p class="text-sm font-semibold">Equivale a [XX] € / hora</p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Clases individuales con horario fijo</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Dudas ilimitadas por chat 24/7</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Simulacros de examen corregidos</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Banco de exámenes resueltos</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Informe mensual (alumnos menores)</li>
+        </ul>
+        <a data-wa data-wa-text="Hola, me interesa el bono mensual para" href="#" target="_blank" rel="noopener" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full bg-ink font-semibold text-white hover:bg-brand-800">Reservar plaza</a>
+      </article>
+
+      <article class="flex flex-col rounded-3xl bg-white p-7 text-ink">
+        <h3 class="font-display text-xl font-bold">Grupo reducido</h3>
+        <p class="mt-1 text-sm text-slate-600">De 2 a [4] alumnos de la misma asignatura.</p>
+        <p class="mt-6"><span class="font-display text-5xl font-extrabold">[XX] €</span> <span class="text-slate-600">/ hora y alumno</span></p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Sesiones semanales de 1,5 h</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Grupo de dudas por chat</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Simulacro corregido antes del examen</li>
+          <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Apuntes y ejercicios resueltos</li>
+        </ul>
+        <a data-wa data-wa-text="Hola, me interesa un grupo reducido de" href="#" target="_blank" rel="noopener" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Apuntarme a un grupo</a>
+      </article>
+    </div>
+
+    <!-- Tabla comparativa -->
+    <div class="mt-12 overflow-x-auto rounded-2xl border border-white/15">
+      <table class="w-full min-w-[640px] text-left text-sm">
+        <caption class="sr-only">Comparativa de modalidades</caption>
+        <thead class="bg-white/5 text-slate-300">
+          <tr><th scope="col" class="px-5 py-4 font-semibold">Incluye</th><th scope="col" class="px-5 py-4 font-semibold">Clase suelta</th><th scope="col" class="px-5 py-4 font-semibold text-marker">Bono mensual</th><th scope="col" class="px-5 py-4 font-semibold">Grupo reducido</th></tr>
+        </thead>
+        <tbody class="divide-y divide-white/10">
+          <tr><th scope="row" class="px-5 py-4 font-medium">Atención</th><td class="px-5 py-4">Individual</td><td class="px-5 py-4">Individual</td><td class="px-5 py-4">2–[4] alumnos</td></tr>
+          <tr><th scope="row" class="px-5 py-4 font-medium">Dudas por chat</th><td class="px-5 py-4">48 h</td><td class="px-5 py-4">Ilimitadas 24/7</td><td class="px-5 py-4">Chat de grupo</td></tr>
+          <tr><th scope="row" class="px-5 py-4 font-medium">Simulacros corregidos</th><td class="px-5 py-4">—</td><td class="px-5 py-4">Sí, cada mes</td><td class="px-5 py-4">1 antes del examen</td></tr>
+          <tr><th scope="row" class="px-5 py-4 font-medium">Material</th><td class="px-5 py-4">Apuntes de la sesión</td><td class="px-5 py-4">Apuntes + banco de exámenes</td><td class="px-5 py-4">Apuntes + ejercicios</td></tr>
+          <tr><th scope="row" class="px-5 py-4 font-medium">Modalidad</th><td class="px-5 py-4" colspan="3">Online, presencial en el aula o a domicilio ([zona], suplemento [X] €)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPINIONES ============ -->
+<section id="opiniones" class="scroll-mt-20">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Opiniones y casos de éxito</p>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Lo que cuentan los alumnos.</h2>
+      <!-- Sustituye cada tarjeta por una opinión real, con permiso del alumno -->
+    </div>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      <figure class="flex flex-col rounded-3xl border border-slate-200 bg-white p-6">
+        <div class="flex items-center justify-between">
+          <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">Universidad</span>
+          <span class="font-display text-sm font-bold">[Suspenso] → <span class="text-brand-600">[nota]</span></span>
+        </div>
+        <blockquote class="mt-4 flex-1 text-slate-700">“[Opinión real del alumno: qué le costaba, qué cambió y cómo le fue en el examen.]”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4">
+          <span class="grid h-11 w-11 place-items-center rounded-full bg-ink font-bold text-white">[A]</span>
+          <span><b class="block">[Nombre A.]</b><span class="text-sm text-slate-600">[1º Ingeniería] · [Cálculo I]</span></span>
+        </figcaption>
+      </figure>
+      <figure class="flex flex-col rounded-3xl border border-slate-200 bg-white p-6">
+        <div class="flex items-center justify-between">
+          <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">PAU</span>
+          <span class="font-display text-sm font-bold">Nota PAU: <span class="text-brand-600">[nota]</span></span>
+        </div>
+        <blockquote class="mt-4 flex-1 text-slate-700">“[Opinión real del alumno de 2º de Bachillerato sobre la preparación de la PAU.]”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4">
+          <span class="grid h-11 w-11 place-items-center rounded-full bg-ink font-bold text-white">[B]</span>
+          <span><b class="block">[Nombre B.]</b><span class="text-sm text-slate-600">[2º Bachillerato] · [Matemáticas II]</span></span>
+        </figcaption>
+      </figure>
+      <figure class="flex flex-col rounded-3xl border border-slate-200 bg-white p-6">
+        <div class="flex items-center justify-between">
+          <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">Universidad</span>
+          <span class="font-display text-sm font-bold">[Suspenso] → <span class="text-brand-600">[nota]</span></span>
+        </div>
+        <blockquote class="mt-4 flex-1 text-slate-700">“[Opinión real del alumno o de su familia sobre el seguimiento y los resultados.]”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4">
+          <span class="grid h-11 w-11 place-items-center rounded-full bg-ink font-bold text-white">[C]</span>
+          <span><b class="block">[Nombre C.]</b><span class="text-sm text-slate-600">[2º ADE] · [Estadística]</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QR ============ -->
+<section id="compartir" class="scroll-mt-20 border-y border-slate-200 bg-white">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Comparte esta web</p>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Escanea, guárdala y pásala a tu grupo de clase.</h2>
+      <p class="mt-4 text-lg text-slate-600">Apunta el móvil al código para abrir la web al instante. Descárgalo en imagen para carteles de la facultad o grupos de apuntes.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <button id="qrDownload" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ink px-6 font-semibold text-white hover:bg-brand-800"><i data-lucide="download" class="h-5 w-5"></i> Descargar QR (PNG)</button>
+        <button id="shareBtn" class="inline-flex min-h-[48px] items-center gap-2 rounded-full border-2 border-ink px-6 font-semibold hover:bg-ink hover:text-white"><i data-lucide="share-2" class="h-5 w-5"></i> Compartir enlace</button>
+      </div>
+      <p id="shareMsg" class="mt-3 text-sm font-medium text-brand-700" role="status" aria-live="polite"></p>
+    </div>
+    <div class="mx-auto w-full max-w-xs">
+      <div class="rounded-[2rem] bg-ink p-5 shadow-xl">
+        <div class="rounded-2xl bg-white p-5">
+          <div id="qrcode" class="mx-auto aspect-square w-full" role="img" aria-label="Código QR con el enlace a esta web"></div>
+        </div>
+        <div class="flex items-center justify-between gap-3 px-1 pt-4 text-white">
+          <span class="leading-tight"><b class="block font-display">Aula Método</b><span class="text-xs text-slate-300">Clases de refuerzo</span></span>
+          <i data-lucide="scan-line" class="h-7 w-7 text-marker"></i>
+        </div>
+      </div>
+      <p id="qrUrl" class="mt-3 break-all text-center text-xs text-slate-500"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="scroll-mt-20">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Ubicación, contacto y horarios</p>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Reserva tu plaza hoy.</h2>
+      <p class="mt-4 text-lg text-slate-600">Respuesta en menos de [2] horas en horario de atención.</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="space-y-4 lg:col-span-1">
+        <a data-wa href="#" target="_blank" rel="noopener" class="flex items-center gap-4 rounded-2xl bg-wa p-5 text-white hover:brightness-110">
+          <i data-lucide="message-circle" class="h-7 w-7"></i>
+          <span><b class="block">WhatsApp</b><span class="text-sm">Escribe y te respondo hoy</span></span>
+        </a>
+        <a href="tel:+34600000000" class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-brand-600">
+          <i data-lucide="phone" class="h-6 w-6 text-brand-600"></i>
+          <span><b class="block">Teléfono</b><span class="text-sm text-slate-600">[+34 600 000 000]</span></span>
+        </a>
+        <a href="mailto:[correo@dominio.es]" class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-brand-600">
+          <i data-lucide="mail" class="h-6 w-6 text-brand-600"></i>
+          <span><b class="block">Correo</b><span class="text-sm text-slate-600">[correo@dominio.es]</span></span>
+        </a>
+        <a href="[https://meet.google.com/xxx-xxxx-xxx]" target="_blank" rel="noopener" class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-brand-600">
+          <i data-lucide="video" class="h-6 w-6 text-brand-600"></i>
+          <span><b class="block">Clases online</b><span class="text-sm text-slate-600">Google Meet / Zoom · pizarra digital</span></span>
+        </a>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 lg:col-span-1">
+        <h3 class="flex items-center gap-2 font-display text-lg font-bold"><i data-lucide="clock" class="h-5 w-5 text-brand-600"></i> Horario semanal</h3>
+        <table class="mt-4 w-full text-sm">
+          <caption class="sr-only">Horario de disponibilidad</caption>
+          <tbody class="divide-y divide-slate-100">
+            <tr><th scope="row" class="py-3 text-left font-medium">Lunes – Jueves</th><td class="py-3 text-right">[16:00 – 21:30]</td></tr>
+            <tr><th scope="row" class="py-3 text-left font-medium">Viernes</th><td class="py-3 text-right">[16:00 – 20:00]</td></tr>
+            <tr><th scope="row" class="py-3 text-left font-medium">Sábado</th><td class="py-3 text-right">[10:00 – 14:00]</td></tr>
+            <tr><th scope="row" class="py-3 text-left font-medium">Domingo</th><td class="py-3 text-right text-slate-500">Solo online en época de exámenes</td></tr>
+          </tbody>
+        </table>
+        <p class="mt-4 rounded-xl bg-marker/30 p-3 text-sm"><b>Época de exámenes:</b> horario ampliado y sesiones intensivas.</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white lg:col-span-1">
+        <!-- Sustituye la consulta "q=" por la dirección real -->
+        <iframe title="Mapa de ubicación del aula" src="https://www.google.com/maps?q=Universidad&output=embed" class="h-56 w-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="p-5">
+          <h3 class="flex items-center gap-2 font-bold"><i data-lucide="map-pin" class="h-5 w-5 text-brand-600"></i> [Calle, número, ciudad]</h3>
+          <p class="mt-2 text-sm text-slate-600">[A X minutos andando del campus. Parada de bus / tranvía más cercana: …]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="bg-ink text-slate-300">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <p>© <span id="year"></span> Aula Método · [Nombre Apellido]. Todos los derechos reservados.</p>
+    <ul class="flex flex-wrap gap-x-5 gap-y-2">
+      <li><a class="hover:text-white" href="#aviso-legal">Aviso legal</a></li>
+      <li><a class="hover:text-white" href="#privacidad">Política de privacidad</a></li>
+      <li><a class="hover:text-white" href="#cookies">Cookies</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOTANTE ============ -->
+<a id="waFloat" data-wa href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" class="fixed bottom-5 right-5 z-50 inline-flex h-14 items-center gap-2 rounded-full bg-wa px-4 text-white shadow-2xl ring-4 ring-white hover:brightness-110 sm:px-5">
+  <svg viewBox="0 0 24 24" class="h-7 w-7" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.44-9.44 9.44zm8.04-17.48A11.3 11.3 0 0 0 12.04.7C5.77.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.6l6-1.57a11.33 11.33 0 0 0 5.45 1.39h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.03-1.18-5.89-3.32-8.03z"/></svg>
+  <span class="hidden font-semibold sm:inline">¿Hablamos?</span>
+</a>
+
+<script>
+  /* ================= CONFIGURACIÓN ================= */
+  const CONFIG = {
+    whatsapp: '34600000000',            // Número en formato internacional, sin "+" ni espacios
+    mensaje: 'Hola, me gustaría información sobre las clases de',
+    qrUrl: ''                            // Déjalo vacío para usar la URL actual, o pon tu dominio
+  };
+
+  const subjects = {
+    uni: [
+      { icon: 'sigma', name: 'Cálculo I y II', topics: 'Límites, derivadas, integrales, series, varias variables y ecuaciones diferenciales.' },
+      { icon: 'grid-3x3', name: 'Álgebra lineal', topics: 'Matrices, sistemas, espacios vectoriales, aplicaciones lineales, diagonalización.' },
+      { icon: 'atom', name: 'Física I y II', topics: 'Cinemática, dinámica, energía, campos, electromagnetismo y circuitos.' },
+      { icon: 'bar-chart-3', name: 'Estadística', topics: 'Descriptiva, probabilidad, distribuciones, inferencia, contrastes y regresión.' },
+      { icon: 'code-2', name: 'Programación', topics: 'Python, C/C++ y Java: fundamentos, estructuras de datos, POO y prácticas.' },
+      { icon: 'calculator', name: 'Matemáticas para ADE', topics: 'Matemáticas empresariales, optimización y matemática financiera.' }
+    ],
+    bach: [
+      { icon: 'target', name: 'Matemáticas II · PAU', topics: 'Análisis, álgebra, geometría y probabilidad con exámenes PAU/EBAU de tu comunidad.' },
+      { icon: 'trending-up', name: 'Matemáticas CC. Sociales', topics: 'Matrices, programación lineal, funciones, probabilidad y estadística.' },
+      { icon: 'orbit', name: 'Física de Bachillerato', topics: 'Gravitación, campo eléctrico y magnético, ondas, óptica y física moderna.' },
+      { icon: 'flask-conical', name: 'Química de Bachillerato', topics: 'Estequiometría, equilibrio, ácido-base, redox y química orgánica.' },
+      { icon: 'pencil-ruler', name: 'Matemáticas 1º Bachillerato', topics: 'Trigonometría, números complejos, funciones, límites y derivadas.' },
+      { icon: 'backpack', name: 'Matemáticas y Física ESO', topics: 'Refuerzo de 3º y 4º ESO, técnicas de estudio y recuperaciones.' }
+    ]
+  };
+
+  const waLink = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+
+  function renderSubjects(key, panelId) {
+    const panel = document.getElementById(panelId);
+    panel.innerHTML = subjects[key].map((s) => `
+      <article class="flex flex-col rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg">
+        <div class="flex items-center gap-3">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600"><i data-lucide="${s.icon}" class="h-5 w-5"></i></span>
+          <h3 class="font-display text-lg font-bold leading-tight">${s.name}</h3>
+        </div>
+        <dl class="mt-5 space-y-4 text-sm">
+          <div><dt class="font-semibold text-slate-500">Temario</dt><dd class="mt-1 text-slate-700">${s.topics}</dd></div>
+          <div><dt class="font-semibold text-slate-500">Modalidad</dt>
+            <dd class="mt-2 flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold"><i data-lucide="monitor" class="h-3.5 w-3.5"></i>Online</span>
+              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold"><i data-lucide="school" class="h-3.5 w-3.5"></i>Academia</span>
+              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold"><i data-lucide="home" class="h-3.5 w-3.5"></i>Domicilio</span>
+            </dd></div>
+          <div><dt class="font-semibold text-slate-500">Material incluido</dt><dd class="mt-1 text-slate-700">Apuntes propios, ejercicios resueltos y exámenes de convocatorias anteriores.</dd></div>
+        </dl>
+        <a href="${waLink(CONFIG.mensaje + ' ' + s.name + '.')}" target="_blank" rel="noopener" class="mt-6 inline-flex min-h-[44px] items-center gap-1 font-semibold text-brand-600 hover:text-brand-800">Pedir información <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+      </article>`).join('');
+  }
+
+  renderSubjects('uni', 'panel-uni');
+  renderSubjects('bach', 'panel-bach');
+
+  // Pestañas accesibles
+  const tabs = [...document.querySelectorAll('.tab-btn')];
+  function selectTab(tab) {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      t.classList.toggle('tab-active', on);
+      t.classList.toggle('text-slate-700', !on);
+      document.getElementById(t.getAttribute('aria-controls')).classList.toggle('hidden', !on);
+    });
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => selectTab(t));
+    t.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        selectTab(next); next.focus();
+      }
+    });
+  });
+
+  // Enlaces de WhatsApp
+  document.querySelectorAll('[data-wa]').forEach((a) => {
+    a.href = waLink(a.dataset.waText ? a.dataset.waText + ' ' : CONFIG.mensaje + ' ');
+  });
+
+  // Menú móvil
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden'); menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Código QR
+  const shareUrl = CONFIG.qrUrl || window.location.href.split('#')[0];
+  document.getElementById('qrUrl').textContent = shareUrl;
+  new QRCode(document.getElementById('qrcode'), {
+    text: shareUrl, width: 512, height: 512,
+    colorDark: '#0F1E36', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H
+  });
+
+  document.getElementById('qrDownload').addEventListener('click', () => {
+    const box = document.getElementById('qrcode');
+    const canvas = box.querySelector('canvas');
+    const img = box.querySelector('img');
+    const src = canvas ? canvas.toDataURL('image/png') : img && img.src;
+    if (!src) return;
+    // Añade margen blanco y pie para carteles impresos
+    const out = document.createElement('canvas');
+    out.width = 640; out.height = 720;
+    const ctx = out.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, out.width, out.height);
+    const qr = new Image();
+    qr.onload = () => {
+      ctx.drawImage(qr, 64, 64, 512, 512);
+      ctx.fillStyle = '#0F1E36'; ctx.textAlign = 'center';
+      ctx.font = 'bold 32px Figtree, sans-serif';
+      ctx.fillText('Aula Método · Clases de refuerzo', 320, 636);
+      ctx.font = '22px Figtree, sans-serif';
+      ctx.fillText('Escanéame para reservar tu plaza', 320, 676);
+      const link = document.createElement('a');
+      link.download = 'aula-metodo-qr.png';
+      link.href = out.toDataURL('image/png');
+      link.click();
+    };
+    qr.src = src;
+  });
+
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    const msg = document.getElementById('shareMsg');
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'Aula Método', text: 'Clases de refuerzo universitario y Bachillerato', url: shareUrl });
+      } else {
+        await navigator.clipboard.writeText(shareUrl);
+        msg.textContent = 'Enlace copiado al portapapeles.';
+      }
+    } catch (e) { /* compartir cancelado */ }
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  lucide.createIcons();
+</script>
+</body>
+</html>
