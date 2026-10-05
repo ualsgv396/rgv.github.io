@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Alejandro Ruiz Martín · Profesor Titular de Universidad</title>
+  <meta name="description" content="Sitio web académico del Dr. Alejandro Ruiz Martín: docencia, tutorías, investigación, publicaciones y recursos para estudiantes.">
+  <meta name="author" content="Alejandro Ruiz Martín">
+  <meta name="theme-color" content="#1e3a5f">
+
+  <!-- Aplica el tema antes de pintar la página para evitar parpadeos -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            serif: ['"Source Serif 4"', 'Georgia', 'serif']
+          },
+          colors: {
+            brand: {
+              50: '#f0f5fa', 100: '#dce7f2', 200: '#b9cfe5', 300: '#8eb0d3',
+              400: '#5f8bbd', 500: '#3f6ea4', 600: '#2f5788', 700: '#27466e',
+              800: '#1e3a5f', 900: '#172c47'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :focus-visible { outline: 2px solid #3f6ea4; outline-offset: 3px; border-radius: 4px; }
+    section { scroll-margin-top: 5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-stone-50 text-slate-700 font-sans antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-300">
+
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-brand-800 focus:px-4 focus:py-2 focus:text-white">
+    Saltar al contenido principal
+  </a>
+
+  <!-- ===================== NAVEGACIÓN ===================== -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-stone-50/85 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/85">
+    <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6" aria-label="Navegación principal">
+      <a href="#inicio" class="flex items-center gap-2 font-serif text-lg font-semibold text-slate-900 dark:text-white">
+        <span class="flex h-8 w-8 items-center justify-center rounded-md bg-brand-800 text-sm font-sans font-bold text-white dark:bg-brand-500" aria-hidden="true">AR</span>
+        <span>A. Ruiz Martín</span>
+      </a>
+
+      <ul class="hidden items-center gap-1 text-sm font-medium md:flex">
+        <li><a href="#docencia" class="nav-link rounded-md px-3 py-2 hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white">Docencia</a></li>
+        <li><a href="#tutorias" class="nav-link rounded-md px-3 py-2 hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white">Tutorías</a></li>
+        <li><a href="#investigacion" class="nav-link rounded-md px-3 py-2 hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white">Investigación</a></li>
+        <li><a href="#recursos" class="nav-link rounded-md px-3 py-2 hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white">Recursos</a></li>
+        <li><a href="#contacto" class="nav-link rounded-md px-3 py-2 hover:bg-slate-200/60 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white">Contacto</a></li>
+      </ul>
+
+      <div class="flex items-center gap-1">
+        <button id="theme-toggle" type="button" class="flex h-10 w-10 items-center justify-center rounded-full text-slate-600 hover:bg-slate-200/70 dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Cambiar a modo oscuro" title="Cambiar tema">
+          <i class="fa-solid fa-moon text-lg dark:hidden" aria-hidden="true"></i>
+          <i class="fa-solid fa-sun hidden text-lg text-amber-400 dark:inline" aria-hidden="true"></i>
+        </button>
+        <button id="menu-toggle" type="button" class="flex h-10 w-10 items-center justify-center rounded-full text-slate-600 hover:bg-slate-200/70 dark:text-slate-300 dark:hover:bg-slate-800 md:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+          <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-stone-50 px-4 pb-4 dark:border-slate-800 dark:bg-slate-950 md:hidden">
+      <ul class="flex flex-col pt-2 text-base font-medium">
+        <li><a href="#docencia" class="block rounded-md px-3 py-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">Docencia</a></li>
+        <li><a href="#tutorias" class="block rounded-md px-3 py-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">Tutorías</a></li>
+        <li><a href="#investigacion" class="block rounded-md px-3 py-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">Investigación</a></li>
+        <li><a href="#recursos" class="block rounded-md px-3 py-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">Recursos</a></li>
+        <li><a href="#contacto" class="block rounded-md px-3 py-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===================== PERFIL ===================== -->
+    <section id="inicio" class="pt-28 pb-16 sm:pt-32 sm:pb-20" aria-labelledby="perfil-nombre">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[auto,1fr] lg:gap-14">
+        <div class="flex justify-center lg:justify-start">
+          <img
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=480&h=480&q=80"
+            alt="Retrato del Dr. Alejandro Ruiz Martín"
+            width="240" height="240"
+            class="h-44 w-44 rounded-full object-cover shadow-lg ring-4 ring-white sm:h-56 sm:w-56 dark:ring-slate-800">
+        </div>
+
+        <div class="text-center lg:text-left">
+          <p class="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-300">Profesor Titular de Universidad</p>
+          <h1 id="perfil-nombre" class="font-serif text-4xl font-bold leading-tight text-slate-900 sm:text-5xl dark:text-white">Dr. Alejandro Ruiz Martín</h1>
+          <p class="mt-3 text-lg text-slate-600 dark:text-slate-400">
+            Departamento de Informática · Escuela Superior de Ingeniería<br class="hidden sm:block">
+            Universidad de Ejemplo
+          </p>
+
+          <p class="mx-auto mt-6 max-w-2xl leading-relaxed lg:mx-0">
+            Doctor en Ingeniería Informática. Mi investigación se centra en el aprendizaje automático aplicado a sistemas
+            ciberfísicos y en la computación de alto rendimiento. Imparto docencia en programación, arquitectura de computadores
+            y ciencia de datos en grado y máster, y dirijo Trabajos Fin de Grado, Fin de Máster y tesis doctorales.
+          </p>
+
+          <!-- Contacto rápido -->
+          <ul id="contacto" class="mt-8 grid gap-3 text-left sm:grid-cols-3" aria-label="Datos de contacto">
+            <li>
+              <a href="mailto:aruiz@universidad.es" class="group flex h-full items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+                <i class="fa-solid fa-envelope mt-0.5 text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+                <span class="min-w-0">
+                  <span class="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Correo</span>
+                  <span class="block break-all text-sm font-medium text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">aruiz@universidad.es</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+34950000000" class="group flex h-full items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+                <i class="fa-solid fa-phone mt-0.5 text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+                <span>
+                  <span class="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Teléfono</span>
+                  <span class="block text-sm font-medium text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">+34 950 000 000 · Ext. 1234</span>
+                </span>
+              </a>
+            </li>
+            <li class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+              <i class="fa-solid fa-location-dot mt-0.5 text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+              <span>
+                <span class="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Despacho</span>
+                <span class="block text-sm font-medium text-slate-900 dark:text-white">Edificio CITE III · Planta 2 · Despacho 2.14</span>
+              </span>
+            </li>
+          </ul>
+
+          <!-- Perfiles externos -->
+          <ul class="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start" aria-label="Perfiles externos">
+            <li><a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium hover:border-brand-400 hover:text-brand-700 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500 dark:hover:text-brand-300"><i class="fa-brands fa-google-scholar text-[#4285F4]" aria-hidden="true"></i>Google Scholar</a></li>
+            <li><a href="https://orcid.org/0000-0000-0000-0000" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium hover:border-brand-400 hover:text-brand-700 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500 dark:hover:text-brand-300"><i class="fa-brands fa-orcid text-[#A6CE39]" aria-hidden="true"></i>ORCID</a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium hover:border-brand-400 hover:text-brand-700 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500 dark:hover:text-brand-300"><i class="fa-brands fa-linkedin text-[#0A66C2]" aria-hidden="true"></i>LinkedIn</a></li>
+            <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium hover:border-brand-400 hover:text-brand-700 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500 dark:hover:text-brand-300"><i class="fa-brands fa-github text-slate-900 dark:text-white" aria-hidden="true"></i>GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DOCENCIA ===================== -->
+    <section id="docencia" class="border-t border-slate-200 py-16 sm:py-20 dark:border-slate-800" aria-labelledby="docencia-titulo">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mb-10 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-300">Curso 2026/2027</p>
+          <h2 id="docencia-titulo" class="mt-1 font-serif text-3xl font-bold text-slate-900 dark:text-white">Asignaturas y docencia</h2>
+          <p class="mt-3">Guías docentes, calendario y materiales de cada asignatura. El material completo está disponible en el campus virtual.</p>
+        </header>
+
+        <!-- Filtro Grado / Máster -->
+        <div class="mb-8 inline-flex rounded-lg border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-900" role="group" aria-label="Filtrar asignaturas por nivel">
+          <button type="button" data-filter="todas" class="filter-btn rounded-md px-4 py-1.5 text-sm font-medium" aria-pressed="true">Todas</button>
+          <button type="button" data-filter="grado" class="filter-btn rounded-md px-4 py-1.5 text-sm font-medium" aria-pressed="false">Grado</button>
+          <button type="button" data-filter="master" class="filter-btn rounded-md px-4 py-1.5 text-sm font-medium" aria-pressed="false">Máster</button>
+        </div>
+
+        <!-- Grado -->
+        <div class="course-group mb-12" data-level="grado">
+          <h3 class="mb-5 flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-graduation-cap text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+            Grado en Ingeniería Informática
+          </h3>
+          <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-brand-50 px-2 py-0.5 font-mono text-xs font-semibold text-brand-700 dark:bg-brand-900/60 dark:text-brand-200">40151101</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">6 ECTS</span>
+              </div>
+              <h4 class="mt-3 font-serif text-xl font-semibold text-slate-900 dark:text-white">Fundamentos de Programación</h4>
+              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">1.º curso · 1.er semestre · Formación básica</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed">Algoritmia, tipos de datos, estructuras de control, funciones, recursividad y depuración con Python.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 text-sm font-medium dark:border-slate-800">
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>Guía docente</a>
+                <span class="text-slate-300 dark:text-slate-700" aria-hidden="true">|</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-laptop" aria-hidden="true"></i>Campus virtual</a>
+              </div>
+            </article>
+
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-brand-50 px-2 py-0.5 font-mono text-xs font-semibold text-brand-700 dark:bg-brand-900/60 dark:text-brand-200">40152205</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">6 ECTS</span>
+              </div>
+              <h4 class="mt-3 font-serif text-xl font-semibold text-slate-900 dark:text-white">Arquitectura de Computadores</h4>
+              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">2.º curso · 2.º semestre · Obligatoria</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed">Segmentación, jerarquía de memoria, paralelismo a nivel de instrucción, multiprocesadores y GPU.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 text-sm font-medium dark:border-slate-800">
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>Guía docente</a>
+                <span class="text-slate-300 dark:text-slate-700" aria-hidden="true">|</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-laptop" aria-hidden="true"></i>Campus virtual</a>
+              </div>
+            </article>
+
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-brand-50 px-2 py-0.5 font-mono text-xs font-semibold text-brand-700 dark:bg-brand-900/60 dark:text-brand-200">40154112</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">6 ECTS</span>
+              </div>
+              <h4 class="mt-3 font-serif text-xl font-semibold text-slate-900 dark:text-white">Aprendizaje Automático</h4>
+              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">4.º curso · 1.er semestre · Optativa</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed">Regresión, clasificación, árboles y ensembles, redes neuronales, validación de modelos y ética de datos.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 text-sm font-medium dark:border-slate-800">
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>Guía docente</a>
+                <span class="text-slate-300 dark:text-slate-700" aria-hidden="true">|</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-laptop" aria-hidden="true"></i>Campus virtual</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Máster -->
+        <div class="course-group" data-level="master">
+          <h3 class="mb-5 flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-user-graduate text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+            Máster Universitario en Ciencia de Datos
+          </h3>
+          <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-amber-50 px-2 py-0.5 font-mono text-xs font-semibold text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">70501103</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">4,5 ECTS</span>
+              </div>
+              <h4 class="mt-3 font-serif text-xl font-semibold text-slate-900 dark:text-white">Computación de Alto Rendimiento</h4>
+              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">1.er curso · 1.er semestre · Obligatoria</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed">Programación paralela con OpenMP, MPI y CUDA; análisis de rendimiento y escalabilidad en clústeres.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 text-sm font-medium dark:border-slate-800">
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>Guía docente</a>
+                <span class="text-slate-300 dark:text-slate-700" aria-hidden="true">|</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-laptop" aria-hidden="true"></i>Campus virtual</a>
+              </div>
+            </article>
+
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-amber-50 px-2 py-0.5 font-mono text-xs font-semibold text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">70501207</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">3 ECTS</span>
+              </div>
+              <h4 class="mt-3 font-serif text-xl font-semibold text-slate-900 dark:text-white">Aprendizaje Profundo</h4>
+              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">1.er curso · 2.º semestre · Optativa</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed">Redes convolucionales y recurrentes, transformers, transferencia de aprendizaje y despliegue con PyTorch.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 text-sm font-medium dark:border-slate-800">
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>Guía docente</a>
+                <span class="text-slate-300 dark:text-slate-700" aria-hidden="true">|</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-laptop" aria-hidden="true"></i>Campus virtual</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TUTORÍAS ===================== -->
+    <section id="tutorias" class="border-t border-slate-200 bg-white py-16 sm:py-20 dark:border-slate-800 dark:bg-slate-900/50" aria-labelledby="tutorias-titulo">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mb-10 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-300">Atención al estudiante</p>
+          <h2 id="tutorias-titulo" class="mt-1 font-serif text-3xl font-bold text-slate-900 dark:text-white">Horario de tutorías</h2>
+          <p class="mt-3">Primer y segundo semestre. Fuera de este horario, las tutorías pueden concertarse bajo petición.</p>
+        </header>
+
+        <div class="grid gap-8 lg:grid-cols-[1fr,320px]">
+          <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full min-w-[520px] text-left text-sm">
+              <caption class="sr-only">Horario semanal de tutorías con día, franja horaria, modalidad y lugar</caption>
+              <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
+                <tr>
+                  <th scope="col" class="px-5 py-3 font-semibold">Día</th>
+                  <th scope="col" class="px-5 py-3 font-semibold">Horario</th>
+                  <th scope="col" class="px-5 py-3 font-semibold">Modalidad</th>
+                  <th scope="col" class="px-5 py-3 font-semibold">Lugar / enlace</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 bg-white dark:divide-slate-800 dark:bg-slate-900">
+                <tr>
+                  <th scope="row" class="px-5 py-4 font-semibold text-slate-900 dark:text-white">Lunes</th>
+                  <td class="px-5 py-4 tabular-nums">10:00 – 12:00</td>
+                  <td class="px-5 py-4"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Presencial</span></td>
+                  <td class="px-5 py-4">Despacho 2.14</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="px-5 py-4 font-semibold text-slate-900 dark:text-white">Martes</th>
+                  <td class="px-5 py-4 tabular-nums">16:00 – 18:00</td>
+                  <td class="px-5 py-4"><span class="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-2.5 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-900/40 dark:text-sky-300"><i class="fa-solid fa-video" aria-hidden="true"></i>Online · Teams</span></td>
+                  <td class="px-5 py-4"><a href="#" class="font-medium text-brand-700 hover:underline dark:text-brand-300">Unirse a la reunión</a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="px-5 py-4 font-semibold text-slate-900 dark:text-white">Miércoles</th>
+                  <td class="px-5 py-4 tabular-nums">11:00 – 13:00</td>
+                  <td class="px-5 py-4"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Presencial</span></td>
+                  <td class="px-5 py-4">Despacho 2.14</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="px-5 py-4 font-semibold text-slate-900 dark:text-white">Jueves</th>
+                  <td class="px-5 py-4 tabular-nums">—</td>
+                  <td class="px-5 py-4 text-slate-400 dark:text-slate-500" colspan="2">Sin tutorías (docencia en máster)</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="px-5 py-4 font-semibold text-slate-900 dark:text-white">Viernes</th>
+                  <td class="px-5 py-4 tabular-nums">09:00 – 11:00</td>
+                  <td class="px-5 py-4"><span class="inline-flex items-center gap-1.5 rounded-full bg-violet-50 px-2.5 py-1 text-xs font-semibold text-violet-700 dark:bg-violet-900/40 dark:text-violet-300"><i class="fa-solid fa-video" aria-hidden="true"></i>Online · Meet</span></td>
+                  <td class="px-5 py-4"><a href="#" class="font-medium text-brand-700 hover:underline dark:text-brand-300">Unirse a la reunión</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="rounded-2xl border border-brand-200 bg-brand-50 p-6 dark:border-brand-800 dark:bg-brand-900/30" aria-labelledby="cita-titulo">
+            <h3 id="cita-titulo" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-white">
+              <i class="fa-regular fa-calendar-check text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+              Cita previa
+            </h3>
+            <ol class="mt-4 space-y-3 text-sm">
+              <li class="flex gap-3"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-800 text-xs font-bold text-white dark:bg-brand-500">1</span>Reserva una franja en el calendario o escribe con al menos 24 h de antelación.</li>
+              <li class="flex gap-3"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-800 text-xs font-bold text-white dark:bg-brand-500">2</span>Indica asignatura, grupo y el motivo de la consulta.</li>
+              <li class="flex gap-3"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-800 text-xs font-bold text-white dark:bg-brand-500">3</span>Recibirás confirmación y, si es online, el enlace a la reunión.</li>
+            </ol>
+            <div class="mt-6 flex flex-col gap-2">
+              <a href="#" class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-400">
+                <i class="fa-regular fa-calendar" aria-hidden="true"></i>Reservar en el calendario
+              </a>
+              <a href="mailto:aruiz@universidad.es?subject=Solicitud%20de%20tutor%C3%ADa" class="inline-flex items-center justify-center gap-2 rounded-lg border border-brand-300 bg-white px-4 py-2.5 text-sm font-semibold text-brand-800 hover:bg-brand-100 dark:border-brand-700 dark:bg-transparent dark:text-brand-200 dark:hover:bg-brand-900/50">
+                <i class="fa-regular fa-envelope" aria-hidden="true"></i>Solicitar por correo
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== INVESTIGACIÓN ===================== -->
+    <section id="investigacion" class="border-t border-slate-200 py-16 sm:py-20 dark:border-slate-800" aria-labelledby="investigacion-titulo">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mb-10 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-300">Investigación</p>
+          <h2 id="investigacion-titulo" class="mt-1 font-serif text-3xl font-bold text-slate-900 dark:text-white">Líneas de investigación y publicaciones</h2>
+        </header>
+
+        <ul class="mb-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Líneas de investigación">
+          <li class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <i class="fa-solid fa-brain text-xl text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+            <h3 class="mt-3 font-semibold text-slate-900 dark:text-white">Aprendizaje automático</h3>
+            <p class="mt-1 text-sm">Modelos eficientes e interpretables para datos de sensores.</p>
+          </li>
+          <li class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <i class="fa-solid fa-microchip text-xl text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+            <h3 class="mt-3 font-semibold text-slate-900 dark:text-white">Computación de altas prestaciones</h3>
+            <p class="mt-1 text-sm">Paralelismo heterogéneo CPU-GPU y eficiencia energética.</p>
+          </li>
+          <li class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <i class="fa-solid fa-solar-panel text-xl text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+            <h3 class="mt-3 font-semibold text-slate-900 dark:text-white">Sistemas ciberfísicos</h3>
+            <p class="mt-1 text-sm">Gemelos digitales para agricultura y energía.</p>
+          </li>
+          <li class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <i class="fa-solid fa-chalkboard-user text-xl text-brand-600 dark:text-brand-300" aria-hidden="true"></i>
+            <h3 class="mt-3 font-semibold text-slate-900 dark:text-white">Innovación docente</h3>
+            <p class="mt-1 text-sm">Aprendizaje basado en proyectos en ingeniería.</p>
+          </li>
+        </ul>
+
+        <h3 class="mb-6 text-lg font-semibold text-slate-900 dark:text-white">Publicaciones destacadas</h3>
+        <ol class="space-y-0 divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+          <li class="grid gap-2 py-6 sm:grid-cols-[80px,1fr] sm:gap-6">
+            <span class="font-serif text-2xl font-semibold text-brand-600 tabular-nums dark:text-brand-300">2026</span>
+            <div>
+              <p class="text-sm"><strong class="font-semibold text-slate-900 dark:text-white">Ruiz-Martín, A.</strong>, <strong class="font-semibold text-slate-900 dark:text-white">García López, M.</strong>, <strong class="font-semibold text-slate-900 dark:text-white">Fernández, J. L.</strong></p>
+              <p class="mt-1 font-serif text-lg font-semibold leading-snug text-slate-900 dark:text-white">Energy-aware scheduling of deep learning workloads on heterogeneous edge clusters</p>
+              <p class="mt-1 text-sm italic text-slate-500 dark:text-slate-400">IEEE Transactions on Parallel and Distributed Systems, 37(4), 812–826</p>
+              <a href="https://doi.org/10.0000/tpds.2026.00001" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-link" aria-hidden="true"></i>DOI: 10.0000/tpds.2026.00001</a>
+            </div>
+          </li>
+          <li class="grid gap-2 py-6 sm:grid-cols-[80px,1fr] sm:gap-6">
+            <span class="font-serif text-2xl font-semibold text-brand-600 tabular-nums dark:text-brand-300">2025</span>
+            <div>
+              <p class="text-sm"><strong class="font-semibold text-slate-900 dark:text-white">Moreno, P.</strong>, <strong class="font-semibold text-slate-900 dark:text-white">Ruiz-Martín, A.</strong></p>
+              <p class="mt-1 font-serif text-lg font-semibold leading-snug text-slate-900 dark:text-white">Digital twins for greenhouse climate control using physics-informed neural networks</p>
+              <p class="mt-1 text-sm italic text-slate-500 dark:text-slate-400">Computers and Electronics in Agriculture, 228, 109654</p>
+              <a href="https://doi.org/10.0000/compag.2025.109654" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-link" aria-hidden="true"></i>DOI: 10.0000/compag.2025.109654</a>
+            </div>
+          </li>
+          <li class="grid gap-2 py-6 sm:grid-cols-[80px,1fr] sm:gap-6">
+            <span class="font-serif text-2xl font-semibold text-brand-600 tabular-nums dark:text-brand-300">2025</span>
+            <div>
+              <p class="text-sm"><strong class="font-semibold text-slate-900 dark:text-white">Ruiz-Martín, A.</strong>, <strong class="font-semibold text-slate-900 dark:text-white">Sánchez Ortega, L.</strong>, <strong class="font-semibold text-slate-900 dark:text-white">Navarro, C.</strong></p>
+              <p class="mt-1 font-serif text-lg font-semibold leading-snug text-slate-900 dark:text-white">Interpretable anomaly detection in industrial IoT streams</p>
+              <p class="mt-1 text-sm italic text-slate-500 dark:text-slate-400">Proc. International Conference on Machine Learning and Applications (ICMLA), pp. 1102–1109</p>
+              <a href="https://doi.org/10.0000/icmla.2025.00180" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-link" aria-hidden="true"></i>DOI: 10.0000/icmla.2025.00180</a>
+            </div>
+          </li>
+          <li class="grid gap-2 py-6 sm:grid-cols-[80px,1fr] sm:gap-6">
+            <span class="font-serif text-2xl font-semibold text-brand-600 tabular-nums dark:text-brand-300">2024</span>
+            <div>
+              <p class="text-sm"><strong class="font-semibold text-slate-900 dark:text-white">Ruiz-Martín, A.</strong>, <strong class="font-semibold text-slate-900 dark:text-white">Torres Vega, R.</strong></p>
+              <p class="mt-1 font-serif text-lg font-semibold leading-snug text-slate-900 dark:text-white">Project-based learning in parallel programming courses: a three-year study</p>
+              <p class="mt-1 text-sm italic text-slate-500 dark:text-slate-400">IEEE Transactions on Education, 67(2), 245–254</p>
+              <a href="https://doi.org/10.0000/te.2024.00042" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 hover:underline dark:text-brand-300"><i class="fa-solid fa-link" aria-hidden="true"></i>DOI: 10.0000/te.2024.00042</a>
+            </div>
+          </li>
+        </ol>
+        <p class="mt-6 text-sm">
+          Lista completa en
+          <a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer" class="font-medium text-brand-700 hover:underline dark:text-brand-300">Google Scholar</a>
+          y
+          <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" rel="noopener noreferrer" class="font-medium text-brand-700 hover:underline dark:text-brand-300">ORCID</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== RECURSOS ===================== -->
+    <section id="recursos" class="border-t border-slate-200 bg-white py-16 sm:py-20 dark:border-slate-800 dark:bg-slate-900/50" aria-labelledby="recursos-titulo">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mb-10 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-widest text-brand-600 dark:text-brand-300">Para estudiantes</p>
+          <h2 id="recursos-titulo" class="mt-1 font-serif text-3xl font-bold text-slate-900 dark:text-white">Recursos</h2>
+          <p class="mt-3">Material de apoyo de libre acceso. Algunos recursos requieren identificarse con la cuenta institucional.</p>
+        </header>
+
+        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <li>
+            <a href="#" class="group flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+              <span>
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">Apuntes y transparencias</span>
+                <span class="mt-1 block text-sm">Temario completo en PDF de las asignaturas de grado.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200"><i class="fa-solid fa-file-code" aria-hidden="true"></i></span>
+              <span>
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">Plantilla LaTeX para TFG</span>
+                <span class="mt-1 block text-sm">Formato oficial de la escuela, con bibliografía BibLaTeX.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></span>
+              <span>
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">Plantilla LaTeX para TFM</span>
+                <span class="mt-1 block text-sm">Incluye estructura recomendada y guía de estilo.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="group flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200"><i class="fa-brands fa-github" aria-hidden="true"></i></span>
+              <span>
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">Repositorio de código</span>
+                <span class="mt-1 block text-sm">Ejemplos y prácticas resueltas en Python, C y CUDA.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></span>
+              <span>
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">Propuestas de TFG / TFM</span>
+                <span class="mt-1 block text-sm">Temas ofertados este curso y cómo solicitarlos.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-stone-50 p-5 transition hover:border-brand-400 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-500">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></span>
+              <span>
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300">Preguntas frecuentes</span>
+                <span class="mt-1 block text-sm">Evaluación, revisiones de examen y convocatorias.</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="border-t border-slate-200 py-10 text-sm dark:border-slate-800">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 sm:px-6 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-xl">
+        <p class="font-semibold text-slate-900 dark:text-white">Aviso legal</p>
+        <p class="mt-1 text-slate-500 dark:text-slate-400">
+          Sitio web personal con fines docentes e informativos. Las opiniones expresadas son del autor y no representan
+          necesariamente a la Universidad de Ejemplo. Este sitio no utiliza cookies de seguimiento; solo guarda en tu
+          navegador la preferencia de tema claro/oscuro.
+        </p>
+      </div>
+      <div class="text-slate-500 md:text-right dark:text-slate-400">
+        <p>Última actualización: <time datetime="2026-10-05">5 de octubre de 2026</time></p>
+        <p class="mt-1">&copy; <span id="year">2026</span> Alejandro Ruiz Martín. Todos los derechos reservados.</p>
+        <a href="#inicio" class="mt-3 inline-flex items-center gap-1.5 font-medium text-brand-700 hover:underline dark:text-brand-300">
+          <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>Volver arriba
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+
+      // ---- Tema claro / oscuro ----
+      var themeBtn = document.getElementById('theme-toggle');
+      function syncThemeLabel() {
+        var dark = root.classList.contains('dark');
+        themeBtn.setAttribute('aria-label', dark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+      }
+      themeBtn.addEventListener('click', function () {
+        var dark = root.classList.toggle('dark');
+        try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+        syncThemeLabel();
+      });
+      syncThemeLabel();
+
+      // ---- Menú móvil ----
+      var menuBtn = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      function setMenu(open) {
+        menu.classList.toggle('hidden', !open);
+        menuBtn.setAttribute('aria-expanded', String(open));
+        menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        menuBtn.querySelector('i').className = 'fa-solid text-lg ' + (open ? 'fa-xmark' : 'fa-bars');
+      }
+      menuBtn.addEventListener('click', function () {
+        setMenu(menu.classList.contains('hidden'));
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      // ---- Filtro de asignaturas ----
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var groups = document.querySelectorAll('.course-group');
+      var activeCls = ['bg-brand-800', 'text-white', 'dark:bg-brand-500'];
+      var idleCls = ['text-slate-600', 'hover:text-slate-900', 'dark:text-slate-300', 'dark:hover:text-white'];
+      function applyFilter(level) {
+        filterBtns.forEach(function (b) {
+          var on = b.dataset.filter === level;
+          b.setAttribute('aria-pressed', String(on));
+          activeCls.forEach(function (c) { b.classList.toggle(c, on); });
+          idleCls.forEach(function (c) { b.classList.toggle(c, !on); });
+        });
+        groups.forEach(function (g) {
+          g.classList.toggle('hidden', level !== 'todas' && g.dataset.level !== level);
+        });
+      }
+      filterBtns.forEach(function (b) {
+        b.addEventListener('click', function () { applyFilter(b.dataset.filter); });
+      });
+      applyFilter('todas');
+
+      // ---- Resaltar sección activa en la navegación ----
+      var links = document.querySelectorAll('.nav-link');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            links.forEach(function (l) {
+              var on = l.getAttribute('href') === '#' + entry.target.id;
+              l.classList.toggle('text-brand-700', on);
+              l.classList.toggle('dark:text-brand-300', on);
+              if (on) { l.setAttribute('aria-current', 'true'); } else { l.removeAttribute('aria-current'); }
+            });
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        ['docencia', 'tutorias', 'investigacion', 'recursos'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) observer.observe(el);
+        });
+      }
+
+      // ---- Año del copyright ----
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
