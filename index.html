@@ -203,13 +203,13 @@
 
     <!-- Carrusel: las flechas desplazan una tarjeta; la de la izquierda sale y entra una nueva por la derecha -->
     <div id="carousel" role="region" aria-roledescription="carrusel" aria-label="Asignaturas" class="relative mt-10">
-      <button id="prevBtn" type="button" aria-label="Asignatura anterior" class="absolute left-1 top-[40%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-lg bg-marker text-ink shadow-lg hover:brightness-95 sm:-left-6">
+      <button id="prevBtn" type="button" aria-label="Asignatura anterior" class="absolute left-1 top-[40%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center bg-marker text-ink shadow-lg hover:brightness-95 sm:-left-6">
         <i data-lucide="arrow-left" class="h-6 w-6"></i>
       </button>
       <div class="-mx-2 overflow-hidden">
         <div id="track" class="flex"></div>
       </div>
-      <button id="nextBtn" type="button" aria-label="Asignatura siguiente" class="absolute right-1 top-[40%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-lg bg-marker text-ink shadow-lg hover:brightness-95 sm:-right-6">
+      <button id="nextBtn" type="button" aria-label="Asignatura siguiente" class="absolute right-1 top-[40%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center bg-marker text-ink shadow-lg hover:brightness-95 sm:-right-6">
         <i data-lucide="arrow-right" class="h-6 w-6"></i>
       </button>
       <p id="carouselStatus" class="sr-only" aria-live="polite"></p>
@@ -227,7 +227,7 @@
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
-      <article class="flex flex-col rounded-3xl bg-white p-7 text-ink">
+      <article class="flex flex-col bg-white p-7 text-ink">
         <h3 class="font-display text-xl font-bold">Clase suelta</h3>
         <p class="mt-1 text-sm text-slate-600">Para una duda concreta o un examen cercano.</p>
         <p class="mt-6"><span class="font-display text-5xl font-extrabold">[XX] €</span> <span class="text-slate-600">/ hora</span></p>
@@ -237,11 +237,11 @@
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Dudas por chat 48 h después</li>
           <li class="flex gap-2 text-slate-400"><i data-lucide="minus" class="h-5 w-5 shrink-0"></i> Simulacros corregidos</li>
         </ul>
-        <a data-mail data-mail-subject="Reserva: clase suelta" data-mail-intro="Me gustaría reservar una clase suelta." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Reservar clase</a>
+        <a data-mail data-mail-subject="Reserva: clase suelta" data-mail-intro="Me gustaría reservar una clase suelta." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center border-2 border-ink font-semibold hover:bg-ink hover:text-white">Reservar clase</a>
       </article>
 
-      <article class="relative flex flex-col rounded-3xl bg-marker p-7 text-ink ring-4 ring-marker/40">
-        <span class="absolute -top-3 right-6 rounded-full bg-ink px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">Más elegido</span>
+      <article class="relative flex flex-col bg-marker p-7 text-ink ring-4 ring-marker/40">
+        <span class="absolute -top-3 right-6 bg-ink px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">Más elegido</span>
         <h3 class="font-display text-xl font-bold">Bono mensual</h3>
         <p class="mt-1 text-sm text-ink/80">[8] horas al mes para llevar la asignatura al día.</p>
         <p class="mt-6"><span class="font-display text-5xl font-extrabold">[XXX] €</span> <span class="text-ink/80">/ mes</span></p>
@@ -253,10 +253,10 @@
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Banco de exámenes resueltos</li>
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Informe mensual (alumnos menores)</li>
         </ul>
-        <a data-mail data-mail-subject="Reserva: bono mensual" data-mail-intro="Me gustaría reservar plaza con el bono mensual." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full bg-ink font-semibold text-white hover:bg-brand-800">Reservar plaza</a>
+        <a data-mail data-mail-subject="Reserva: bono mensual" data-mail-intro="Me gustaría reservar plaza con el bono mensual." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center bg-ink font-semibold text-white hover:bg-brand-800">Reservar plaza</a>
       </article>
 
-      <article class="flex flex-col rounded-3xl bg-white p-7 text-ink">
+      <article class="flex flex-col bg-white p-7 text-ink">
         <h3 class="font-display text-xl font-bold">Grupo reducido</h3>
         <p class="mt-1 text-sm text-slate-600">De 2 a [4] alumnos de la misma asignatura.</p>
         <p class="mt-6"><span class="font-display text-5xl font-extrabold">[XX] €</span> <span class="text-slate-600">/ hora y alumno</span></p>
@@ -266,12 +266,12 @@
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Simulacro corregido antes del examen</li>
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Apuntes y ejercicios resueltos</li>
         </ul>
-        <a data-mail data-mail-subject="Reserva: grupo reducido" data-mail-intro="Me gustaría apuntarme a un grupo reducido." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Apuntarme a un grupo</a>
+        <a data-mail data-mail-subject="Reserva: grupo reducido" data-mail-intro="Me gustaría apuntarme a un grupo reducido." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center border-2 border-ink font-semibold hover:bg-ink hover:text-white">Apuntarme a un grupo</a>
       </article>
     </div>
 
     <!-- Tabla comparativa -->
-    <div class="mt-12 overflow-x-auto rounded-2xl border border-white/15">
+    <div class="mt-12 overflow-x-auto border border-white/15">
       <table class="w-full min-w-[640px] text-left text-sm">
         <caption class="sr-only">Comparativa de modalidades</caption>
         <thead class="bg-white/5 text-slate-300">
@@ -511,11 +511,11 @@
     const level = key === 'uni' ? 'Universidad' : 'Bachillerato · ESO';
     track.innerHTML = subjects[key].map((s) => `
       <article class="shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4" aria-roledescription="diapositiva" aria-label="${s.name}">
-        <div class="flex h-full flex-col rounded-2xl bg-ink p-4 text-white">
-          <div class="${poster} relative flex aspect-square flex-col overflow-hidden rounded-xl p-5">
+        <div class="flex h-full flex-col bg-ink p-4 text-white">
+          <div class="${poster} relative flex aspect-square flex-col overflow-hidden p-5">
             <i data-lucide="${s.icon}" class="pointer-events-none absolute -bottom-6 -right-6 h-40 w-40 text-white/15" aria-hidden="true"></i>
             <span class="text-xs font-bold uppercase tracking-[.2em] text-marker">Aula Método</span>
-            <span class="mt-1 inline-flex w-fit rounded-full bg-marker px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-ink">${level}</span>
+            <span class="mt-1 inline-flex w-fit bg-marker px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-ink">${level}</span>
             <span class="relative mt-auto font-display text-3xl font-extrabold leading-none">${s.name}</span>
             <span class="relative mt-3 text-sm leading-snug text-white/85">${s.topics}</span>
           </div>
