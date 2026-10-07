@@ -38,6 +38,10 @@
 
   <style>
     .tab-active { background: #0F1E36; color: #fff; }
+    /* Carrusel de asignaturas */
+    .poster { background-color: #183FA8; background-image: linear-gradient(rgba(255,255,255,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px); background-size: 22px 22px; }
+    .poster-alt { background-color: #142F7A; }
+    #track { will-change: transform; }
     #qrcode img, #qrcode canvas { width: 100% !important; height: auto !important; image-rendering: pixelated; }
     details summary::-webkit-details-marker { display: none; }
     :focus-visible { outline: 3px solid #1F4FD1; outline-offset: 2px; }
@@ -91,8 +95,8 @@
     <p class="mt-2 text-base text-slate-600 sm:text-lg">Graduado Universitario · Clases Particulares y Refuerzo Académico</p>
 
     <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a data-wa href="#" target="_blank" rel="noopener" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-wa px-6 font-semibold text-white shadow-sm hover:brightness-110">
-        <i data-lucide="message-circle" class="h-5 w-5"></i> Contactar por WhatsApp
+      <a data-mail href="#" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-600 px-6 font-semibold text-white shadow-sm hover:bg-brand-700">
+        <i data-lucide="mail" class="h-5 w-5"></i> Contactar por Gmail
       </a>
       <a href="#asignaturas" class="inline-flex min-h-[48px] items-center gap-2 rounded-full border-2 border-ink px-6 font-semibold hover:bg-ink hover:text-white">
         Ver asignaturas <i data-lucide="arrow-down" class="h-4 w-4"></i>
@@ -186,21 +190,30 @@
 <!-- ============ ASIGNATURAS ============ -->
 <section id="asignaturas" class="scroll-mt-20">
   <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
-    <div class="flex flex-wrap items-end justify-between gap-6">
+    <div class="flex flex-wrap items-end justify-between gap-6 border-b-2 border-ink pb-6">
       <div class="max-w-2xl">
         <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Asignaturas y niveles</p>
-        <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Elige tu nivel y tu asignatura.</h2>
+        <h2 class="mt-2 font-display text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Elige tu asignatura</h2>
       </div>
       <div class="inline-flex rounded-full border border-slate-300 bg-white p-1" role="tablist" aria-label="Nivel educativo">
-        <button role="tab" id="tab-uni" aria-controls="panel-uni" aria-selected="true" class="tab-btn tab-active min-h-[44px] rounded-full px-5 text-sm font-semibold">Universidad</button>
-        <button role="tab" id="tab-bach" aria-controls="panel-bach" aria-selected="false" class="tab-btn min-h-[44px] rounded-full px-5 text-sm font-semibold text-slate-700">Bachillerato · PAU · ESO</button>
+        <button role="tab" id="tab-uni" data-level="uni" aria-controls="carousel" aria-selected="true" class="tab-btn tab-active min-h-[44px] rounded-full px-5 text-sm font-semibold">Universidad</button>
+        <button role="tab" id="tab-bach" data-level="bach" aria-controls="carousel" aria-selected="false" class="tab-btn min-h-[44px] rounded-full px-5 text-sm font-semibold text-slate-700">Bachillerato · PAU · ESO</button>
       </div>
     </div>
 
-    <!-- Universidad -->
-    <div id="panel-uni" role="tabpanel" aria-labelledby="tab-uni" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
-    <!-- Bachillerato -->
-    <div id="panel-bach" role="tabpanel" aria-labelledby="tab-bach" class="mt-10 hidden grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+    <!-- Carrusel: las flechas desplazan una tarjeta; la de la izquierda sale y entra una nueva por la derecha -->
+    <div id="carousel" role="region" aria-roledescription="carrusel" aria-label="Asignaturas" class="relative mt-10">
+      <button id="prevBtn" type="button" aria-label="Asignatura anterior" class="absolute left-1 top-[40%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-lg bg-marker text-ink shadow-lg hover:brightness-95 sm:-left-6">
+        <i data-lucide="arrow-left" class="h-6 w-6"></i>
+      </button>
+      <div class="-mx-2 overflow-hidden">
+        <div id="track" class="flex"></div>
+      </div>
+      <button id="nextBtn" type="button" aria-label="Asignatura siguiente" class="absolute right-1 top-[40%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-lg bg-marker text-ink shadow-lg hover:brightness-95 sm:-right-6">
+        <i data-lucide="arrow-right" class="h-6 w-6"></i>
+      </button>
+      <p id="carouselStatus" class="sr-only" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 
@@ -224,7 +237,7 @@
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Dudas por chat 48 h después</li>
           <li class="flex gap-2 text-slate-400"><i data-lucide="minus" class="h-5 w-5 shrink-0"></i> Simulacros corregidos</li>
         </ul>
-        <a data-wa data-wa-text="Hola, me interesa una clase suelta de" href="#" target="_blank" rel="noopener" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Reservar clase</a>
+        <a data-mail data-mail-subject="Reserva: clase suelta" data-mail-intro="Me gustaría reservar una clase suelta." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Reservar clase</a>
       </article>
 
       <article class="relative flex flex-col rounded-3xl bg-marker p-7 text-ink ring-4 ring-marker/40">
@@ -240,7 +253,7 @@
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Banco de exámenes resueltos</li>
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0"></i> Informe mensual (alumnos menores)</li>
         </ul>
-        <a data-wa data-wa-text="Hola, me interesa el bono mensual para" href="#" target="_blank" rel="noopener" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full bg-ink font-semibold text-white hover:bg-brand-800">Reservar plaza</a>
+        <a data-mail data-mail-subject="Reserva: bono mensual" data-mail-intro="Me gustaría reservar plaza con el bono mensual." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full bg-ink font-semibold text-white hover:bg-brand-800">Reservar plaza</a>
       </article>
 
       <article class="flex flex-col rounded-3xl bg-white p-7 text-ink">
@@ -253,7 +266,7 @@
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Simulacro corregido antes del examen</li>
           <li class="flex gap-2"><i data-lucide="check" class="h-5 w-5 shrink-0 text-brand-600"></i> Apuntes y ejercicios resueltos</li>
         </ul>
-        <a data-wa data-wa-text="Hola, me interesa un grupo reducido de" href="#" target="_blank" rel="noopener" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Apuntarme a un grupo</a>
+        <a data-mail data-mail-subject="Reserva: grupo reducido" data-mail-intro="Me gustaría apuntarme a un grupo reducido." href="#" class="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-ink font-semibold hover:bg-ink hover:text-white">Apuntarme a un grupo</a>
       </article>
     </div>
 
@@ -286,8 +299,8 @@
     <ol class="mt-10 grid gap-5 md:grid-cols-3">
       <li class="relative rounded-3xl border border-slate-200 bg-white p-6">
         <span class="font-display text-5xl font-extrabold text-brand-100" aria-hidden="true">01</span>
-        <span class="absolute right-6 top-6 grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600"><i data-lucide="message-circle" class="h-5 w-5"></i></span>
-        <h3 class="mt-2 font-display text-xl font-bold">Escríbeme por WhatsApp</h3>
+        <span class="absolute right-6 top-6 grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600"><i data-lucide="mail" class="h-5 w-5"></i></span>
+        <h3 class="mt-2 font-display text-xl font-bold">Escríbeme un correo</h3>
         <p class="mt-2 text-slate-600">Cuéntame tu curso, la asignatura y la fecha del examen. Te respondo el mismo día.</p>
       </li>
       <li class="relative rounded-3xl border border-slate-200 bg-white p-6">
@@ -304,7 +317,7 @@
       </li>
     </ol>
     <div class="mt-10 flex justify-center">
-      <a data-wa href="#" target="_blank" rel="noopener" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-wa px-6 font-semibold text-white shadow-sm hover:brightness-110"><i data-lucide="message-circle" class="h-5 w-5"></i> Dar el primer paso</a>
+      <a data-mail href="#" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-600 px-6 font-semibold text-white shadow-sm hover:bg-brand-700"><i data-lucide="mail" class="h-5 w-5"></i> Dar el primer paso</a>
     </div>
   </div>
 </section>
@@ -313,8 +326,7 @@
 <section id="preguntas" class="scroll-mt-20 border-t border-slate-200">
   <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
     <div class="text-center">
-      <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Preguntas frecuentes</p>
-      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Resolvemos tus dudas.</h2>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Preguntas frecuentes</h2>
     </div>
     <div class="mt-10 space-y-3">
       <details class="group rounded-2xl border border-slate-200 bg-white px-5 open:shadow-sm">
@@ -342,7 +354,7 @@
         <p class="pb-5 text-slate-600">En alumnos menores de edad envío un informe mensual con asistencia, avances y puntos a reforzar.</p>
       </details>
     </div>
-    <p class="mt-8 text-center text-slate-600">¿Tienes otra pregunta? <a data-wa href="#" target="_blank" rel="noopener" class="font-semibold text-brand-600 underline hover:text-brand-800">Escríbeme por WhatsApp</a>.</p>
+    <p class="mt-8 text-center text-slate-600">¿Tienes otra pregunta? <a data-mail data-mail-subject="Duda sobre las clases" href="#" class="font-semibold text-brand-600 underline hover:text-brand-800">Escríbeme un correo</a>.</p>
   </div>
 </section>
 
@@ -380,22 +392,17 @@
     <div class="max-w-2xl">
       <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Ubicación, contacto y horarios</p>
       <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Contáctame.</h2>
-      <p class="mt-4 text-lg text-slate-600">Respuesta en menos de [2] horas en horario de atención.</p>
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-3">
       <div class="space-y-4 lg:col-span-1">
-        <a data-wa href="#" target="_blank" rel="noopener" class="flex items-center gap-4 rounded-2xl bg-wa p-5 text-white hover:brightness-110">
-          <i data-lucide="message-circle" class="h-7 w-7"></i>
-          <span><b class="block">WhatsApp</b><span class="text-sm">Escribe y te respondo hoy</span></span>
+        <a data-mail href="#" class="flex items-center gap-4 rounded-2xl bg-brand-600 p-5 text-white hover:bg-brand-700">
+          <i data-lucide="mail" class="h-7 w-7"></i>
+          <span class="min-w-0"><b class="block">Contactar por Gmail</b><span data-mail-address class="block break-all text-sm"></span></span>
         </a>
         <a href="tel:+34600000000" class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-brand-600">
           <i data-lucide="phone" class="h-6 w-6 text-brand-600"></i>
           <span><b class="block">Teléfono</b><span class="text-sm text-slate-600">[+34 658 49 74 49]</span></span>
-        </a>
-        <a href="mailto:[correo@dominio.es]" class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-brand-600">
-          <i data-lucide="mail" class="h-6 w-6 text-brand-600"></i>
-          <span><b class="block">Correo</b><span class="text-sm text-slate-600">[correo@dominio.es]</span></span>
         </a>
         <a href="[https://meet.google.com/xxx-xxxx-xxx]" target="_blank" rel="noopener" class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-brand-600">
           <i data-lucide="video" class="h-6 w-6 text-brand-600"></i>
@@ -434,7 +441,6 @@
 <!-- ============ PIE ============ -->
 <footer class="bg-ink text-slate-300">
   <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
-    <p>© <span id="year"></span> Aula Método · [Nombre Apellido]. Todos los derechos reservados.</p>
     <ul class="flex flex-wrap gap-x-5 gap-y-2">
       <li><a class="hover:text-white" href="#aviso-legal">Aviso legal</a></li>
       <li><a class="hover:text-white" href="#privacidad">Política de privacidad</a></li>
@@ -443,67 +449,147 @@
   </div>
 </footer>
 
-<!-- ============ WHATSAPP FLOTANTE ============ -->
-<a id="waFloat" data-wa href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" class="fixed bottom-5 right-5 z-50 inline-flex h-14 items-center gap-2 rounded-full bg-wa px-4 text-white shadow-2xl ring-4 ring-white hover:brightness-110 sm:px-5">
-  <svg viewBox="0 0 24 24" class="h-7 w-7" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.44-9.44 9.44zm8.04-17.48A11.3 11.3 0 0 0 12.04.7C5.77.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.6l6-1.57a11.33 11.33 0 0 0 5.45 1.39h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.03-1.18-5.89-3.32-8.03z"/></svg>
-  <span class="hidden font-semibold sm:inline">¿Hablamos?</span>
+<!-- ============ CORREO FLOTANTE ============ -->
+<a id="mailFloat" data-mail href="#" aria-label="Escribir un correo" class="fixed bottom-5 right-5 z-50 inline-flex h-14 items-center gap-2 rounded-full bg-brand-600 px-4 text-white shadow-2xl ring-4 ring-white hover:bg-brand-700 sm:px-5">
+  <i data-lucide="mail" class="h-6 w-6"></i>
+  <span class="hidden font-semibold sm:inline">Escríbeme</span>
 </a>
 
 <script>
   /* ================= CONFIGURACIÓN ================= */
   const CONFIG = {
-    whatsapp: '34600000000',            // Número en formato internacional, sin "+" ni espacios
-    mensaje: 'Hola, me gustaría información sobre las clases de',
+    email: 'sergyojf04@gmail.com',       // Correo del profesor (destinatario de todos los botones)
+    profesor: 'Rafael',
     qrUrl: ''                            // Déjalo vacío para usar la URL actual, o pon tu dominio
   };
 
   const subjects = {
     uni: [
-      { icon: 'sigma', name: 'Cálculo I y II', topics: 'Límites, derivadas, integrales, series, varias variables y ecuaciones diferenciales.' },
-      { icon: 'grid-3x3', name: 'Álgebra lineal', topics: 'Matrices, sistemas, espacios vectoriales, aplicaciones lineales, diagonalización.' },
-      { icon: 'atom', name: 'Física I y II', topics: 'Cinemática, dinámica, energía, campos, electromagnetismo y circuitos.' },
-      { icon: 'bar-chart-3', name: 'Estadística', topics: 'Descriptiva, probabilidad, distribuciones, inferencia, contrastes y regresión.' },
-      { icon: 'code-2', name: 'Programación', topics: 'Python, C/C++ y Java: fundamentos, estructuras de datos, POO y prácticas.' },
-      { icon: 'calculator', name: 'Matemáticas para ADE', topics: 'Matemáticas empresariales, optimización y matemática financiera.' }
+      { icon: 'sigma', name: 'Cálculo I y II', curso: '1º', topics: 'Límites, derivadas, integrales, series, varias variables y ecuaciones diferenciales.' },
+      { icon: 'grid-3x3', name: 'Álgebra lineal', curso: '1º', topics: 'Matrices, sistemas, espacios vectoriales, aplicaciones lineales, diagonalización.' },
+      { icon: 'atom', name: 'Física I y II', curso: '1º', topics: 'Cinemática, dinámica, energía, campos, electromagnetismo y circuitos.' },
+      { icon: 'bar-chart-3', name: 'Estadística', curso: '1º', topics: 'Descriptiva, probabilidad, distribuciones, inferencia, contrastes y regresión.' },
+      { icon: 'code-2', name: 'Programación', curso: '1º', topics: 'Python, C/C++ y Java: fundamentos, estructuras de datos, POO y prácticas.' },
+      { icon: 'calculator', name: 'Matemáticas para ADE', curso: '1º', topics: 'Matemáticas empresariales, optimización y matemática financiera.' }
     ],
     bach: [
-      { icon: 'target', name: 'Matemáticas II · PAU', topics: 'Análisis, álgebra, geometría y probabilidad con exámenes PAU/EBAU de tu comunidad.' },
-      { icon: 'trending-up', name: 'Matemáticas CC. Sociales', topics: 'Matrices, programación lineal, funciones, probabilidad y estadística.' },
-      { icon: 'orbit', name: 'Física de Bachillerato', topics: 'Gravitación, campo eléctrico y magnético, ondas, óptica y física moderna.' },
-      { icon: 'flask-conical', name: 'Química de Bachillerato', topics: 'Estequiometría, equilibrio, ácido-base, redox y química orgánica.' },
-      { icon: 'pencil-ruler', name: 'Matemáticas 1º Bachillerato', topics: 'Trigonometría, números complejos, funciones, límites y derivadas.' },
-      { icon: 'backpack', name: 'Matemáticas y Física ESO', topics: 'Refuerzo de 3º y 4º ESO, técnicas de estudio y recuperaciones.' }
+      { icon: 'target', name: 'Matemáticas II · PAU', curso: '1º', topics: 'Análisis, álgebra, geometría y probabilidad con exámenes PAU/EBAU de tu comunidad.' },
+      { icon: 'trending-up', name: 'Matemáticas CC. Sociales', curso: '1º', topics: 'Matrices, programación lineal, funciones, probabilidad y estadística.' },
+      { icon: 'orbit', name: 'Física de Bachillerato', curso: '1º', topics: 'Gravitación, campo eléctrico y magnético, ondas, óptica y física moderna.' },
+      { icon: 'flask-conical', name: 'Química de Bachillerato', curso: '1º', topics: 'Estequiometría, equilibrio, ácido-base, redox y química orgánica.' },
+      { icon: 'pencil-ruler', name: 'Matemáticas 1º Bachillerato', curso: '1º', topics: 'Trigonometría, números complejos, funciones, límites y derivadas.' },
+      { icon: 'backpack', name: 'Matemáticas y Física ESO', curso: '1º', topics: 'Refuerzo de 3º y 4º ESO, técnicas de estudio y recuperaciones.' }
     ]
   };
 
-  const waLink = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-
-  function renderSubjects(key, panelId) {
-    const panel = document.getElementById(panelId);
-    panel.innerHTML = subjects[key].map((s) => `
-      <article class="flex flex-col rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg">
-        <div class="flex items-center gap-3">
-          <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600"><i data-lucide="${s.icon}" class="h-5 w-5"></i></span>
-          <h3 class="font-display text-lg font-bold leading-tight">${s.name}</h3>
-        </div>
-        <dl class="mt-5 space-y-4 text-sm">
-          <div><dt class="font-semibold text-slate-500">Temario</dt><dd class="mt-1 text-slate-700">${s.topics}</dd></div>
-          <div><dt class="font-semibold text-slate-500">Modalidad</dt>
-            <dd class="mt-2 flex flex-wrap gap-2">
-              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold"><i data-lucide="monitor" class="h-3.5 w-3.5"></i>Online</span>
-              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold"><i data-lucide="school" class="h-3.5 w-3.5"></i>Academia</span>
-              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold"><i data-lucide="home" class="h-3.5 w-3.5"></i>Domicilio</span>
-            </dd></div>
-          <div><dt class="font-semibold text-slate-500">Material incluido</dt><dd class="mt-1 text-slate-700">Apuntes propios, ejercicios resueltos y exámenes de convocatorias anteriores.</dd></div>
-        </dl>
-        <a href="${waLink(CONFIG.mensaje + ' ' + s.name + '.')}" target="_blank" rel="noopener" class="mt-6 inline-flex min-h-[44px] items-center gap-1 font-semibold text-brand-600 hover:text-brand-800">Pedir información <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
-      </article>`).join('');
+  /* ================= CORREO (GMAIL) ================= */
+  // En ordenador abre la ventana de redacción de Gmail; en móvil usa mailto (abre la app de Gmail o la de correo).
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const enc = encodeURIComponent;
+  function mailBody(intro, asignatura = '') {
+    return `Hola ${CONFIG.profesor},\n\n${intro}\n\nCurso: \nAsignatura: ${asignatura}\nModalidad (online / presencial): \nDisponibilidad: \n\nUn saludo.`;
+  }
+  function mailLink(subject, body) {
+    return isMobile
+      ? `mailto:${CONFIG.email}?subject=${enc(subject)}&body=${enc(body)}`
+      : `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(CONFIG.email)}&su=${enc(subject)}&body=${enc(body)}`;
+  }
+  function setMail(a, subject, body) {
+    a.href = mailLink(subject, body);
+    if (!isMobile) { a.target = '_blank'; a.rel = 'noopener'; }
   }
 
-  renderSubjects('uni', 'panel-uni');
-  renderSubjects('bach', 'panel-bach');
+  /* ================= CARRUSEL DE ASIGNATURAS ================= */
+  const track = document.getElementById('track');
+  const status = document.getElementById('carouselStatus');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DURATION = 450;
+  let busy = false;
 
-  // Pestañas accesibles
+  function renderSubjects(key) {
+    const poster = key === 'uni' ? 'poster' : 'poster poster-alt';
+    const level = key === 'uni' ? 'Universidad' : 'Bachillerato · ESO';
+    track.innerHTML = subjects[key].map((s) => `
+      <article class="shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4" aria-roledescription="diapositiva" aria-label="${s.name}">
+        <div class="flex h-full flex-col rounded-2xl bg-ink p-4 text-white">
+          <div class="${poster} relative flex aspect-square flex-col overflow-hidden rounded-xl p-5">
+            <i data-lucide="${s.icon}" class="pointer-events-none absolute -bottom-6 -right-6 h-40 w-40 text-white/15" aria-hidden="true"></i>
+            <span class="text-xs font-bold uppercase tracking-[.2em] text-marker">Aula Método</span>
+            <span class="mt-1 inline-flex w-fit rounded-full bg-marker px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-ink">${level}</span>
+            <span class="relative mt-auto font-display text-3xl font-extrabold leading-none">${s.name}</span>
+            <span class="relative mt-3 text-sm leading-snug text-white/85">${s.topics}</span>
+          </div>
+          <div class="mt-4 flex items-start gap-4">
+            <div class="w-14 shrink-0 text-center leading-none">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-marker">Curso</span>
+              <span class="mt-1 block font-display text-4xl font-extrabold text-marker">${s.curso}</span>
+            </div>
+            <h3 class="pt-0.5 text-lg font-semibold uppercase leading-snug tracking-wide">${s.name}</h3>
+          </div>
+          <a data-subject="${s.name}" data-curso="${s.curso}" href="#" class="mt-auto inline-flex min-h-[44px] items-center gap-1 pt-3 text-sm font-semibold text-marker hover:underline">Pedir información <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+        </div>
+      </article>`).join('');
+    track.querySelectorAll('a[data-subject]').forEach((a) => {
+      const name = a.dataset.subject;
+      setMail(a, `Información: ${name} (${a.dataset.curso} curso)`, mailBody(`Me gustaría información sobre las clases de ${name}.`, name));
+    });
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(0)';
+    if (window.lucide) lucide.createIcons();
+  }
+
+  const slideWidth = () => track.firstElementChild.getBoundingClientRect().width;
+  const announce = () => { status.textContent = `Mostrando desde ${track.firstElementChild.getAttribute('aria-label')}`; };
+
+  function afterSlide(cb) {
+    if (reduceMotion) { cb(); return; }
+    let done = false;
+    const finish = () => { if (!done) { done = true; cb(); } };
+    track.addEventListener('transitionend', finish, { once: true });
+    setTimeout(finish, DURATION + 80);
+  }
+
+  // Siguiente: la primera tarjeta sale por la izquierda y pasa al final
+  function next() {
+    if (busy || track.children.length < 2) return;
+    busy = true;
+    track.style.transition = reduceMotion ? 'none' : `transform ${DURATION}ms ease`;
+    track.style.transform = `translateX(-${slideWidth()}px)`;
+    afterSlide(() => {
+      track.style.transition = 'none';
+      track.appendChild(track.firstElementChild);
+      track.style.transform = 'translateX(0)';
+      busy = false; announce();
+    });
+  }
+
+  // Anterior: la última tarjeta entra por la izquierda
+  function prev() {
+    if (busy || track.children.length < 2) return;
+    busy = true;
+    track.style.transition = 'none';
+    track.prepend(track.lastElementChild);
+    track.style.transform = `translateX(-${slideWidth()}px)`;
+    void track.offsetWidth; // fuerza el reflow antes de animar
+    track.style.transition = reduceMotion ? 'none' : `transform ${DURATION}ms ease`;
+    track.style.transform = 'translateX(0)';
+    afterSlide(() => { busy = false; announce(); });
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', next);
+  document.getElementById('prevBtn').addEventListener('click', prev);
+
+  // Deslizar con el dedo en móvil
+  let touchX = null;
+  track.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    touchX = null;
+  });
+
+  // Pestañas de nivel
   const tabs = [...document.querySelectorAll('.tab-btn')];
   function selectTab(tab) {
     tabs.forEach((t) => {
@@ -512,23 +598,26 @@
       t.tabIndex = on ? 0 : -1;
       t.classList.toggle('tab-active', on);
       t.classList.toggle('text-slate-700', !on);
-      document.getElementById(t.getAttribute('aria-controls')).classList.toggle('hidden', !on);
     });
+    renderSubjects(tab.dataset.level);
   }
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => selectTab(t));
     t.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
-        selectTab(next); next.focus();
+        const nextTab = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        selectTab(nextTab); nextTab.focus();
       }
     });
   });
+  renderSubjects('uni');
 
-  // Enlaces de WhatsApp
-  document.querySelectorAll('[data-wa]').forEach((a) => {
-    a.href = waLink(a.dataset.waText ? a.dataset.waText + ' ' : CONFIG.mensaje + ' ');
+  // Botones de contacto por correo
+  document.querySelectorAll('[data-mail]').forEach((a) => {
+    setMail(a, a.dataset.mailSubject || 'Información sobre clases particulares',
+      mailBody(a.dataset.mailIntro || 'Me gustaría recibir información sobre las clases particulares.'));
   });
+  document.querySelectorAll('[data-mail-address]').forEach((el) => { el.textContent = CONFIG.email; });
 
   // Menú móvil
   const menuBtn = document.getElementById('menuBtn');
@@ -588,8 +677,7 @@
     } catch (e) { /* compartir cancelado */ }
   });
 
-  document.getElementById('year').textContent = new Date().getFullYear();
-  lucide.createIcons();
+  if (window.lucide) lucide.createIcons();
 </script>
 </body>
 </html>
