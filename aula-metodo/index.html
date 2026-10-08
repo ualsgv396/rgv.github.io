@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth palette-amber">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aula Método · Clases de refuerzo universitario, Bachillerato y ESO</title>
+  <meta name="description" content="Clases particulares de Cálculo, Álgebra, Física, Estadística, Programación, Bachillerato, PAU/EBAU y ESO. Método guiado con exámenes reales y seguimiento personalizado.">
+  <meta name="theme-color" content="#0A0A0A">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:         '#0A0A0A',
+            paper:       '#FAFAF7',
+            line:        '#E7E5E0',
+            muted:       '#6B6B6B',
+            gold:        'var(--accent, #B08D57)',
+            'gold-dark': 'var(--accent-dark, #8A6A3A)'
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:    ['"Inter Tight"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Librerías Externas -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-paper font-sans text-ink antialiased">
+
+<!-- ============ BARRA DE PROGRESO ============ -->
+<div id="read-progress" aria-hidden="true"></div>
+
+<!-- ============ MENÚ MÓVIL ============ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+    <span class="font-display text-xl text-white font-bold">Aula Método</span>
+    <button id="menuClose" aria-label="Cerrar menú"
+      class="grid h-11 w-11 place-items-center border border-white/20 text-white hover:border-white/60 transition-colors">
+      <i data-lucide="x" class="h-5 w-5"></i>
+    </button>
+  </div>
+  <nav class="flex-1 flex flex-col justify-center px-8 gap-2">
+    <a href="#profesor"    class="mobile-nav-link block py-4 font-display text-3xl text-white/80 hover:text-white transition-colors border-b border-white/10">Profesor</a>
+    <a href="#asignaturas" class="mobile-nav-link block py-4 font-display text-3xl text-white/80 hover:text-white transition-colors border-b border-white/10">Asignaturas</a>
+    <a href="#tarifas"     class="mobile-nav-link block py-4 font-display text-3xl text-white/80 hover:text-white transition-colors border-b border-white/10">Tarifas</a>
+    <a href="#preguntas"   class="mobile-nav-link block py-4 font-display text-3xl text-white/80 hover:text-white transition-colors border-b border-white/10">Preguntas</a>
+    <a href="#contacto"    class="mobile-nav-link block py-4 font-display text-3xl text-white/80 hover:text-white transition-colors">Contacto</a>
+  </nav>
+  <div class="px-8 pb-10">
+    <a href="#contacto" class="mobile-nav-link btn-ink-outline-inv w-full text-center py-4 text-lg font-semibold border border-white/30">Reservar clase</a>
+  </div>
+</div>
+
+<!-- ============ CABECERA ============ -->
+<header id="site-header" class="py-4 px-4 sm:px-6">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4" aria-label="Principal">
+    <a href="#inicio" class="flex items-center gap-3 group">
+      <span class="grid h-9 w-9 place-items-center bg-ink text-paper">
+        <i data-lucide="graduation-cap" class="h-4 w-4"></i>
+      </span>
+      <span class="leading-tight">
+        <span class="block font-display text-base font-bold tracking-tight">Aula Método</span>
+        <span class="block text-[11px] text-muted tracking-wide">Rafael Gómez Vico</span>
+      </span>
+    </a>
+
+    <ul class="hidden items-center gap-8 text-sm font-medium text-muted lg:flex">
+      <li><a class="hover:text-ink transition-colors" href="#profesor">Profesor</a></li>
+      <li><a class="hover:text-ink transition-colors" href="#asignaturas">Asignaturas</a></li>
+      <li><a class="hover:text-ink transition-colors" href="#tarifas">Tarifas</a></li>
+      <li><a class="hover:text-ink transition-colors" href="#preguntas">Preguntas</a></li>
+      <li><a class="hover:text-ink transition-colors" href="#contacto">Contacto</a></li>
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a href="#contacto" class="hidden btn-ink text-sm sm:inline-flex">
+        <span>Reservar clase</span>
+      </a>
+      <button id="menuBtn" class="grid h-11 w-11 place-items-center border border-line lg:hidden hover:border-ink transition-colors"
+        aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <i data-lucide="menu" class="h-5 w-5"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="inicio">
+
+<!-- ============ HERO ============ -->
+<section class="bg-paper">
+  <div class="mx-auto flex max-w-3xl flex-col items-center px-4 py-16 text-center sm:px-6 sm:py-24">
+    <div class="hero-item" style="animation-delay:0ms">
+      <img src="https://placehold.co/500x500/D4D4D0/0A0A0A?text=Foto"
+           alt="Foto de Rafael Gómez Vico"
+           width="250" height="250"
+           class="prof-photo mx-auto aspect-square h-auto w-[200px] sm:w-[250px] max-w-full rounded-full object-cover border border-line">
+    </div>
+    <h1 class="hero-item mt-8 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl" style="animation-delay:100ms">
+      Rafael Gómez Vico
+    </h1>
+    <p class="hero-item mt-3 text-base text-muted sm:text-lg" style="animation-delay:200ms">
+      Graduado Universitario · Clases Particulares y Refuerzo Académico
+    </p>
+    <div class="hero-item mt-8 flex flex-wrap justify-center gap-3" style="animation-delay:300ms">
+      <a data-mail href="#" class="btn-ink text-sm">
+        <span class="flex items-center gap-2 relative z-10">
+          <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg> Contactar por Gmail
+        </span>
+      </a>
+      <a href="#asignaturas" class="btn-outline text-sm">
+        Ver asignaturas <i data-lucide="arrow-down" class="h-4 w-4"></i>
+      </a>
+    </div>
+
+    <!-- Credenciales -->
+    <dl class="hero-item mx-auto mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 md:grid-cols-4" style="animation-delay:420ms">
+      <div class="card-hover bg-white border border-line p-5 text-left">
+        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Grado</dt>
+        <dd class="mt-2 font-display text-sm font-bold leading-snug">[Ing. / Matemáticas / Física]</dd>
+      </div>
+      <div class="card-hover bg-white border border-line p-5 text-left">
+        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Máster</dt>
+        <dd class="mt-2 font-display text-sm font-bold leading-snug">[Máster en Profesorado]</dd>
+      </div>
+      <div class="card-hover bg-white border border-line p-5 text-left">
+        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Experiencia</dt>
+        <dd class="mt-2 font-display text-2xl font-bold">
+          <span class="counter-val" data-target="[X]">[X]</span> <span class="text-base font-normal text-muted">años</span>
+        </dd>
+      </div>
+      <div class="card-hover bg-white border border-line p-5 text-left">
+        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Aprobados</dt>
+        <dd class="mt-2 font-display text-2xl font-bold text-gold-dark">
+          <span class="counter-val" data-target="[XX]">[XX]</span><span class="text-base font-normal text-muted">%</span>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ SOBRE EL PROFESOR ============ -->
+<section id="profesor" class="scroll-mt-24 bg-ink text-paper">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl reveal">
+      <span class="section-label">Sobre mí</span>
+      <h2 class="mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl leading-tight">
+        Formación sólida,<br>explicación sencilla.
+      </h2>
+      <p class="mt-5 text-base text-paper/70 leading-relaxed">
+        [Breve presentación: quién eres, por qué das clase y qué tipo de alumno consigue mejores resultados contigo.]
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-14 lg:grid-cols-2">
+      <!-- Trayectoria -->
+      <div class="reveal">
+        <h3 class="flex items-center gap-2 font-display text-xl font-bold text-paper">
+          <i data-lucide="book-open-check" class="h-5 w-5 text-gold" aria-hidden="true"></i>
+          Formación y trayectoria
+        </h3>
+        <ol class="mt-8 space-y-8 border-l border-white/15 pl-8">
+          <li class="relative">
+            <span class="timeline-dot" style="border-color:#0A0A0A"></span>
+            <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año – Año] · [Universidad]</p>
+            <p class="mt-1 font-semibold text-paper">Grado en [Titulación]</p>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">Especialidad en [mención / especialidad].</p>
+          </li>
+          <li class="relative">
+            <span class="timeline-dot" style="border-color:#0A0A0A"></span>
+            <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año] · [Universidad]</p>
+            <p class="mt-1 font-semibold text-paper">Máster en [Profesorado / especialidad]</p>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">[Línea de trabajo o prácticas docentes.]</p>
+          </li>
+          <li class="relative">
+            <span class="timeline-dot" style="border-color:#0A0A0A"></span>
+            <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año] – actualidad</p>
+            <p class="mt-1 font-semibold text-paper">Profesor de refuerzo</p>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">[X] años preparando asignaturas de primeros cursos de Ingeniería, Ciencias, PAU y ESO.</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Metodología -->
+      <div class="reveal">
+        <h3 class="flex items-center gap-2 font-display text-xl font-bold text-paper">
+          <i data-lucide="route" class="h-5 w-5 text-gold" aria-hidden="true"></i>
+          Metodología
+        </h3>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <article class="card-hover border border-white/10 bg-white/5 p-5">
+            <i data-lucide="user" class="h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h4 class="mt-3 font-semibold text-paper">Individual o grupo</h4>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">Clase 1:1 a tu ritmo, o grupos reducidos.</p>
+          </article>
+          <article class="card-hover border border-white/10 bg-white/5 p-5">
+            <i data-lucide="file-text" class="h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h4 class="mt-3 font-semibold text-paper">Exámenes reales</h4>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">Resolvemos convocatorias anteriores paso a paso.</p>
+          </article>
+          <article class="card-hover border border-white/10 bg-white/5 p-5">
+            <i data-lucide="messages-square" class="h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h4 class="mt-3 font-semibold text-paper">Dudas 24/7</h4>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">Envía una foto del ejercicio por chat sin esperar a la siguiente clase.</p>
+          </article>
+          <article class="card-hover border border-white/10 bg-white/5 p-5">
+            <i data-lucide="line-chart" class="h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h4 class="mt-3 font-semibold text-paper">Seguimiento personal</h4>
+            <p class="mt-1 text-sm text-paper/60 leading-relaxed">Plan de estudio semanal e informe de progreso.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASIGNATURAS ============ -->
+<section id="asignaturas" class="scroll-mt-24 bg-ink">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8 reveal">
+      <div class="max-w-xl">
+        <span class="section-label">Asignaturas y niveles</span>
+        <h2 class="mt-5 font-display text-4xl font-bold text-paper sm:text-5xl uppercase tracking-tight">
+          Elige tu asignatura
+        </h2>
+      </div>
+      <div class="inline-flex border border-white/20 p-1" role="tablist" aria-label="Nivel educativo">
+        <button role="tab" id="tab-uni" data-level="uni" aria-controls="carousel" aria-selected="true"
+          class="tab-btn tab-active-style min-h-[44px] px-5 text-sm font-semibold transition-colors">
+          Universidad
+        </button>
+        <button role="tab" id="tab-bach" data-level="bach" aria-controls="carousel" aria-selected="false"
+          class="tab-btn min-h-[44px] px-5 text-sm font-semibold text-paper/50 transition-colors hover:text-paper">
+          Bachillerato · PAU · ESO
+        </button>
+      </div>
+    </div>
+
+    <div id="carousel" role="region" aria-roledescription="carrusel" aria-label="Asignaturas" class="mt-10">
+      <div class="flex items-center justify-end gap-2 mb-4">
+        <button id="prevBtn" type="button" aria-label="Asignatura anterior"
+          class="grid h-11 w-11 place-items-center border border-white/20 bg-ink text-paper hover:border-gold hover:text-gold transition-colors">
+          <i data-lucide="arrow-left" class="h-5 w-5"></i>
+        </button>
+        <button id="nextBtn" type="button" aria-label="Asignatura siguiente"
+          class="grid h-11 w-11 place-items-center border border-white/20 bg-ink text-paper hover:border-gold hover:text-gold transition-colors">
+          <i data-lucide="arrow-right" class="h-5 w-5"></i>
+        </button>
+      </div>
+      <div class="-mx-2 overflow-hidden">
+        <div id="track" class="flex"></div>
+      </div>
+      <p id="carouselStatus" class="sr-only" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TARIFAS ============ -->
+<section id="tarifas" class="scroll-mt-24 bg-paper">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl reveal">
+      <span class="section-label">Modalidades y tarifas</span>
+      <h2 class="mt-5 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+        Precios claros, sin matrícula ni permanencia.
+      </h2>
+      <p class="mt-4 text-base text-muted leading-relaxed">
+        Primera clase de diagnóstico para valorar tu nivel y preparar un plan.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-px bg-line lg:grid-cols-3 reveal">
+      <!-- Clase suelta -->
+      <article class="card-hover flex flex-col bg-white p-8">
+        <p class="text-[10px] font-semibold uppercase tracking-widest text-muted">Clase suelta</p>
+        <h3 class="mt-2 font-display text-2xl font-bold">Para una duda concreta o un examen cercano.</h3>
+        <p class="mt-8"><span class="font-display text-5xl font-bold">[XX] €</span> <span class="text-sm text-muted">/ hora</span></p>
+        <ul class="mt-8 space-y-3 text-sm flex-1">
+          <li class="flex items-start gap-2.5"><i data-lucide="check" class="h-4 w-4 shrink-0 text-gold mt-0.5"></i> Clase individual 1:1</li>
+          <li class="flex items-start gap-2.5"><i data-lucide="check" class="h-4 w-4 shrink-0 text-gold mt-0.5"></i> Apuntes de la sesión</li>
+        </ul>
+        <a data-mail href="#" class="btn-outline mt-10 text-sm">Reservar clase</a>
+      </article>
+
+      <!-- Bono mensual (destacado) -->
+      <article class="card-hover pricing-featured flex flex-col p-8 relative">
+        <span class="absolute -top-px left-8 bg-gold px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-ink">
+          Más elegido
+        </span>
+        <p class="text-[10px] font-semibold uppercase tracking-widest text-gold">Bono mensual</p>
+        <h3 class="mt-2 font-display text-2xl font-bold text-paper">[8] horas al mes para llevar la asignatura al día.</h3>
+        <p class="mt-8">
+          <span class="font-display text-5xl font-bold text-paper">[XXX] €</span>
+          <span class="text-sm text-paper/60">/ mes</span>
+        </p>
+        <ul class="mt-8 space-y-3 text-sm flex-1 text-paper/80">
+          <li class="flex items-start gap-2.5"><i data-lucide="check" class="h-4 w-4 shrink-0 text-gold mt-0.5"></i> Clases con horario fijo</li>
+          <li class="flex items-start gap-2.5"><i data-lucide="check" class="h-4 w-4 shrink-0 text-gold mt-0.5"></i> Dudas ilimitadas 24/7</li>
+        </ul>
+        <a data-mail href="#" class="btn-ink-outline-inv mt-10 text-sm w-full">Reservar plaza</a>
+      </article>
+
+      <!-- Grupo reducido -->
+      <article class="card-hover flex flex-col bg-white p-8">
+        <p class="text-[10px] font-semibold uppercase tracking-widest text-muted">Grupo reducido</p>
+        <h3 class="mt-2 font-display text-2xl font-bold">De 2 a [4] alumnos.</h3>
+        <p class="mt-8"><span class="font-display text-5xl font-bold">[XX] €</span> <span class="text-sm text-muted">/ hora</span></p>
+        <ul class="mt-8 space-y-3 text-sm flex-1">
+          <li class="flex items-start gap-2.5"><i data-lucide="check" class="h-4 w-4 shrink-0 text-gold mt-0.5"></i> Sesiones semanales de 1,5 h</li>
+          <li class="flex items-start gap-2.5"><i data-lucide="check" class="h-4 w-4 shrink-0 text-gold mt-0.5"></i> Grupo de dudas por chat</li>
+        </ul>
+        <a data-mail href="#" class="btn-outline mt-10 text-sm">Apuntarme a un grupo</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREGUNTAS FRECUENTES ============ -->
+<section id="preguntas" class="scroll-mt-24 bg-paper border-t border-line">
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="text-center reveal">
+      <span class="section-label mx-auto">Preguntas frecuentes</span>
+      <h2 class="mt-5 font-display text-4xl font-bold sm:text-5xl">Resolvemos tus dudas.</h2>
+    </div>
+
+    <div class="mt-12 space-y-2 reveal">
+      <div class="faq-item border border-line bg-white">
+        <button class="faq-trigger flex w-full min-h-[56px] cursor-pointer items-center justify-between gap-4 px-6 py-4 font-semibold text-left hover:bg-paper transition-colors" aria-expanded="false">
+          <span>¿Y si no puedo ir a una clase?</span>
+          <i data-lucide="plus" class="faq-icon h-5 w-5 shrink-0 text-gold"></i>
+        </button>
+        <div class="faq-body"><p class="px-6 pb-5 text-sm text-muted leading-relaxed">Avísame con al menos 24 h de antelación y la cambiamos.</p></div>
+      </div>
+      <div class="faq-item border border-line bg-white">
+        <button class="faq-trigger flex w-full min-h-[56px] cursor-pointer items-center justify-between gap-4 px-6 py-4 font-semibold text-left hover:bg-paper transition-colors" aria-expanded="false">
+          <span>¿Cómo se paga?</span>
+          <i data-lucide="plus" class="faq-icon h-5 w-5 shrink-0 text-gold"></i>
+        </button>
+        <div class="faq-body"><p class="px-6 pb-5 text-sm text-muted leading-relaxed">Por Bizum o transferencia.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QR ============ -->
+<section id="compartir" class="scroll-mt-24 border-t border-line bg-white">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
+    <div class="reveal">
+      <span class="section-label">Comparte esta web</span>
+      <h2 class="mt-5 font-display text-4xl font-bold sm:text-5xl">
+        Escanea, guárdala y pásala a tu grupo de clase.
+      </h2>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <button id="qrDownload" class="btn-ink text-sm">
+          <span class="flex items-center gap-2 relative z-10"><i data-lucide="download" class="h-4 w-4"></i> Descargar QR</span>
+        </button>
+        <button id="shareBtn" class="btn-outline text-sm">
+          <i data-lucide="share-2" class="h-4 w-4"></i> Compartir enlace
+        </button>
+      </div>
+      <p id="shareMsg" class="mt-3 text-sm font-medium text-gold-dark"></p>
+    </div>
+    <div class="mx-auto w-full max-w-xs reveal">
+      <div id="qr-card" class="qr-card bg-ink p-5">
+        <div class="bg-white p-5">
+          <div id="qrcode" class="mx-auto aspect-square w-full"></div>
+        </div>
+        <div class="flex items-center justify-between gap-3 px-1 pt-4 text-paper">
+          <span class="leading-tight">
+            <b class="block font-display text-sm">Aula Método</b>
+            <span class="text-xs text-paper/50">Clases de refuerzo</span>
+          </span>
+          <i data-lucide="scan-line" class="h-7 w-7 text-gold"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="scroll-mt-24 bg-paper">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
+    <div class="max-w-2xl reveal">
+      <span class="section-label">Ubicación, contacto y horarios</span>
+      <h2 class="mt-5 font-display text-4xl font-bold sm:text-5xl">Contáctame.</h2>
+    </div>
+
+    <div class="mt-12 grid gap-4 lg:grid-cols-3 reveal">
+      <!-- Canales -->
+      <div class="space-y-3 lg:col-span-1">
+        <a data-mail href="#" class="card-hover flex items-center gap-4 border border-ink bg-ink p-5 text-paper hover:bg-ink/90 transition-colors">
+          <svg class="h-6 w-6 text-gold shrink-0 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          <span class="min-w-0">
+            <b class="block text-sm font-semibold">Contactar por Gmail</b>
+            <span data-mail-address class="block break-all text-xs text-paper/60 mt-0.5"></span>
+          </span>
+        </a>
+      </div>
+      <!-- Horario -->
+      <div class="border border-line bg-white p-6 lg:col-span-1">
+        <h3 class="flex items-center gap-2 font-display text-lg font-bold">
+          <i data-lucide="clock" class="h-5 w-5 text-gold"></i> Horario semanal
+        </h3>
+        <table class="mt-5 w-full text-sm">
+          <tbody class="divide-y divide-line">
+            <tr><th class="py-3 text-left font-medium text-xs text-muted">Lun – Jue</th><td class="py-3 text-right">[16:00 – 21:30]</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Mapa -->
+      <div class="overflow-hidden border border-line bg-white lg:col-span-1">
+        <iframe title="Mapa" src="https://www.google.com/maps?q=Universidad&output=embed" class="map-frame h-52 w-full border-0"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-ink text-paper/50">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <span class="font-display text-sm text-paper font-bold">Aula Método</span>
+  </div>
+</footer>
+
+<a id="mailFloat" data-mail href="#" class="fixed bottom-5 right-5 z-50 inline-flex h-14 items-center gap-2.5 bg-ink text-paper px-4 sm:px-5 shadow-xl transition-colors"
+  onmouseenter="this.style.background='var(--accent)'" onmouseleave="this.style.background=''">
+  <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+  <span class="hidden font-semibold text-sm sm:inline">Escríbeme</span>
+</a>
+
+<!-- Vinculación del script principal -->
+<script src="js/main.js"></script>
+</body>
+</html>
