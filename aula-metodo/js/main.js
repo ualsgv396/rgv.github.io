@@ -63,6 +63,57 @@ window.addEventListener('scroll', () => {
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ============================================================
+   FILTRO DE ASIGNATURAS (curso → cuatrimestre)
+============================================================ */
+const subjectFilter = { curso: '2', cuatri: '1' };
+const subjectPanels = [...document.querySelectorAll('.subject-panel')];
+const subjectCount  = document.getElementById('subjectCount');
+
+function showSubjects() {
+  subjectPanels.forEach((panel) => {
+    const match = panel.dataset.curso === subjectFilter.curso && panel.dataset.cuatri === subjectFilter.cuatri;
+    panel.hidden = !match;
+    if (match) {
+      panel.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      const n = panel.querySelectorAll('article').length;
+      if (subjectCount) subjectCount.textContent = n ? `${n} asignaturas` : 'Por concretar';
+    }
+  });
+}
+
+document.querySelectorAll('[data-filter]').forEach((list) => {
+  const key  = list.dataset.filter;
+  const tabs = [...list.querySelectorAll('.filter-tab')];
+  const select = (tab, focus) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+    });
+    if (focus) tab.focus();
+    subjectFilter[key] = tab.dataset.value;
+    // Al cambiar de curso se vuelve al 1º cuatrimestre
+    if (key === 'curso') {
+      const first = document.querySelector('[data-filter="cuatri"] .filter-tab');
+      if (first) first.click();
+      return;
+    }
+    showSubjects();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t, false));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      select(next, true);
+    });
+  });
+});
+showSubjects();
+
+/* ============================================================
    BOTONES DE CORREO
 ============================================================ */
 document.querySelectorAll('[data-mail]').forEach((a) => {
