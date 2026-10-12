@@ -221,6 +221,12 @@ body {
   font-size: 13px; color: var(--color-subtext);
 }
 
+/* Cabecera de las tarjetas de asignatura */
+.poster-card {
+  background-color: var(--color-canvas);
+  border-bottom: 1px solid var(--color-line);
+}
+
 :focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
 
 /* ============================================================
