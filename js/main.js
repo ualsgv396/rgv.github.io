@@ -234,6 +234,34 @@ new QRCode(document.getElementById('qrcode'), {
   colorDark: '#171717', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H
 });
 
+/* QR ampliado en un modal a pantalla completa */
+new QRCode(document.getElementById('qrcodeBig'), {
+  text: shareUrl, width: 1024, height: 1024,
+  colorDark: '#171717', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H
+});
+
+const qrModal = document.getElementById('qrModal');
+const qrOpen  = document.getElementById('qrOpen');
+const qrClose = document.getElementById('qrClose');
+
+function openQrModal() {
+  qrModal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  qrClose.focus();
+}
+function closeQrModal() {
+  qrModal.classList.add('hidden');
+  document.body.style.overflow = '';
+  qrOpen.focus();
+}
+qrOpen.addEventListener('click', openQrModal);
+qrClose.addEventListener('click', closeQrModal);
+// Clic en el fondo oscuro (fuera del QR grande)
+qrModal.addEventListener('click', (e) => { if (e.target === qrModal) closeQrModal(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !qrModal.classList.contains('hidden')) closeQrModal();
+});
+
 document.getElementById('qrDownload').addEventListener('click', () => {
   const box = document.getElementById('qrcode');
   const canvas = box.querySelector('canvas');
@@ -275,7 +303,7 @@ shareBtn.addEventListener('click', async () => {
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
       shareBtn.classList.remove('is-copied');
-      msg.textContent = 'Copia la dirección de esta página para mandarla por WhatsApp.';
+      msg.textContent = '';
     }, 2200);
   } catch (e) {
     msg.textContent = 'No se ha podido copiar. Copia la dirección desde la barra del navegador.';

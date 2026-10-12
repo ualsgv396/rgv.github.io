@@ -394,3 +394,9 @@ body {
   .filter-label { min-width: 0; padding: 0 20px 0 12px; letter-spacing: .06em; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
   .filter-tab { min-width: 44px; padding: 0 9px; font-size: 13px; }
 }
+
+/* Modal del QR: entrada suave */
+#qrModal:not(.hidden) { animation: qrFade .25s ease; }
+#qrModal:not(.hidden) .qr-modal-panel { animation: qrZoom .35s cubic-bezier(.22,1,.36,1); }
+@keyframes qrFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes qrZoom { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
