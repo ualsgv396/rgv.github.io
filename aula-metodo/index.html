@@ -180,44 +180,180 @@
 <!-- ============ ASIGNATURAS ============ -->
 <section id="asignaturas" class="scroll-mt-24 bg-paper">
   <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
-    <div class="grid gap-8 border-b border-line pb-10 lg:grid-cols-12 lg:items-end reveal">
+    <div class="grid gap-6 border-b border-line pb-10 lg:grid-cols-12 lg:items-end reveal">
       <div class="lg:col-span-7">
-        <span class="section-label">Asignaturas y niveles</span>
+        <span class="section-label">Asignaturas · 2º curso</span>
         <h2 class="t-heading-lg mt-5">¿Con qué asignatura te estás peleando?</h2>
-        <p class="mt-4 max-w-md text-muted">Si la tuya no aparece, pregúntame igualmente. Es probable que también pueda ayudarte.</p>
       </div>
-      <div class="lg:col-span-5 lg:justify-self-end">
-        <div class="inline-flex rounded-full border border-line bg-white p-1" role="tablist" aria-label="Nivel educativo">
-          <button role="tab" id="tab-uni" data-level="uni" aria-controls="carousel" aria-selected="true"
-            class="tab-btn tab-active-style min-h-[40px] rounded-full px-4 text-sm font-medium transition-colors">
-            Universidad
-          </button>
-          <button role="tab" id="tab-bach" data-level="bach" aria-controls="carousel" aria-selected="false"
-            class="tab-btn min-h-[40px] rounded-full px-4 text-sm font-medium text-muted transition-colors hover:text-ink">
-            Bachillerato · PAU · ESO
-          </button>
-        </div>
-      </div>
+      <p class="max-w-md text-muted lg:col-span-5 lg:justify-self-end">
+        Asignaturas de 2º curso de Ingeniería, ordenadas por cuatrimestre. Si la tuya no aparece, pregúntame igualmente.
+      </p>
     </div>
 
-    <div id="carousel" role="region" aria-roledescription="carrusel" aria-label="Asignaturas" class="mt-10">
-      <div class="mb-4 flex items-center justify-between gap-2">
-        <p class="font-mono text-[11px] uppercase tracking-wider text-muted">Desliza o usa las flechas</p>
-        <div class="flex gap-2">
-          <button id="prevBtn" type="button" aria-label="Asignatura anterior"
-            class="grid h-11 w-11 place-items-center rounded-lg border border-line bg-white text-ink hover:border-ink transition-colors">
-            <i data-lucide="arrow-left" class="h-5 w-5"></i>
-          </button>
-          <button id="nextBtn" type="button" aria-label="Asignatura siguiente"
-            class="grid h-11 w-11 place-items-center rounded-lg border border-line bg-white text-ink hover:border-ink transition-colors">
-            <i data-lucide="arrow-right" class="h-5 w-5"></i>
-          </button>
-        </div>
-      </div>
-      <div class="-mx-2 overflow-hidden px-px py-1">
-        <div id="track" class="flex"></div>
-      </div>
-      <p id="carouselStatus" class="sr-only" aria-live="polite"></p>
+    <div class="mt-12">
+      <h3 class="flex items-center gap-3 font-mono text-sm uppercase tracking-wider text-muted reveal">
+        1º Cuatrimestre
+        <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
+        <span class="text-[11px]">5 asignaturas</span>
+      </h3>
+      <ul class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        <li class="reveal stagger" style="--d:0ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102203</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Fundamentos de Materiales</h4>
+            <a data-mail data-mail-subject="Información: Fundamentos de Materiales (2º curso, 1º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Fundamentos de Materiales." data-mail-asignatura="Fundamentos de Materiales"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Fundamentos%20de%20Materiales%20%282%C2%BA%20curso%2C%201%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:60ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102104</span>
+              <span>6 ECTS · Básica</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Métodos Numéricos y Optimización</h4>
+            <a data-mail data-mail-subject="Información: Métodos Numéricos y Optimización (2º curso, 1º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Métodos Numéricos y Optimización." data-mail-asignatura="Métodos Numéricos y Optimización"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20M%C3%A9todos%20Num%C3%A9ricos%20y%20Optimizaci%C3%B3n%20%282%C2%BA%20curso%2C%201%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:120ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102205</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Teoría de Circuitos y Máquinas Eléctricas</h4>
+            <a data-mail data-mail-subject="Información: Teoría de Circuitos y Máquinas Eléctricas (2º curso, 1º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Teoría de Circuitos y Máquinas Eléctricas." data-mail-asignatura="Teoría de Circuitos y Máquinas Eléctricas"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Teor%C3%ADa%20de%20Circuitos%20y%20M%C3%A1quinas%20El%C3%A9ctricas%20%282%C2%BA%20curso%2C%201%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:180ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102207</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Teoría de Mecanismos</h4>
+            <a data-mail data-mail-subject="Información: Teoría de Mecanismos (2º curso, 1º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Teoría de Mecanismos." data-mail-asignatura="Teoría de Mecanismos"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Teor%C3%ADa%20de%20Mecanismos%20%282%C2%BA%20curso%2C%201%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:240ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102202</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Termotecnia</h4>
+            <a data-mail data-mail-subject="Información: Termotecnia (2º curso, 1º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Termotecnia." data-mail-asignatura="Termotecnia"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Termotecnia%20%282%C2%BA%20curso%2C%201%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-12">
+      <h3 class="flex items-center gap-3 font-mono text-sm uppercase tracking-wider text-muted reveal">
+        2º Cuatrimestre
+        <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
+        <span class="text-[11px]">5 asignaturas</span>
+      </h3>
+      <ul class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        <li class="reveal stagger" style="--d:0ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102208</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Automatización Industrial</h4>
+            <a data-mail data-mail-subject="Información: Automatización Industrial (2º curso, 2º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Automatización Industrial." data-mail-asignatura="Automatización Industrial"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Automatizaci%C3%B3n%20Industrial%20%282%C2%BA%20curso%2C%202%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:60ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102206</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Electrónica Básica</h4>
+            <a data-mail data-mail-subject="Información: Electrónica Básica (2º curso, 2º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Electrónica Básica." data-mail-asignatura="Electrónica Básica"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Electr%C3%B3nica%20B%C3%A1sica%20%282%C2%BA%20curso%2C%202%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:120ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102201</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Ingeniería Fluidomecánica</h4>
+            <a data-mail data-mail-subject="Información: Ingeniería Fluidomecánica (2º curso, 2º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Ingeniería Fluidomecánica." data-mail-asignatura="Ingeniería Fluidomecánica"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Ingenier%C3%ADa%20Fluidomec%C3%A1nica%20%282%C2%BA%20curso%2C%202%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:180ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>44102204</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Resistencia de Materiales</h4>
+            <a data-mail data-mail-subject="Información: Resistencia de Materiales (2º curso, 2º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Resistencia de Materiales." data-mail-asignatura="Resistencia de Materiales"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Resistencia%20de%20Materiales%20%282%C2%BA%20curso%2C%202%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:240ms">
+          <article class="card-hover surface-card flex h-full flex-col p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span>43102223</span>
+              <span>6 ECTS · Obligatoria</span>
+            </div>
+            <h4 class="mt-2 flex-1 text-base font-semibold leading-snug tracking-tight text-ink">Señales y Sistemas</h4>
+            <a data-mail data-mail-subject="Información: Señales y Sistemas (2º curso, 2º cuatrimestre)" data-mail-intro="Me gustaría información sobre las clases de Señales y Sistemas." data-mail-asignatura="Señales y Sistemas"
+               href="mailto:isqrafael@gmail.com?subject=Informaci%C3%B3n%3A%20Se%C3%B1ales%20y%20Sistemas%20%282%C2%BA%20curso%2C%202%C2%BA%20cuatrimestre%29"
+               class="mt-3 inline-flex w-fit items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
+              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
+            </a>
+          </article>
+        </li>
+        <li class="reveal stagger" style="--d:300ms">
+          <div class="flex h-full min-h-[120px] flex-col justify-center rounded-xl border border-dashed border-line p-4 sm:p-5">
+            <p class="text-base font-semibold tracking-tight text-ink">Y más asignaturas por concretar...</p>
+            <p class="mt-1 text-[13px] leading-snug text-muted">¿Buscas otra? <a data-mail href="mailto:isqrafael@gmail.com" class="font-medium text-ink underline-offset-4 hover:underline">Pregúntame</a>.</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
