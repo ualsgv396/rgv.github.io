@@ -153,22 +153,18 @@
 
     <!-- Barra de filtros: curso y cuatrimestre -->
     <div class="subject-filter mt-10 overflow-hidden rounded-xl border border-line bg-white reveal">
-      <div class="flex items-center gap-4 px-3 py-2 sm:px-4">
-        <span class="hidden items-center gap-2 pr-2 sm:flex">
-          <span class="font-mono text-[11px] uppercase tracking-wider text-muted">Curso:</span>
-        </span>
+      <div class="flex items-center gap-3 px-2 py-2 sm:gap-4 sm:px-3">
+        <span class="filter-label rounded-l-full">Curso:</span>
         <div class="flex flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="Curso" data-filter="curso">
-          <button type="button" role="tab" class="filter-tab" data-value="1" aria-selected="false" tabindex="-1">1º Curso</button>
-          <button type="button" role="tab" class="filter-tab is-active" data-value="2" aria-selected="true">2º Curso</button>
+          <button type="button" role="tab" class="filter-tab" data-value="1" aria-selected="false" tabindex="-1" aria-label="1º Curso">1º<span class="hidden sm:inline"> Curso</span></button>
+          <button type="button" role="tab" class="filter-tab is-active" data-value="2" aria-selected="true" aria-label="2º Curso">2º<span class="hidden sm:inline"> Curso</span></button>
         </div>
       </div>
-      <div class="flex items-center gap-4 border-t border-line bg-paper px-3 py-2 sm:px-4">
-        <span class="hidden items-center gap-2 pr-2 sm:flex">
-          <span class="font-mono text-[11px] uppercase tracking-wider text-muted">Cuatrimestre:</span>
-        </span>
+      <div class="flex items-center gap-3 border-t border-line bg-paper px-2 py-2 sm:gap-4 sm:px-3">
+        <span class="filter-label rounded-l-full">Cuatrimestre:</span>
         <div class="flex flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="Cuatrimestre" data-filter="cuatri">
-          <button type="button" role="tab" class="filter-tab filter-tab--sub is-active" data-value="1" aria-selected="true">1º Cuatrimestre</button>
-          <button type="button" role="tab" class="filter-tab filter-tab--sub" data-value="2" aria-selected="false" tabindex="-1">2º Cuatrimestre</button>
+          <button type="button" role="tab" class="filter-tab filter-tab--sub is-active" data-value="1" aria-selected="true" aria-label="1º Cuatrimestre">1º<span class="hidden sm:inline"> Cuatrimestre</span></button>
+          <button type="button" role="tab" class="filter-tab filter-tab--sub" data-value="2" aria-selected="false" tabindex="-1" aria-label="2º Cuatrimestre">2º<span class="hidden sm:inline"> Cuatrimestre</span></button>
         </div>
         <span id="subjectCount" class="hidden shrink-0 font-mono text-[11px] uppercase tracking-wider text-muted sm:inline" aria-live="polite">5 asignaturas</span>
       </div>
@@ -603,7 +599,7 @@
   </div>
 </footer>
 
-<a id="mailFloat" data-mail href="mailto:isqrafael@gmail.com" class="fixed bottom-5 right-5 z-50 inline-flex h-12 items-center gap-2.5 rounded-lg border border-white/10 bg-ink text-white px-4 transition-colors"
+<a id="mailFloat" data-mail href="mailto:isqrafael@gmail.com" class="fixed bottom-5 left-5 z-50 inline-flex h-12 items-center gap-2.5 rounded-lg border border-white/10 bg-ink text-white px-4 transition-colors"
   onmouseenter="this.style.background='var(--accent)'" onmouseleave="this.style.background=''">
   <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
   <span class="hidden font-medium text-sm sm:inline">Escríbeme</span>
