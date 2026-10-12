@@ -1,16 +1,57 @@
 /* ============================================================
-    TOKENS Y RESET
+    TOKENS (guía "Machinist's Blueprint") Y RESET
 ============================================================ */
+:root {
+  --color-paper-white: #ffffff;
+  --color-canvas:      #fafafa;
+  --color-line:        #eaeaea;
+  --color-subtext:     #666666;
+  --color-icon:        #7d7d7d;
+  --color-ink:         #171717;
+  --color-onyx:        #000000;
+
+  --shadow-subtle:   rgba(0,0,0,.08) 0 0 0 1px, rgba(0,0,0,.04) 0 2px 1px 0;
+  --shadow-subtle-3: rgba(0,0,0,.08) 0 0 0 1px, rgba(0,0,0,.04) 0 2px 2px 0, rgba(0,0,0,.04) 0 8px 8px -8px;
+  --shadow-xl:       rgba(0,0,0,.25) 0 25px 50px -12px;
+
+  /* Acento monocromo: el color lo pone el contenido, no la interfaz */
+  --accent:      #000000;
+  --accent-dark: #171717;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
-body { background-color: #FAFAF7; font-family: 'Inter Tight', system-ui, sans-serif; color: #0A0A0A; -webkit-font-smoothing: antialiased; }
+body {
+  background-color: var(--color-canvas);
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  font-feature-settings: "ss05", "ss09";
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Escala tipográfica: tracking negativo progresivo en tamaños grandes */
+.t-display {
+  font-size: clamp(2.5rem, 6.2vw, 4.25rem);
+  line-height: 1; letter-spacing: -0.06em; font-weight: 600;
+}
+.t-heading-lg {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05; letter-spacing: -0.05em; font-weight: 600;
+}
+.t-heading {
+  font-size: 1.5rem; line-height: 1.33; letter-spacing: -0.02em; font-weight: 600;
+}
+.t-mono {
+  font-family: 'Geist Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  font-feature-settings: "zero";
+}
 
 /* ============================================================
     BARRA DE PROGRESO DE LECTURA
 ============================================================ */
 #read-progress {
   position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-  background: var(--accent, #B08D57); z-index: 9999; transition: width .1s linear;
+  background: var(--color-ink); z-index: 9999; transition: width .1s linear;
 }
 
 /* ============================================================
@@ -18,20 +59,22 @@ body { background-color: #FAFAF7; font-family: 'Inter Tight', system-ui, sans-se
 ============================================================ */
 #site-header {
   position: sticky; top: 0; z-index: 40;
+  background: var(--color-canvas);
+  border-bottom: 1px solid var(--color-line);
   transition: padding .3s ease, border-color .3s ease, background .3s ease, backdrop-filter .3s ease;
 }
 #site-header.scrolled {
-  background: rgba(250,250,247,.92);
+  background: rgba(250,250,250,.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid #E7E5E0;
+  border-bottom: 1px solid var(--color-line);
 }
 
 /* ============================================================
-    MENÚ MÓVIL — pantalla completa negro
+    MENÚ MÓVIL — pantalla completa
 ============================================================ */
 #mobile-menu {
-  position: fixed; inset: 0; background: #0A0A0A; z-index: 50;
+  position: fixed; inset: 0; background: var(--color-ink); z-index: 50;
   display: flex; flex-direction: column;
   transform: translateY(-100%); visibility: hidden;
   transition: transform .4s cubic-bezier(.22,1,.36,1), visibility .4s;
@@ -39,20 +82,21 @@ body { background-color: #FAFAF7; font-family: 'Inter Tight', system-ui, sans-se
 #mobile-menu.open { transform: translateY(0); visibility: visible; }
 
 /* ============================================================
-    LÍNEA DORADA BAJO ANTETÍTULOS
+    ANTETÍTULOS CON LÍNEA ANIMADA
 ============================================================ */
 .section-label {
   display: inline-block;
   position: relative;
   padding-bottom: 6px;
-  font-size: .7rem; font-weight: 700; letter-spacing: .2em;
+  font-family: 'Geist Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: .6875rem; font-weight: 400; letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--accent-dark, #8A6A3A);
+  color: var(--color-subtext);
 }
 .section-label::after {
   content: '';
   position: absolute; bottom: 0; left: 0;
-  height: 1px; width: 0; background: var(--accent, #B08D57);
+  height: 1px; width: 0; background: var(--color-ink);
   transition: width .6s cubic-bezier(.22,1,.36,1);
 }
 .section-label.line-drawn::after { width: 100%; }
@@ -87,79 +131,109 @@ body { background-color: #FAFAF7; font-family: 'Inter Tight', system-ui, sans-se
 }
 .prof-photo:hover { filter: grayscale(0); }
 
+/* Chips de sugerencia (borde fino, texto secundario) */
+.chip {
+  display: inline-flex; align-items: center; gap: .375rem;
+  padding: 4px 10px; border: 1px solid var(--color-line); border-radius: 6px;
+  background: var(--color-paper-white);
+  font-size: 13px; color: var(--color-subtext);
+  transition: border-color .2s ease, color .2s ease;
+}
+.chip:hover { border-color: var(--color-ink); color: var(--color-ink); }
+
 /* ============================================================
     CREDENCIALES Y TARJETAS
 ============================================================ */
 .counter-val { display: inline-block; }
 
+.surface-card {
+  background: var(--color-paper-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-subtle);
+}
+
 .card-hover {
   position: relative; overflow: hidden;
+  border-radius: 12px;
   transition: transform .3s ease, box-shadow .3s ease;
 }
 .card-hover::after {
   content: '';
   position: absolute; bottom: 0; left: 0;
-  height: 2px; width: 0; background: var(--accent, #B08D57);
+  height: 2px; width: 0; background: var(--color-ink);
   transition: width .35s cubic-bezier(.22,1,.36,1);
 }
-.card-hover:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,.07); }
+.card-hover:hover { transform: translateY(-3px); box-shadow: var(--shadow-subtle-3); }
 .card-hover:hover::after { width: 100%; }
 
+.icon-box {
+  display: grid; place-items: center;
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--color-line); background: var(--color-paper-white);
+  color: var(--color-ink);
+}
+
 /* ============================================================
-    BOTONES
+    BOTONES (sólido = primario, borde = secundario)
 ============================================================ */
 .btn-ink {
   position: relative; overflow: hidden;
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  min-height: 48px; padding: 0 1.75rem;
-  background: #0A0A0A; color: #FAFAF7;
-  font-weight: 600; letter-spacing: .01em;
+  min-height: 44px; padding: 0 1.125rem;
+  border: 1px solid var(--color-ink); border-radius: 8px;
+  background: var(--color-ink); color: var(--color-paper-white);
+  font-weight: 500; font-size: 14px;
   transition: color .3s ease;
 }
 .btn-ink::before {
   content: '';
   position: absolute; inset: 0;
-  background: #FAFAF7; transform: scaleX(0); transform-origin: right;
+  background: var(--color-paper-white); transform: scaleX(0); transform-origin: right;
   transition: transform .35s cubic-bezier(.22,1,.36,1);
 }
-.btn-ink:hover { color: #0A0A0A; }
+.btn-ink:hover { color: var(--color-ink); }
 .btn-ink:hover::before { transform: scaleX(1); transform-origin: left; }
 .btn-ink span, .btn-ink i { position: relative; z-index: 1; }
 
 .btn-outline {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  min-height: 48px; padding: 0 1.75rem;
-  border: 1px solid #0A0A0A; color: #0A0A0A;
-  font-weight: 600; letter-spacing: .01em;
-  transition: background .3s ease, color .3s ease;
+  min-height: 44px; padding: 0 1.125rem;
+  border: 1px solid var(--color-line); border-radius: 8px;
+  background: var(--color-paper-white); color: var(--color-ink);
+  font-weight: 500; font-size: 14px;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
 }
-.btn-outline:hover { background: #0A0A0A; color: #FAFAF7; }
+.btn-outline:hover { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper-white); }
 
 .btn-ink-outline-inv {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  min-height: 48px; padding: 0 1.75rem;
-  border: 1px solid rgba(250,250,247,.4); color: #FAFAF7;
-  font-weight: 600;
+  min-height: 44px; padding: 0 1.125rem;
+  border: 1px solid rgba(255,255,255,.25); border-radius: 8px;
+  color: var(--color-paper-white);
+  font-weight: 500; font-size: 14px;
   transition: background .3s ease, border-color .3s ease;
 }
-.btn-ink-outline-inv:hover { background: rgba(250,250,247,.08); border-color: rgba(250,250,247,.7); }
+.btn-ink-outline-inv:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.6); }
+
+/* Microcopy de confianza bajo los botones */
+.micro {
+  display: flex; align-items: center; gap: .375rem;
+  font-size: 13px; color: var(--color-subtext);
+}
 
 /* ============================================================
     CARRUSEL DE ASIGNATURAS
 ============================================================ */
 #track { will-change: transform; }
 .poster-card {
-  background-color: #111;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-color: var(--color-canvas);
+  border-bottom: 1px solid var(--color-line);
 }
 .tab-active-style {
-  background: #FAFAF7; color: #0A0A0A;
+  background: var(--color-ink); color: var(--color-paper-white);
 }
 
-:focus-visible { outline: 2px solid var(--accent, #B08D57); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
 
 /* ============================================================
     ACORDEÓN FAQ
@@ -182,27 +256,32 @@ body { background-color: #FAFAF7; font-family: 'Inter Tight', system-ui, sans-se
 }
 .map-frame { filter: grayscale(1) contrast(1.05); }
 .timeline-dot {
-  position: absolute; left: -9px; top: 6px;
-  width: 17px; height: 17px;
-  border-radius: 50%; background: var(--accent, #B08D57);
-  border: 3px solid #FAFAF7;
+  position: absolute; left: -38px; top: 4px;
+  width: 11px; height: 11px;
+  border-radius: 50%; background: var(--color-ink);
+  box-shadow: 0 0 0 4px var(--color-paper-white);
 }
 .pricing-featured {
-  background: #0A0A0A; color: #FAFAF7;
-  border: 1px solid #0A0A0A;
+  background: var(--color-ink); color: var(--color-paper-white);
+  box-shadow: var(--shadow-xl);
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #FAFAF7; }
-::-webkit-scrollbar-thumb { background: var(--accent, #B08D57); }
+::-webkit-scrollbar-track { background: var(--color-canvas); }
+::-webkit-scrollbar-thumb { background: #c7c7c7; }
 
 #qrcode img, #qrcode canvas { width: 100% !important; height: auto !important; image-rendering: pixelated; }
 
 /* ============================================================
-    PALETAS DE COLOR (Por defecto: Ámbar cálido)
+    PALETA (monocroma)
 ============================================================ */
 :root.palette-amber {
-  --accent:      #C47D2A;
-  --accent-dark: #9A5E18;
-  --accent-name: "Ámbar cálido";
+  --accent:      #000000;
+  --accent-dark: #171717;
+  --accent-name: "Monocromo";
 }
+
+/* La tarjeta destacada conserva su elevación y su línea inferior blanca */
+.pricing-featured.card-hover:hover { box-shadow: var(--shadow-xl); }
+.pricing-featured.card-hover::after,
+.bg-ink.card-hover::after { background: var(--color-paper-white); }
