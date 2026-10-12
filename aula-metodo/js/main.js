@@ -74,12 +74,92 @@ function showSubjects() {
     const match = panel.dataset.curso === subjectFilter.curso && panel.dataset.cuatri === subjectFilter.cuatri;
     panel.hidden = !match;
     if (match) {
+      const track = panel.querySelector('.subject-track');
+      if (track) resetTrack(track);
+      subjectNav.style.display = track ? '' : 'none';
       panel.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
       const n = panel.querySelectorAll('article').length;
       if (subjectCount) subjectCount.textContent = n ? `${n} asignaturas` : 'Por concretar';
     }
   });
 }
+
+/* ============================================================
+   CARRUSEL DE ASIGNATURAS (sobre el panel visible)
+============================================================ */
+const subjectNav = document.getElementById('subjectNav');
+const carouselStatus = document.getElementById('carouselStatus');
+const DURATION = 500;
+let busy = false;
+
+// Orden original de cada carrusel, para volver al inicio al cambiar de filtro
+const trackOrder = new Map();
+document.querySelectorAll('.subject-track').forEach(t => trackOrder.set(t, [...t.children]));
+
+const activeTrack = () => {
+  const panel = subjectPanels.find(p => !p.hidden);
+  return panel ? panel.querySelector('.subject-track') : null;
+};
+const slideWidth = (track) => track.firstElementChild ? track.firstElementChild.getBoundingClientRect().width : 0;
+const announce = (track) => {
+  const name = track.firstElementChild && track.firstElementChild.querySelector('article');
+  carouselStatus.textContent = name ? `Mostrando desde ${name.getAttribute('aria-label')}` : '';
+};
+
+function resetTrack(track) {
+  track.style.transition = 'none';
+  track.style.transform = 'translateX(0)';
+  trackOrder.get(track).forEach(li => track.appendChild(li));
+}
+
+function afterSlide(track, cb) {
+  if (reduceMotion) { cb(); return; }
+  let done = false;
+  const finish = () => { if (!done) { done = true; cb(); } };
+  track.addEventListener('transitionend', finish, { once: true });
+  setTimeout(finish, DURATION + 80);
+}
+
+function next() {
+  const track = activeTrack();
+  if (busy || !track || track.children.length < 2) return;
+  busy = true;
+  track.style.transition = reduceMotion ? 'none' : `transform ${DURATION}ms cubic-bezier(.22,1,.36,1)`;
+  track.style.transform = `translateX(-${slideWidth(track)}px)`;
+  afterSlide(track, () => {
+    track.style.transition = 'none';
+    track.appendChild(track.firstElementChild);
+    track.style.transform = 'translateX(0)';
+    busy = false; announce(track);
+  });
+}
+
+function prev() {
+  const track = activeTrack();
+  if (busy || !track || track.children.length < 2) return;
+  busy = true;
+  track.style.transition = 'none';
+  track.prepend(track.lastElementChild);
+  track.style.transform = `translateX(-${slideWidth(track)}px)`;
+  void track.offsetWidth;
+  track.style.transition = reduceMotion ? 'none' : `transform ${DURATION}ms cubic-bezier(.22,1,.36,1)`;
+  track.style.transform = 'translateX(0)';
+  afterSlide(track, () => { busy = false; announce(track); });
+}
+
+document.getElementById('nextBtn').addEventListener('click', next);
+document.getElementById('prevBtn').addEventListener('click', prev);
+
+document.querySelectorAll('.subject-track').forEach((track) => {
+  let touchX = null;
+  track.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    touchX = null;
+  });
+});
 
 document.querySelectorAll('[data-filter]').forEach((list) => {
   const key  = list.dataset.filter;

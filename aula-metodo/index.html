@@ -214,7 +214,22 @@
       </div>
     </div>
 
-    <div class="mt-6">
+    <div id="subjectNav" class="mt-6 mb-4 flex items-center justify-between gap-2">
+      <p class="font-mono text-[11px] uppercase tracking-wider text-muted">Desliza o usa las flechas</p>
+      <div class="flex gap-2">
+        <button id="prevBtn" type="button" aria-label="Asignatura anterior"
+          class="grid h-11 w-11 place-items-center rounded-lg border border-line bg-white text-ink hover:border-ink transition-colors">
+          <i data-lucide="arrow-left" class="h-5 w-5"></i>
+        </button>
+        <button id="nextBtn" type="button" aria-label="Asignatura siguiente"
+          class="grid h-11 w-11 place-items-center rounded-lg border border-line bg-white text-ink hover:border-ink transition-colors">
+          <i data-lucide="arrow-right" class="h-5 w-5"></i>
+        </button>
+      </div>
+    </div>
+    <p id="carouselStatus" class="sr-only" aria-live="polite"></p>
+
+    <div>
     <div class="subject-panel" role="tabpanel" id="panel-1-1" data-curso="1" data-cuatri="1" aria-label="1º curso, 1º cuatrimestre" hidden>
       <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" role="list">
         <li class="sm:col-span-2 lg:col-span-3">
@@ -242,8 +257,9 @@
       </ul>
     </div>
     <div class="subject-panel" role="tabpanel" id="panel-2-1" data-curso="2" data-cuatri="1" aria-label="2º curso, 1º cuatrimestre">
-      <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" role="list">
-        <li class="reveal stagger" style="--d:0ms">
+      <div class="-mx-2 overflow-hidden py-1">
+      <ul class="subject-track flex" role="list" aria-roledescription="carrusel">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:0ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Fundamentos de Materiales">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -269,7 +285,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:60ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:60ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Métodos Numéricos y Optimización">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -295,7 +311,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:120ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:120ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Teoría de Circuitos y Máquinas Eléctricas">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -321,7 +337,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:180ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:180ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Teoría de Mecanismos">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -347,7 +363,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:240ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:240ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Termotecnia">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -373,7 +389,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:300ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:300ms">
           <div class="relative flex h-full min-h-[160px] flex-col justify-center overflow-hidden rounded-xl border border-dashed border-line p-5">
             <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.06] grayscale" aria-hidden="true" alt="">
             <p class="text-base font-semibold tracking-tight text-ink">Y más asignaturas por concretar...</p>
@@ -381,10 +397,12 @@
           </div>
         </li>
       </ul>
+      </div>
     </div>
     <div class="subject-panel" role="tabpanel" id="panel-2-2" data-curso="2" data-cuatri="2" aria-label="2º curso, 2º cuatrimestre" hidden>
-      <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" role="list">
-        <li class="reveal stagger" style="--d:0ms">
+      <div class="-mx-2 overflow-hidden py-1">
+      <ul class="subject-track flex" role="list" aria-roledescription="carrusel">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:0ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Automatización Industrial">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -410,7 +428,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:60ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:60ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Electrónica Básica">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -436,7 +454,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:120ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:120ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Ingeniería Fluidomecánica">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -462,7 +480,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:180ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:180ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Resistencia de Materiales">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -488,7 +506,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:240ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:240ms">
           <article class="card-hover surface-card flex h-full flex-col overflow-hidden" aria-label="Señales y Sistemas">
             <div class="poster-card relative flex flex-1 min-h-[170px] flex-col overflow-hidden p-5 sm:min-h-[200px]">
               <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.08] grayscale" aria-hidden="true" alt="">
@@ -514,7 +532,7 @@
             </div>
           </article>
         </li>
-        <li class="reveal stagger" style="--d:300ms">
+        <li class="subject-slide reveal stagger shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3" style="--d:300ms">
           <div class="relative flex h-full min-h-[160px] flex-col justify-center overflow-hidden rounded-xl border border-dashed border-line p-5">
             <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.06] grayscale" aria-hidden="true" alt="">
             <p class="text-base font-semibold tracking-tight text-ink">Y más asignaturas por concretar...</p>
@@ -522,6 +540,7 @@
           </div>
         </li>
       </ul>
+      </div>
     </div>
     </div>
   </div>
