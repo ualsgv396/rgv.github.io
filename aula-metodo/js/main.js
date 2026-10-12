@@ -8,28 +8,6 @@ const CONFIG = {
 };
 
 /* ============================================================
-   LISTA DE ASIGNATURAS
-============================================================ */
-const subjects = {
-  uni: [
-    { icon: 'sigma',        name: 'Cálculo I y II',          curso: '1º', topics: 'Límites, derivadas, integrales, series, varias variables y ecuaciones diferenciales.' },
-    { icon: 'grid-3x3',     name: 'Álgebra lineal',          curso: '1º', topics: 'Matrices, sistemas, espacios vectoriales, aplicaciones lineales, diagonalización.' },
-    { icon: 'atom',         name: 'Física I y II',           curso: '1º', topics: 'Cinemática, dinámica, energía, campos, electromagnetismo y circuitos.' },
-    { icon: 'bar-chart-3',  name: 'Estadística',             curso: '1º', topics: 'Descriptiva, probabilidad, distribuciones, inferencia, contrastes y regresión.' },
-    { icon: 'code-2',       name: 'Programación',            curso: '1º', topics: 'Python, C/C++ y Java: fundamentos, estructuras de datos, POO y prácticas.' },
-    { icon: 'calculator',   name: 'Matemáticas para ADE',    curso: '1º', topics: 'Matemáticas empresariales, optimización y matemática financiera.' }
-  ],
-  bach: [
-    { icon: 'target',         name: 'Matemáticas II · PAU',      curso: '2º', topics: 'Análisis, álgebra, geometría y probabilidad con exámenes PAU/EBAU de tu comunidad.' },
-    { icon: 'trending-up',    name: 'Matemáticas CC. Sociales',   curso: '2º', topics: 'Matrices, programación lineal, funciones, probabilidad y estadística.' },
-    { icon: 'orbit',          name: 'Física de Bachillerato',     curso: '2º', topics: 'Gravitación, campo eléctrico y magnético, ondas, óptica y física moderna.' },
-    { icon: 'flask-conical',  name: 'Química de Bachillerato',    curso: '2º', topics: 'Estequiometría, equilibrio, ácido-base, redox y química orgánica.' },
-    { icon: 'pencil-ruler',   name: 'Matemáticas 1º Bachillerato',curso: '1º', topics: 'Trigonometría, números complejos, funciones, límites y derivadas.' },
-    { icon: 'backpack',       name: 'Matemáticas y Física ESO',   curso: '4º', topics: 'Refuerzo de 3º y 4º ESO, técnicas de estudio y recuperaciones.' }
-  ]
-};
-
-/* ============================================================
    CORREO — enlaces mailto
 ============================================================ */
 const enc = encodeURIComponent;
@@ -80,125 +58,15 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ============================================================
-   CARRUSEL DE ASIGNATURAS
+   PREFERENCIA DE MOVIMIENTO REDUCIDO
 ============================================================ */
-const track  = document.getElementById('track');
-const status = document.getElementById('carouselStatus');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const DURATION = 500;
-let busy = false;
-
-function renderSubjects(key) {
-  const level = key === 'uni' ? 'Universidad' : 'Bachillerato · ESO';
-  track.innerHTML = subjects[key].map((s) => `
-    <article class="shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-      aria-roledescription="diapositiva" aria-label="${s.name}">
-      <div class="flex h-full flex-col overflow-hidden rounded-xl bg-white text-ink shadow-subtle">
-        <div class="poster-card relative flex aspect-[4/3] flex-col overflow-hidden p-5">
-          <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.06] grayscale" aria-hidden="true" alt="">
-          <span class="font-mono text-[11px] uppercase tracking-wider text-muted">Aula Método</span>
-          <span class="mt-2 inline-flex w-fit rounded-full border border-line bg-white px-2.5 py-0.5 text-[12px] text-muted">${level}</span>
-          <span class="relative z-10 mt-auto text-2xl font-semibold leading-tight tracking-[-0.03em] text-ink">${s.name}</span>
-          <span class="relative z-10 mt-2 text-[13px] leading-snug text-muted">${s.topics}</span>
-        </div>
-        <div class="relative z-10 flex items-start gap-4 bg-white p-5">
-          <div class="w-12 shrink-0 border-r border-line pr-4 text-center leading-none">
-            <span class="block font-mono text-[10px] uppercase tracking-wider text-muted">Curso</span>
-            <span class="mt-1 block text-3xl font-semibold tracking-[-0.05em] text-ink">${s.curso}</span>
-          </div>
-          <div class="min-w-0 flex-1">
-            <h3 class="text-sm font-semibold leading-snug tracking-tight text-ink">${s.name}</h3>
-            <a data-subject="${s.name}" data-curso="${s.curso}" href="#"
-              class="mt-2 inline-flex items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
-              Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </article>`).join('');
-
-  track.querySelectorAll('a[data-subject]').forEach((a) => {
-    const name = a.dataset.subject;
-    setMail(a, `Información: ${name} (${a.dataset.curso} curso)`, mailBody(`Me gustaría información sobre las clases de ${name}.`, name));
-  });
-
-  track.style.transition = 'none';
-  track.style.transform = 'translateX(0)';
-  if (window.lucide) lucide.createIcons();
-}
-
-const slideWidth = () => track.firstElementChild ? track.firstElementChild.getBoundingClientRect().width : 0;
-const announce   = () => {
-  if (track.firstElementChild)
-    status.textContent = `Mostrando desde ${track.firstElementChild.getAttribute('aria-label')}`;
-};
-
-function afterSlide(cb) {
-  if (reduceMotion) { cb(); return; }
-  let done = false;
-  const finish = () => { if (!done) { done = true; cb(); } };
-  track.addEventListener('transitionend', finish, { once: true });
-  setTimeout(finish, DURATION + 80);
-}
-
-function next() {
-  if (busy || track.children.length < 2) return;
-  busy = true;
-  track.style.transition = reduceMotion ? 'none' : `transform ${DURATION}ms cubic-bezier(.22,1,.36,1)`;
-  track.style.transform = `translateX(-${slideWidth()}px)`;
-  afterSlide(() => {
-    track.style.transition = 'none';
-    track.appendChild(track.firstElementChild);
-    track.style.transform = 'translateX(0)';
-    busy = false; announce();
-  });
-}
-
-function prev() {
-  if (busy || track.children.length < 2) return;
-  busy = true;
-  track.style.transition = 'none';
-  track.prepend(track.lastElementChild);
-  track.style.transform = `translateX(-${slideWidth()}px)`;
-  void track.offsetWidth;
-  track.style.transition = reduceMotion ? 'none' : `transform ${DURATION}ms cubic-bezier(.22,1,.36,1)`;
-  track.style.transform = 'translateX(0)';
-  afterSlide(() => { busy = false; announce(); });
-}
-
-document.getElementById('nextBtn').addEventListener('click', next);
-document.getElementById('prevBtn').addEventListener('click', prev);
-
-let touchX = null;
-track.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
-track.addEventListener('touchend', (e) => {
-  if (touchX === null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
-  if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
-  touchX = null;
-});
-
-const tabs = [...document.querySelectorAll('.tab-btn')];
-function selectTab(tab) {
-  tabs.forEach((t) => {
-    const on = t === tab;
-    t.setAttribute('aria-selected', String(on));
-    t.tabIndex = on ? 0 : -1;
-    t.classList.toggle('tab-active-style', on);
-    t.classList.toggle('text-muted', !on);
-  });
-  renderSubjects(tab.dataset.level);
-}
-tabs.forEach((t, i) => {
-  t.addEventListener('click', () => selectTab(t));
-});
-renderSubjects('uni');
 
 /* ============================================================
    BOTONES DE CORREO
 ============================================================ */
 document.querySelectorAll('[data-mail]').forEach((a) => {
-  setMail(a, a.dataset.mailSubject || 'Información sobre clases', mailBody(a.dataset.mailIntro || 'Me gustaría recibir información.'));
+  setMail(a, a.dataset.mailSubject || 'Información sobre clases', mailBody(a.dataset.mailIntro || 'Me gustaría recibir información.', a.dataset.mailAsignatura || ''));
 });
 document.querySelectorAll('[data-mail-address]').forEach(el => el.textContent = CONFIG.email);
 
