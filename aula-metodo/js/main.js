@@ -2,7 +2,7 @@
    CONFIGURACIÓN — edita aquí el email y el QR
 ============================================================ */
 const CONFIG = {
-  email:    'sergyojf04@gmail.com',
+  email:    'isqrafael@gmail.com',
   profesor: 'Rafael',
   qrUrl:    '' 
 };
@@ -30,22 +30,18 @@ const subjects = {
 };
 
 /* ============================================================
-   CORREO — Gmail en escritorio, mailto en móvil
+   CORREO — enlaces mailto
 ============================================================ */
-const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 const enc = encodeURIComponent;
 
 function mailBody(intro, asignatura = '') {
   return `Hola ${CONFIG.profesor},\n\n${intro}\n\nCurso: \nAsignatura: ${asignatura}\nModalidad (online / presencial): \nDisponibilidad: \n\nUn saludo.`;
 }
 function mailLink(subject, body) {
-  return isMobile
-    ? `mailto:${CONFIG.email}?subject=${enc(subject)}&body=${enc(body)}`
-    : `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(CONFIG.email)}&su=${enc(subject)}&body=${enc(body)}`;
+  return `mailto:${CONFIG.email}?subject=${enc(subject)}&body=${enc(body)}`;
 }
 function setMail(a, subject, body) {
   a.href = mailLink(subject, body);
-  if (!isMobile) { a.target = '_blank'; a.rel = 'noopener'; }
 }
 
 /* ============================================================
@@ -250,17 +246,41 @@ document.getElementById('qrDownload').addEventListener('click', () => {
   link.click();
 });
 
-document.getElementById('shareBtn').addEventListener('click', async () => {
+const shareBtn = document.getElementById('shareBtn');
+let copiedTimer = null;
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  const ok = document.execCommand('copy');
+  ta.remove();
+  if (!ok) throw new Error('copy failed');
+}
+
+shareBtn.addEventListener('click', async () => {
   const msg = document.getElementById('shareMsg');
   try {
-    if (navigator.share) {
-      await navigator.share({ title: 'Aula Método', text: 'Clases de refuerzo', url: shareUrl });
-    } else {
-      await navigator.clipboard.writeText(shareUrl);
-      msg.textContent = 'Enlace copiado.';
-      setTimeout(() => msg.textContent = '', 3000);
-    }
-  } catch (e) {}
+    await copyText(window.location.href);
+    shareBtn.classList.remove('is-copied');
+    void shareBtn.offsetWidth;
+    shareBtn.classList.add('is-copied');
+    msg.textContent = 'Enlace copiado. Ya puedes pegarlo donde quieras.';
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => {
+      shareBtn.classList.remove('is-copied');
+      msg.textContent = 'Copia la dirección de esta página para mandarla por WhatsApp.';
+    }, 2200);
+  } catch (e) {
+    msg.textContent = 'No se ha podido copiar. Copia la dirección desde la barra del navegador.';
+  }
 });
 
 /* ============================================================
