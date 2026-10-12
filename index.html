@@ -154,14 +154,14 @@
     <!-- Barra de filtros: curso y cuatrimestre -->
     <div class="subject-filter mt-10 overflow-hidden rounded-xl border border-line bg-white reveal">
       <div class="flex items-center gap-3 px-2 py-2 sm:gap-4 sm:px-3">
-        <span class="filter-label rounded-l-full">Curso:</span>
+        <span class="filter-label rounded-l-full">Curso</span>
         <div class="flex flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="Curso" data-filter="curso">
           <button type="button" role="tab" class="filter-tab" data-value="1" aria-selected="false" tabindex="-1" aria-label="1º Curso">1º<span class="hidden sm:inline"> Curso</span></button>
           <button type="button" role="tab" class="filter-tab is-active" data-value="2" aria-selected="true" aria-label="2º Curso">2º<span class="hidden sm:inline"> Curso</span></button>
         </div>
       </div>
       <div class="flex items-center gap-3 border-t border-line bg-paper px-2 py-2 sm:gap-4 sm:px-3">
-        <span class="filter-label rounded-l-full">Cuatrimestre:</span>
+        <span class="filter-label rounded-l-full">Cuatrimestre</span>
         <div class="flex flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="Cuatrimestre" data-filter="cuatri">
           <button type="button" role="tab" class="filter-tab filter-tab--sub is-active" data-value="1" aria-selected="true" aria-label="1º Cuatrimestre">1º<span class="hidden sm:inline"> Cuatrimestre</span></button>
           <button type="button" role="tab" class="filter-tab filter-tab--sub" data-value="2" aria-selected="false" tabindex="-1" aria-label="2º Cuatrimestre">2º<span class="hidden sm:inline"> Cuatrimestre</span></button>
@@ -508,7 +508,7 @@
             <h3 class="mt-2 text-lg font-semibold leading-snug tracking-tight">Para una duda concreta o un examen que tienes encima.</h3>
             <ul class="mt-5 space-y-2.5 text-sm">
             <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Clase individual 1:1</li>
-            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Te quedas con los apuntes de la sesión</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Online o presencial, a tratar</li>
             </ul>
           </div>
           <div class="flex flex-col justify-between gap-5 border-t border-line pt-5 sm:w-56 sm:shrink-0 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
@@ -521,8 +521,10 @@
             <p class="font-mono text-[11px] uppercase tracking-wider text-muted">Grupo reducido</p>
             <h3 class="mt-2 text-lg font-semibold leading-snug tracking-tight">De 2 a 4 alumnos de la misma asignatura.</h3>
             <ul class="mt-5 space-y-2.5 text-sm">
-            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Sesiones semanales de 1,5 h</li>
-            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Grupo de dudas por chat</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Sesiones en grupo</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Precio por alumno, depende del número de participantes</li>
+            <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink"></i> Online o presencial, a tratar</li>
+
             </ul>
           </div>
           <div class="flex flex-col justify-between gap-5 border-t border-line pt-5 sm:w-56 sm:shrink-0 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
@@ -536,10 +538,9 @@
       <aside class="reveal stagger h-full" style="--d:240ms" aria-label="Compartir esta web">
         <div id="qr-card" class="qr-card flex h-full flex-col rounded-xl bg-ink p-6 text-white sm:p-8" style="box-shadow:var(--shadow-xl)">
           <div class="flex items-center justify-between">
-            <p class="font-mono text-[11px] uppercase tracking-wider text-white/60">Pásalo a tu clase</p>
             <i data-lucide="scan-line" class="h-5 w-5 text-white/70" aria-hidden="true"></i>
           </div>
-          <h3 class="mt-3 text-2xl font-semibold leading-tight tracking-[-0.03em]">¿Os apuntáis varios? En grupo reducido sale a cuenta.</h3>
+          <h3 class="mt-3 text-2xl font-semibold leading-tight tracking-[-0.03em]">Escanea para abrir la página</h3>
           <div class="flex flex-1 items-center justify-center py-6">
             <button id="qrOpen" type="button" aria-label="Ampliar el código QR" aria-haspopup="dialog" aria-controls="qrModal"
               class="group relative w-full max-w-[220px] cursor-pointer rounded-lg bg-white p-3 transition-transform duration-300 hover:scale-105 focus-visible:scale-105">
