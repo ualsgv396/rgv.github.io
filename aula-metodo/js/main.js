@@ -97,23 +97,23 @@ function renderSubjects(key) {
   track.innerHTML = subjects[key].map((s) => `
     <article class="shrink-0 basis-full px-2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
       aria-roledescription="diapositiva" aria-label="${s.name}">
-      <div class="flex h-full flex-col bg-[#111] border border-white/5 text-paper">
-        <div class="poster-card relative flex aspect-[4/3] flex-col overflow-hidden p-6">
-          
-          <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-20 invert mix-blend-screen" aria-hidden="true" alt="">          <span class="text-[10px] font-semibold uppercase tracking-[.25em] text-gold">Aula Método</span>
-          <span class="mt-1.5 inline-flex w-fit border border-gold/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gold/80">${level}</span>
-          <span class="relative mt-auto font-display text-2xl font-bold leading-tight text-paper z-10">${s.name}</span>
-          <span class="relative mt-2 text-xs leading-snug text-paper/50 z-10">${s.topics}</span>
+      <div class="flex h-full flex-col overflow-hidden rounded-xl bg-white text-ink shadow-subtle">
+        <div class="poster-card relative flex aspect-[4/3] flex-col overflow-hidden p-5">
+          <img src="logoUal.png" class="pointer-events-none absolute -bottom-4 -right-4 h-32 w-32 opacity-[.06] grayscale" aria-hidden="true" alt="">
+          <span class="font-mono text-[11px] uppercase tracking-wider text-muted">Aula Método</span>
+          <span class="mt-2 inline-flex w-fit rounded-full border border-line bg-white px-2.5 py-0.5 text-[12px] text-muted">${level}</span>
+          <span class="relative z-10 mt-auto text-2xl font-semibold leading-tight tracking-[-0.03em] text-ink">${s.name}</span>
+          <span class="relative z-10 mt-2 text-[13px] leading-snug text-muted">${s.topics}</span>
         </div>
-        <div class="mt-0 flex items-start gap-4 border-t border-white/8 p-5 relative z-10 bg-[#111]">
-          <div class="w-12 shrink-0 text-center leading-none border-r border-white/10 pr-4">
-            <span class="block text-[9px] font-semibold uppercase tracking-wider text-gold/60">Curso</span>
-            <span class="mt-0.5 block font-display text-3xl font-bold text-gold">${s.curso}</span>
+        <div class="relative z-10 flex items-start gap-4 bg-white p-5">
+          <div class="w-12 shrink-0 border-r border-line pr-4 text-center leading-none">
+            <span class="block font-mono text-[10px] uppercase tracking-wider text-muted">Curso</span>
+            <span class="mt-1 block text-3xl font-semibold tracking-[-0.05em] text-ink">${s.curso}</span>
           </div>
-          <div class="flex-1 min-w-0">
-            <h3 class="text-sm font-semibold uppercase leading-snug tracking-wide text-paper">${s.name}</h3>
+          <div class="min-w-0 flex-1">
+            <h3 class="text-sm font-semibold leading-snug tracking-tight text-ink">${s.name}</h3>
             <a data-subject="${s.name}" data-curso="${s.curso}" href="#"
-              class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-gold hover:underline">
+              class="mt-2 inline-flex items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline">
               Pedir información <i data-lucide="arrow-right" class="h-3 w-3" aria-hidden="true"></i>
             </a>
           </div>
@@ -189,7 +189,7 @@ function selectTab(tab) {
     t.setAttribute('aria-selected', String(on));
     t.tabIndex = on ? 0 : -1;
     t.classList.toggle('tab-active-style', on);
-    t.classList.toggle('text-paper/50', !on);
+    t.classList.toggle('text-muted', !on);
   });
   renderSubjects(tab.dataset.level);
 }
@@ -236,7 +236,7 @@ const shareUrl = CONFIG.qrUrl || window.location.href.split('#')[0];
 if(document.getElementById('qrUrl')) document.getElementById('qrUrl').textContent = shareUrl;
 new QRCode(document.getElementById('qrcode'), {
   text: shareUrl, width: 512, height: 512,
-  colorDark: '#0A0A0A', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H
+  colorDark: '#171717', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H
 });
 
 document.getElementById('qrDownload').addEventListener('click', () => {
