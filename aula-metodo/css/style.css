@@ -285,3 +285,39 @@ body {
 .pricing-featured.card-hover:hover { box-shadow: var(--shadow-xl); }
 .pricing-featured.card-hover::after,
 .bg-ink.card-hover::after { background: var(--color-paper-white); }
+
+/* ============================================================
+    TARIFAS + QR — entrada escalonada y botón de copiar
+============================================================ */
+.reveal.stagger { transition-delay: var(--d, 0ms); }
+.reveal.stagger.visible:hover { transition-delay: 0ms; }
+
+.qr-frame { transition: transform .4s cubic-bezier(.22,1,.36,1); }
+.qr-card:hover .qr-frame { transform: scale(1.03); }
+
+.btn-copy {
+  position: relative; overflow: hidden;
+  display: inline-grid; place-items: center;
+  min-height: 44px; padding: 0 .75rem;
+  border: 1px solid var(--color-paper-white); border-radius: 8px;
+  background: var(--color-paper-white); color: var(--color-ink);
+  font-weight: 500; font-size: 14px;
+  transition: background .3s ease, color .3s ease, transform .15s ease;
+}
+.btn-copy:hover { background: #ededed; }
+.btn-copy:active { transform: scale(.97); }
+.copy-label {
+  grid-area: 1 / 1;
+  display: inline-flex; align-items: center; gap: .5rem;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .25s ease;
+}
+.copy-label--done { transform: translateY(120%); opacity: 0; }
+.btn-copy.is-copied { background: transparent; border-color: rgba(255,255,255,.6); color: var(--color-paper-white); }
+.btn-copy.is-copied .copy-label--idle { transform: translateY(-120%); opacity: 0; }
+.btn-copy.is-copied .copy-label--done { transform: translateY(0); opacity: 1; }
+.btn-copy.is-copied::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(255,255,255,.5);
+  animation: copyPulse .6s ease-out;
+}
+@keyframes copyPulse { to { box-shadow: 0 0 0 10px rgba(255,255,255,0); } }
