@@ -315,3 +315,22 @@ body {
   animation: copyPulse .6s ease-out;
 }
 @keyframes copyPulse { to { box-shadow: 0 0 0 10px rgba(255,255,255,0); } }
+
+/* ============================================================
+    FILTRO DE ASIGNATURAS (curso → cuatrimestre)
+============================================================ */
+.filter-tab {
+  position: relative; white-space: nowrap;
+  min-height: 40px; padding: 0 14px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; color: var(--color-subtext);
+  transition: color .2s ease, background .25s ease;
+}
+.filter-tab:hover { color: var(--color-ink); }
+.filter-tab.is-active { background: var(--color-ink); color: var(--color-paper-white); }
+.filter-tab--sub { min-height: 36px; font-size: 13px; }
+.filter-tab--sub.is-active {
+  background: var(--color-paper-white); color: var(--color-ink);
+  box-shadow: var(--shadow-subtle);
+}
+.subject-panel:not([hidden]) { animation: panelIn .35s cubic-bezier(.22,1,.36,1); }
+@keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
