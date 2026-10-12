@@ -8,8 +8,9 @@ const CONFIG = {
 };
 
 /* ============================================================
-   CORREO — enlaces mailto
+   CORREO — Gmail web en ordenador, mailto en móvil (abre la app)
 ============================================================ */
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 const enc = encodeURIComponent;
 
 // Cuerpo estándar: el alumno solo rellena los huecos
@@ -19,10 +20,17 @@ function mailBody() {
     `Prefiero clases (online / presencial): _____\n\nUn saludo.`;
 }
 function mailLink(subject, body) {
-  return `mailto:${CONFIG.email}?subject=${enc(subject)}&body=${enc(body)}`;
+  return isMobile
+    ? `mailto:${CONFIG.email}?subject=${enc(subject)}&body=${enc(body)}`
+    : `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(CONFIG.email)}&su=${enc(subject)}&body=${enc(body)}`;
+}
+function openMail(url) {
+  if (isMobile) window.location.href = url;
+  else window.open(url, '_blank', 'noopener');
 }
 function setMail(a, subject, body) {
   a.href = mailLink(subject, body);
+  if (!isMobile) { a.target = '_blank'; a.rel = 'noopener'; }
 }
 
 /* ============================================================
@@ -227,7 +235,7 @@ document.getElementById('asignaturas').addEventListener('click', (e) => {
   const name  = card.querySelector('h4').textContent.trim();
   const curso  = panel ? panel.dataset.curso  : subjectFilter.curso;
   const cuatri = panel ? panel.dataset.cuatri : subjectFilter.cuatri;
-  window.location.href = subjectMailLink(name, curso, cuatri);
+  openMail(subjectMailLink(name, curso, cuatri));
 });
 document.querySelectorAll('[data-mail-address]').forEach(el => el.textContent = CONFIG.email);
 
