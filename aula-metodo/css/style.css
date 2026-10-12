@@ -334,3 +334,43 @@ body {
 }
 .subject-panel:not([hidden]) { animation: panelIn .35s cubic-bezier(.22,1,.36,1); }
 @keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ============================================================
+    SECCIONES OSCURAS (Asignaturas y Contacto)
+    Invierte la paleta de los componentes que viven dentro.
+============================================================ */
+.section-dark { background: var(--color-onyx); color: var(--color-paper-white); }
+.section-dark .text-ink   { color: var(--color-paper-white); }
+.section-dark .text-muted { color: rgba(255,255,255,.65); }
+.section-dark .border-line { border-color: rgba(255,255,255,.12); }
+.section-dark .bg-white { background-color: #141414; }
+.section-dark .bg-paper { background-color: #0d0d0d; }
+.section-dark .micro { color: rgba(255,255,255,.6); }
+.section-dark :focus-visible { outline-color: var(--color-paper-white); }
+
+.section-dark .section-label { color: rgba(255,255,255,.6); }
+.section-dark .section-label::after { background: var(--color-paper-white); }
+
+.section-dark .surface-card { background: #141414; box-shadow: 0 0 0 1px rgba(255,255,255,.1); }
+.section-dark .card-hover:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.25); }
+.section-dark .card-hover::after { background: var(--color-paper-white); }
+.section-dark .poster-card { background-color: #0d0d0d; border-bottom-color: rgba(255,255,255,.1); }
+.section-dark img[src*="logoUal"] { filter: invert(1) grayscale(1); }
+
+.section-dark .filter-tab { color: rgba(255,255,255,.6); }
+.section-dark .filter-tab:hover { color: var(--color-paper-white); }
+.section-dark .filter-tab.is-active { background: var(--color-paper-white); color: var(--color-ink); }
+.section-dark .filter-tab--sub.is-active { background: rgba(255,255,255,.14); color: var(--color-paper-white); box-shadow: none; }
+.section-dark .subject-filter .bg-ink { background: var(--color-paper-white); color: var(--color-ink); }
+.section-dark .hover\:border-ink:hover { border-color: var(--color-paper-white); }
+
+.section-dark .btn-outline { background: transparent; border-color: rgba(255,255,255,.25); color: var(--color-paper-white); }
+.section-dark .btn-outline:hover { background: var(--color-paper-white); border-color: var(--color-paper-white); color: var(--color-ink); }
+
+/* Tarjeta de correo: en blanco para destacar sobre el negro */
+.mail-card { background: var(--color-ink); color: var(--color-paper-white); }
+.mail-card .mail-card-sub { color: rgba(255,255,255,.6); }
+.section-dark .mail-card { background: var(--color-paper-white); color: var(--color-ink); }
+.section-dark .mail-card:hover { background: #ededed; }
+.section-dark .mail-card .mail-card-sub { color: var(--color-subtext); }
+.section-dark .mail-card.card-hover::after { background: var(--color-ink); }
