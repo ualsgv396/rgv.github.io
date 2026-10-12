@@ -12,8 +12,11 @@ const CONFIG = {
 ============================================================ */
 const enc = encodeURIComponent;
 
-function mailBody(intro, asignatura = '') {
-  return `Hola ${CONFIG.profesor},\n\n${intro}\n\nCurso: \nAsignatura: ${asignatura}\nModalidad (online / presencial): \nDisponibilidad: \n\nUn saludo.`;
+// Cuerpo estándar: el alumno solo rellena los huecos
+function mailBody() {
+  return `Hola ${CONFIG.profesor},\n\nte escribo porque necesito ayuda con mis clases.\n\n` +
+    `Estudio: _____\nAsignatura: _____\nMi examen es el: _____\n` +
+    `Prefiero clases (online / presencial): _____\n\nUn saludo.`;
 }
 function mailLink(subject, body) {
   return `mailto:${CONFIG.email}?subject=${enc(subject)}&body=${enc(body)}`;
@@ -197,7 +200,34 @@ showSubjects();
    BOTONES DE CORREO
 ============================================================ */
 document.querySelectorAll('[data-mail]').forEach((a) => {
-  setMail(a, a.dataset.mailSubject || 'Información sobre clases', mailBody(a.dataset.mailIntro || 'Me gustaría recibir información.', a.dataset.mailAsignatura || ''));
+  setMail(a, a.dataset.mailSubject || 'Clases particulares - Consulta', mailBody());
+});
+
+/* ============================================================
+   "PEDIR INFORMACIÓN" EN LAS TARJETAS DE ASIGNATURA
+   Lee el nombre de la tarjeta y el curso/cuatrimestre de su panel.
+============================================================ */
+function subjectMailLink(name, curso, cuatri) {
+  const nivel   = `${curso}º Curso, ${cuatri}º Cuatrimestre`;
+  const subject = `Información sobre ${name} - ${nivel}`;
+  const body =
+    `Hola ${CONFIG.profesor},\n\n` +
+    `me gustaría pedirte más información sobre las clases particulares de ${name} ` +
+    `correspondientes al ${curso}º Curso (${cuatri}º Cuatrimestre). Me gustaría saber...\n\n` +
+    `_____\n\nUn saludo.`;
+  return mailLink(subject, body);
+}
+
+document.getElementById('asignaturas').addEventListener('click', (e) => {
+  const btn = e.target.closest('.subject-info');
+  if (!btn) return;
+  e.preventDefault();
+  const card  = btn.closest('article');
+  const panel = btn.closest('.subject-panel');
+  const name  = card.querySelector('h4').textContent.trim();
+  const curso  = panel ? panel.dataset.curso  : subjectFilter.curso;
+  const cuatri = panel ? panel.dataset.cuatri : subjectFilter.cuatri;
+  window.location.href = subjectMailLink(name, curso, cuatri);
 });
 document.querySelectorAll('[data-mail-address]').forEach(el => el.textContent = CONFIG.email);
 
