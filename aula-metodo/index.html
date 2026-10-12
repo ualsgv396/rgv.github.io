@@ -130,29 +130,33 @@
       </a>
     </div>
 
-    <!-- Credenciales -->
-    <dl class="hero-item mx-auto mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 md:grid-cols-4" style="animation-delay:420ms">
-      <div class="card-hover bg-white border border-line p-5 text-left">
-        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Grado</dt>
-        <dd class="mt-2 font-display text-sm font-bold leading-snug">[Ing. / Matemáticas / Física]</dd>
-      </div>
-      <div class="card-hover bg-white border border-line p-5 text-left">
-        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Máster</dt>
-        <dd class="mt-2 font-display text-sm font-bold leading-snug">[Máster en Profesorado]</dd>
-      </div>
-      <div class="card-hover bg-white border border-line p-5 text-left">
-        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Experiencia</dt>
-        <dd class="mt-2 font-display text-2xl font-bold">
-          <span class="counter-val" data-target="[X]">[X]</span> <span class="text-base font-normal text-muted">años</span>
-        </dd>
-      </div>
-      <div class="card-hover bg-white border border-line p-5 text-left">
-        <dt class="text-[10px] font-semibold uppercase tracking-widest text-muted">Aprobados</dt>
-        <dd class="mt-2 font-display text-2xl font-bold text-gold-dark">
-          <span class="counter-val" data-target="[XX]">[XX]</span><span class="text-base font-normal text-muted">%</span>
-        </dd>
-      </div>
-    </dl>
+    <!-- Formación y trayectoria -->
+    <div class="hero-item mx-auto mt-14 w-full max-w-xl text-left" style="animation-delay:420ms">
+      <h2 class="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted">
+        <i data-lucide="book-open-check" class="h-4 w-4 text-gold" aria-hidden="true"></i>
+        Formación y trayectoria
+      </h2>
+      <ol class="mt-8 space-y-8 border-l border-line pl-8">
+        <li class="relative">
+          <span class="timeline-dot"></span>
+          <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año – Año] · [Universidad]</p>
+          <p class="mt-1 font-semibold text-ink">Grado en [Titulación]</p>
+          <p class="mt-1 text-sm text-muted leading-relaxed">Especialidad en [mención / especialidad].</p>
+        </li>
+        <li class="relative">
+          <span class="timeline-dot"></span>
+          <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año] · [Universidad]</p>
+          <p class="mt-1 font-semibold text-ink">Máster en Profesorado</p>
+          <p class="mt-1 text-sm text-muted leading-relaxed">Prácticas docentes y didáctica de las ciencias.</p>
+        </li>
+        <li class="relative">
+          <span class="timeline-dot"></span>
+          <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año] – actualidad</p>
+          <p class="mt-1 font-semibold text-ink">Profesor particular</p>
+          <p class="mt-1 text-sm text-muted leading-relaxed">[X] años preparando primeros cursos de Ingeniería y Ciencias, PAU/EBAU y refuerzo de ESO.</p>
+        </li>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -169,42 +173,14 @@
       </p>
     </div>
 
-    <div class="mt-16 grid gap-14 lg:grid-cols-2">
-      <!-- Trayectoria -->
-      <div class="reveal">
-        <h3 class="flex items-center gap-2 font-display text-xl font-bold text-paper">
-          <i data-lucide="book-open-check" class="h-5 w-5 text-gold" aria-hidden="true"></i>
-          Formación y trayectoria
-        </h3>
-        <ol class="mt-8 space-y-8 border-l border-white/15 pl-8">
-          <li class="relative">
-            <span class="timeline-dot" style="border-color:#0A0A0A"></span>
-            <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año – Año] · [Universidad]</p>
-            <p class="mt-1 font-semibold text-paper">Grado en [Titulación]</p>
-            <p class="mt-1 text-sm text-paper/60 leading-relaxed">Especialidad en [mención / especialidad].</p>
-          </li>
-          <li class="relative">
-            <span class="timeline-dot" style="border-color:#0A0A0A"></span>
-            <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año] · [Universidad]</p>
-            <p class="mt-1 font-semibold text-paper">Máster en [Profesorado / especialidad]</p>
-            <p class="mt-1 text-sm text-paper/60 leading-relaxed">[Línea de trabajo o prácticas docentes.]</p>
-          </li>
-          <li class="relative">
-            <span class="timeline-dot" style="border-color:#0A0A0A"></span>
-            <p class="text-xs font-semibold text-gold-dark uppercase tracking-widest">[Año] – actualidad</p>
-            <p class="mt-1 font-semibold text-paper">Profesor de refuerzo</p>
-            <p class="mt-1 text-sm text-paper/60 leading-relaxed">[X] años preparando asignaturas de primeros cursos de Ingeniería, Ciencias, PAU y ESO.</p>
-          </li>
-        </ol>
-      </div>
-
+    <div class="mt-16">
       <!-- Metodología -->
       <div class="reveal">
         <h3 class="flex items-center gap-2 font-display text-xl font-bold text-paper">
           <i data-lucide="route" class="h-5 w-5 text-gold" aria-hidden="true"></i>
           Metodología
         </h3>
-        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <article class="card-hover border border-white/10 bg-white/5 p-5">
             <i data-lucide="user" class="h-6 w-6 text-gold" aria-hidden="true"></i>
             <h4 class="mt-3 font-semibold text-paper">Individual o grupo</h4>
