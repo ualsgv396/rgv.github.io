@@ -1,6 +1,20 @@
 @import "tailwindcss";
 
 /* ============================================================
+   🎨 COLOR DE ACENTO — ELIGE UNO
+   Deja SIN comentar solo una línea "--accent". Todo lo que usa el
+   acento (enlaces, puntos, brillos de botones, tarjetas al pasar el
+   ratón, pestaña activa…) cambia a la vez.
+============================================================ */
+:root {
+  --accent: #4d8dff;    /* 1. Azul eléctrico */
+  /* --accent: #2fd39a; */ /* 2. Verde esmeralda */
+  /* --accent: #b57bff; */ /* 3. Violeta neón */
+  /* --accent: #22d3ee; */ /* 4. Cian */
+  /* --accent: #ff8833; */ /* 5. Ámbar original (Signal Orange) */
+}
+
+/* ============================================================
    GRAPHITE — tokens de diseño (Tailwind v4)
    Colores, tipografía, radios y sombras de la guía.
    El espaciado usa la escala por defecto de Tailwind (4px), así que
@@ -56,6 +70,13 @@
   --shadow-pale: rgb(255, 255, 255) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px -2px 6px 0px inset;
 }
 
+/* Acento conectado a la variable elegida arriba: bg-accent, text-accent, border-accent… */
+@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --color-accent-line: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
 /* ============================================================
    BASE
 ============================================================ */
@@ -68,7 +89,7 @@
     font-feature-settings: "clig" 0, "liga" 0;
     -webkit-font-smoothing: antialiased;
   }
-  :focus-visible { outline: 2px solid var(--color-ash); outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   ::selection { background: var(--color-graphite-edge); color: var(--color-cloud-white); }
 }
 
@@ -76,41 +97,97 @@
    COMPONENTES REUTILIZABLES
 ============================================================ */
 @layer components {
-  /* Botón de conversión pálido (primario) */
+  /* ---------- Botones: base común con micro-interacciones ----------
+     hover → sube 1px, escala 1.02 y brillo perimetral del acento
+     active → se hunde (escala 0.97)                                   */
+  .btn-pale, .btn-charcoal, .btn-ghost {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-button px-4 py-2
+           text-nav-control font-medium;
+    min-height: 40px;
+    transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, background-color .25s ease,
+                border-color .25s ease, color .2s ease;
+  }
+  .btn-pale:hover, .btn-charcoal:hover, .btn-ghost:hover { transform: translateY(-1px) scale(1.02); }
+  .btn-pale:active, .btn-charcoal:active, .btn-ghost:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+
+  /* Pálido (primario): brillo que recorre el botón */
   .btn-pale {
-    @apply inline-flex items-center justify-center gap-2 rounded-button border border-white/10 bg-paper-white px-4 py-2
-           text-nav-control font-medium text-charcoal-surface shadow-pale transition-colors hover:bg-cloud-white;
-    min-height: 40px;
+    @apply border border-white/10 bg-paper-white text-charcoal-surface shadow-pale;
   }
-  /* Botón secundario carbón */
+  .btn-pale::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / .75) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .6s ease;
+  }
+  .btn-pale:hover { @apply bg-cloud-white; box-shadow: var(--shadow-pale), 0 0 0 1px var(--color-accent-line), 0 6px 24px -6px var(--accent); }
+  .btn-pale:hover::after { transform: translateX(120%); }
+
+  /* Carbón (secundario) */
   .btn-charcoal {
-    @apply inline-flex items-center justify-center gap-2 rounded-button border border-steel-border bg-graphite-edge px-4 py-2
-           text-nav-control font-medium text-cloud-white shadow-control transition-colors hover:bg-steel-border;
-    min-height: 40px;
+    @apply border border-steel-border bg-graphite-edge text-cloud-white shadow-control;
   }
-  /* Control transparente (navegación) */
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-button border border-white/10 px-4 py-2
-           text-nav-control font-medium text-fog transition-colors hover:text-cloud-white;
-    min-height: 40px;
-  }
+  .btn-charcoal:hover { @apply bg-steel-border; border-color: var(--color-accent-line); box-shadow: 0 0 0 1px var(--color-accent-line), 0 6px 20px -8px var(--accent); }
+
+  /* Transparente */
+  .btn-ghost { @apply border border-white/10 text-fog; }
+  .btn-ghost:hover { @apply text-cloud-white; background-color: var(--color-accent-soft); border-color: var(--color-accent-line); }
+
   /* Botón icono circular */
   .btn-icon {
-    @apply grid size-10 place-items-center rounded-full border border-graphite-edge bg-charcoal-surface text-cloud-white
-           shadow-nav transition-colors hover:border-steel-border disabled:opacity-40;
+    @apply grid size-10 place-items-center rounded-full border border-graphite-edge bg-charcoal-surface text-cloud-white shadow-nav
+           disabled:opacity-40 disabled:pointer-events-none;
+    transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, border-color .25s ease, color .2s ease;
   }
-  /* Enlace naranja en línea */
-  .link-orange {
-    @apply inline-flex items-center gap-1 text-body text-signal-orange underline-offset-4 hover:underline;
+  .btn-icon:hover { transform: scale(1.08); border-color: var(--color-accent-line); color: var(--accent);
+                    box-shadow: var(--shadow-nav), 0 0 18px -4px var(--accent); }
+  .btn-icon:active { transform: scale(.92); transition-duration: .08s; }
+
+  /* Enlace de acento en línea: subrayado que crece y flecha que avanza */
+  .link-accent, .link-orange {
+    @apply relative inline-flex items-center gap-1 text-body text-accent;
     line-height: 20px;
   }
-  /* Tarjeta base */
+  .link-accent::after, .link-orange::after {
+    content: ''; position: absolute; left: 0; bottom: -2px; height: 1px; width: 0;
+    background: currentColor; transition: width .3s cubic-bezier(.22,1,.36,1);
+  }
+  .link-accent:hover::after, .link-orange:hover::after { width: calc(100% - 18px); }
+  .link-accent svg, .link-orange svg { transition: transform .25s cubic-bezier(.22,1,.36,1); }
+  .link-accent:hover svg, .link-orange:hover svg { transform: translateX(3px); }
+  .link-accent:active, .link-orange:active { opacity: .75; }
+
+  /* ---------- Superficies (romper el negro plano) ---------- */
   .card {
     @apply rounded-card border border-graphite-edge bg-obsidian-canvas;
   }
+  /* Tarjeta elevada: carbón con un degradado muy sutil hacia el negro */
+  .surface-raised {
+    @apply rounded-card border border-graphite-edge;
+    background: linear-gradient(180deg, var(--color-charcoal-surface) 0%, #101010 100%);
+  }
+  /* Interacción de tarjeta: borde y brillo del acento al pasar el ratón */
+  .card-interactive {
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+  .card-interactive:hover {
+    border-color: var(--color-accent-line);
+    box-shadow: var(--shadow-card), 0 0 0 1px var(--color-accent-soft), 0 12px 40px -16px var(--accent);
+  }
+  /* Sección con fondo carbón degradado */
+  .section-tint {
+    background: linear-gradient(180deg, var(--color-charcoal-surface) 0%, var(--color-obsidian-canvas) 100%);
+  }
+  /* Halo de acento muy tenue detrás del hero */
+  .hero-glow {
+    background:
+      radial-gradient(60% 50% at 75% 40%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 70%),
+      radial-gradient(40% 40% at 10% 0%, rgb(255 255 255 / .04) 0%, transparent 70%);
+  }
+
   /* Etiqueta de sección */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-badge border border-graphite-edge px-3 py-1 text-caption text-fog;
+    @apply inline-flex items-center gap-2 rounded-badge border border-graphite-edge bg-charcoal-surface px-3 py-1 text-caption text-fog;
   }
 }
 

@@ -10,7 +10,7 @@ const { plan } = Astro.props;
 ---
 
 <!-- Tarjeta de tarifa horizontal: detalle a la izquierda, precio y botón a la derecha -->
-<article class="card flex flex-1 flex-col gap-6 p-4 shadow-card sm:flex-row sm:p-6">
+<article class="surface-raised card-interactive flex flex-1 flex-col gap-6 p-4 shadow-card sm:flex-row sm:p-6">
   <div class="flex-1">
     <p class="text-caption text-ash uppercase">{plan.label}</p>
     <h3 class="mt-2 text-subheading font-medium">{plan.title}</h3>
@@ -18,7 +18,7 @@ const { plan } = Astro.props;
       {
         plan.features.map((feature) => (
           <li class="flex items-start gap-2">
-            <Check size={16} className="mt-0.5 shrink-0 text-cloud-white" aria-hidden="true" />
+            <Check size={16} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
             {feature}
           </li>
         ))

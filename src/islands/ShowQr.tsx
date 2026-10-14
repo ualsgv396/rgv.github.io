@@ -64,7 +64,7 @@ export default function ShowQr({ value, buttonLabel = 'Mostrar código QR' }: Sh
         <motion.div
           initial={false}
           animate={{ width: expanded ? 288 : 220, borderRadius: expanded ? 10 : 24 }}
-          className="overflow-hidden border border-graphite-edge bg-charcoal-surface shadow-card"
+          className="overflow-hidden border border-graphite-edge bg-graphite-edge/60 shadow-card backdrop-blur"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {!expanded ? (
@@ -72,12 +72,14 @@ export default function ShowQr({ value, buttonLabel = 'Mostrar código QR' }: Sh
                 key="collapsed"
                 type="button"
                 onClick={() => setExpanded(true)}
-                className="flex h-12 w-full items-center justify-center gap-2 text-nav-control font-medium text-cloud-white"
+                className="flex h-12 w-full items-center justify-center gap-2 text-nav-control font-medium text-cloud-white transition-colors hover:bg-accent-soft"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.96 }}
                 initial={{ opacity: 0, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
                 exit={{ opacity: 0, filter: 'blur(4px)' }}
               >
-                <QrCode size={18} aria-hidden="true" />
+                <QrCode size={18} className="text-accent" aria-hidden="true" />
                 {buttonLabel}
               </motion.button>
             ) : (
@@ -95,7 +97,8 @@ export default function ShowQr({ value, buttonLabel = 'Mostrar código QR' }: Sh
                   className="group relative rounded-card bg-cloud-white p-3"
                   initial={{ opacity: 0, y: 40, scale: 1.15 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, boxShadow: '0 0 0 2px var(--color-accent-line), 0 12px 32px -10px var(--accent)' }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   {url && <QRCodeSVG value={url} size={224} level="H" fgColor="#0a0a0a" bgColor="#fafafa" />}
                   <span className="absolute right-2 bottom-2 grid size-7 place-items-center rounded-full bg-obsidian-canvas text-cloud-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -109,6 +112,8 @@ export default function ShowQr({ value, buttonLabel = 'Mostrar código QR' }: Sh
                     type="button"
                     onClick={copy}
                     aria-live="polite"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.95 }}
                     className="flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full border border-white/10 bg-paper-white text-nav-control font-medium text-charcoal-surface shadow-pale"
                   >
                     <LinkIcon size={16} aria-hidden="true" />

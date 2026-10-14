@@ -34,7 +34,7 @@ export default function SubjectExplorer({ subjects, cursos = [1, 2] }: Props) {
   return (
     <LayoutGroup>
       {/* Filtros */}
-      <div className="card overflow-hidden">
+      <div className="surface-raised overflow-hidden">
         <FilterRow
           label="Curso"
           options={cursos.map((c) => ({ value: c, text: `${c}º Curso` }))}
@@ -104,14 +104,14 @@ function FilterRow({
               role="tab"
               aria-selected={selected}
               onClick={() => onChange(o.value)}
-              className={`relative min-h-9 rounded-button px-3 text-nav-control font-medium whitespace-nowrap transition-colors ${
+              className={`relative min-h-9 rounded-button px-3 text-nav-control font-medium whitespace-nowrap transition-[color,transform] active:scale-95 ${
                 selected ? 'text-cloud-white' : 'text-fog hover:text-cloud-white'
               }`}
             >
               {selected && (
                 <motion.span
                   layoutId={`filter-${label}`}
-                  className="absolute inset-0 rounded-button border border-steel-border bg-graphite-edge"
+                  className="absolute inset-0 rounded-button border border-accent-line bg-graphite-edge shadow-[0_0_16px_-6px_var(--accent)]"
                   transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
@@ -189,8 +189,9 @@ function SubjectCard({ subject: s, onOpen, onAsk }: { subject: Subject; onOpen: 
     <motion.article
       layoutId={`subject-${s.code}`}
       onClick={onOpen}
-      whileHover={{ y: -3 }}
-      className={`${slideClass} card flex cursor-pointer flex-col overflow-hidden shadow-card`}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
+      className={`${slideClass} card card-interactive flex cursor-pointer flex-col overflow-hidden shadow-card`}
     >
       <div className="relative flex min-h-48 flex-1 flex-col overflow-hidden border-b border-graphite-edge bg-true-black p-4">
         <img src={LOGO} alt="" aria-hidden="true" className={`${logoClass} -right-6 -bottom-6 size-40 opacity-20`} />
@@ -202,7 +203,7 @@ function SubjectCard({ subject: s, onOpen, onAsk }: { subject: Subject; onOpen: 
         </motion.h3>
         <p className="relative mt-2 line-clamp-2 text-nav-control text-fog">{s.topics}</p>
       </div>
-      <div className="flex items-start gap-4 p-4">
+      <div className="flex items-start gap-4 bg-charcoal-surface p-4">
         <div className="w-12 shrink-0 border-r border-graphite-edge pr-4 text-center leading-none">
           <span className="block text-[10px] font-bold text-ash uppercase">Curso</span>
           <span className="mt-1 block text-[28px] font-medium tracking-[-1px]">{s.curso}º</span>
@@ -214,7 +215,7 @@ function SubjectCard({ subject: s, onOpen, onAsk }: { subject: Subject; onOpen: 
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
             <button
               type="button"
-              className="link-orange text-nav-control"
+              className="link-accent text-nav-control"
               onClick={(e) => {
                 e.stopPropagation();
                 onAsk();
@@ -225,7 +226,7 @@ function SubjectCard({ subject: s, onOpen, onAsk }: { subject: Subject; onOpen: 
             <button
               type="button"
               aria-label={`Ver detalles de ${s.name}`}
-              className="grid size-8 place-items-center rounded-full border border-graphite-edge text-fog transition-colors hover:text-cloud-white"
+              className="grid size-8 place-items-center rounded-full border border-graphite-edge text-fog transition-[color,border-color,transform] hover:scale-110 hover:border-accent-line hover:text-accent active:scale-90"
               onClick={(e) => {
                 e.stopPropagation();
                 onOpen();
@@ -247,7 +248,7 @@ function MoreCard() {
       <p className="text-subheading font-medium">Y más asignaturas por concretar...</p>
       <p className="mt-1 text-nav-control text-fog">
         ¿Buscas otra?{' '}
-        <button type="button" className="link-orange text-nav-control" onClick={() => openMail('Consulta sobre otra asignatura')}>
+        <button type="button" className="link-accent text-nav-control" onClick={() => openMail('Consulta sobre otra asignatura')}>
           Pregúntame <ArrowRight size={14} aria-hidden="true" />
         </button>
       </p>
@@ -308,7 +309,7 @@ function SubjectModal({ subject: s, onClose, onAsk }: { subject: Subject; onClos
       />
       <motion.div
         layoutId={`subject-${s.code}`}
-        className="relative z-10 w-full max-w-2xl overflow-hidden rounded-card border border-graphite-edge bg-obsidian-canvas shadow-card"
+        className="relative z-10 w-full max-w-2xl overflow-hidden rounded-card border border-graphite-edge bg-charcoal-surface shadow-card"
       >
         <button
           ref={closeRef}
@@ -343,7 +344,7 @@ function SubjectModal({ subject: s, onClose, onAsk }: { subject: Subject; onClos
               ['Créditos', `${s.ects} ECTS`],
               ['Carácter', s.kind],
             ].map(([k, v]) => (
-              <div key={k} className="rounded-button border border-graphite-edge p-2">
+              <div key={k} className="rounded-button border border-graphite-edge bg-obsidian-canvas p-2">
                 <dt className="text-caption text-ash">{k}</dt>
                 <dd className="mt-1 text-nav-control font-medium">{v}</dd>
               </div>
