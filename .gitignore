@@ -1,1 +1,6 @@
 rgv.github.io/
+
+# Astro
+node_modules/
+dist/
+.astro/

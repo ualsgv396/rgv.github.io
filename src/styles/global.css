@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GRAPHITE — tokens de diseño (Tailwind v4)
+   Colores, tipografía, radios y sombras de la guía.
+   El espaciado usa la escala por defecto de Tailwind (4px), así que
+   la base de 8px se consigue con valores pares: 2 = 8px, 4 = 16px,
+   6 = 24px, 8 = 32px, 12 = 48px, 16 = 64px, 32 = 128px.
+============================================================ */
+@theme {
+  /* Colores */
+  --color-obsidian-canvas: #0a0a0a;
+  --color-true-black: #000000;
+  --color-charcoal-surface: #171717;
+  --color-graphite-edge: #262626;
+  --color-steel-border: #464646;
+  --color-cloud-white: #fafafa;
+  --color-paper-white: #e5e5e5;
+  --color-fog: #a1a1a1;
+  --color-ash: #737373;
+  --color-signal-orange: #ff8833;
+
+  /* Tipografía: matterFont no es pública; se usa Inter como sustituto */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Escala tipográfica */
+  --text-caption: 12px;
+  --text-caption--line-height: 1.33;
+  --text-nav-control: 14px;
+  --text-nav-control--line-height: 1.43;
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body-large: 18px;
+  --text-body-large--line-height: 1.25;
+  --text-subheading: 20px;
+  --text-subheading--line-height: 1.4;
+  --text-feature-heading: 24px;
+  --text-feature-heading--line-height: 1.17;
+  --text-section-heading: 36px;
+  --text-section-heading--line-height: 1.11;
+  --text-display: 60px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -1.5px;
+
+  /* Radios con nombre */
+  --radius-card: 10px;
+  --radius-button: 8px;
+  --radius-badge: 20px;
+  --radius-tab: 4px;
+
+  /* Sombras */
+  --shadow-nav: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
+  --shadow-card: rgba(0, 0, 0, 0.3) 0px 8px 10px 0px;
+  --shadow-control: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+  --shadow-frame: rgba(101, 129, 128, 0.15) 0px 0px 2px 2px inset, rgba(32, 47, 46, 0.15) 0px 0px 4px 4px inset;
+  --shadow-pale: rgb(255, 255, 255) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.1) 0px -2px 6px 0px inset;
+}
+
+/* ============================================================
+   BASE
+============================================================ */
+@layer base {
+  html { scroll-behavior: smooth; color-scheme: dark; }
+  body {
+    background-color: var(--color-obsidian-canvas);
+    color: var(--color-cloud-white);
+    font-family: var(--font-sans);
+    font-feature-settings: "clig" 0, "liga" 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible { outline: 2px solid var(--color-ash); outline-offset: 2px; }
+  ::selection { background: var(--color-graphite-edge); color: var(--color-cloud-white); }
+}
+
+/* ============================================================
+   COMPONENTES REUTILIZABLES
+============================================================ */
+@layer components {
+  /* Botón de conversión pálido (primario) */
+  .btn-pale {
+    @apply inline-flex items-center justify-center gap-2 rounded-button border border-white/10 bg-paper-white px-4 py-2
+           text-nav-control font-medium text-charcoal-surface shadow-pale transition-colors hover:bg-cloud-white;
+    min-height: 40px;
+  }
+  /* Botón secundario carbón */
+  .btn-charcoal {
+    @apply inline-flex items-center justify-center gap-2 rounded-button border border-steel-border bg-graphite-edge px-4 py-2
+           text-nav-control font-medium text-cloud-white shadow-control transition-colors hover:bg-steel-border;
+    min-height: 40px;
+  }
+  /* Control transparente (navegación) */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-button border border-white/10 px-4 py-2
+           text-nav-control font-medium text-fog transition-colors hover:text-cloud-white;
+    min-height: 40px;
+  }
+  /* Botón icono circular */
+  .btn-icon {
+    @apply grid size-10 place-items-center rounded-full border border-graphite-edge bg-charcoal-surface text-cloud-white
+           shadow-nav transition-colors hover:border-steel-border disabled:opacity-40;
+  }
+  /* Enlace naranja en línea */
+  .link-orange {
+    @apply inline-flex items-center gap-1 text-body text-signal-orange underline-offset-4 hover:underline;
+    line-height: 20px;
+  }
+  /* Tarjeta base */
+  .card {
+    @apply rounded-card border border-graphite-edge bg-obsidian-canvas;
+  }
+  /* Etiqueta de sección */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-badge border border-graphite-edge px-3 py-1 text-caption text-fog;
+  }
+}
+
+/* Barra de desplazamiento del carrusel oculta */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }
+}

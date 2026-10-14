@@ -1,0 +1,45 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Pricing from '@/components/Pricing.astro';
+import Contact from '@/components/Contact.astro';
+import Footer from '@/components/Footer.astro';
+
+// Islas interactivas (React + Motion)
+import Dock from '@/islands/Dock';
+import SubjectExplorer from '@/islands/SubjectExplorer';
+
+import { SUBJECTS } from '@/data/site';
+---
+
+<Layout>
+  <Header />
+
+  <main>
+    <Hero />
+
+    <section id="asignaturas" class="scroll-mt-24 border-t border-graphite-edge">
+      <div class="mx-auto max-w-[1152px] px-4 py-16 lg:py-32">
+        <SectionHeading
+          eyebrow="Asignaturas por curso"
+          title="¿Qué asignatura estás buscando?"
+          description="Elige tu curso y cuatrimestre. Si tu asignatura no aparece, pregúntame igualmente."
+        />
+        <div class="mt-12">
+          <!-- client:visible → el JS del explorador solo se descarga al llegar a esta sección -->
+          <SubjectExplorer client:visible subjects={SUBJECTS} />
+        </div>
+      </div>
+    </section>
+
+    <Pricing />
+    <Contact />
+  </main>
+
+  <Footer />
+
+  <!-- client:load → el Dock es navegación, debe funcionar desde el primer momento -->
+  <Dock client:load />
+</Layout>

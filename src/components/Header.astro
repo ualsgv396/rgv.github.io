@@ -1,0 +1,40 @@
+---
+import { GraduationCap } from 'lucide-react';
+import { NAV, SITE } from '@/data/site';
+import MailLink from './MailLink.astro';
+---
+
+<!-- Navegación principal flotante (estática). En móvil, la navegación la hace el Dock. -->
+<header class="sticky top-0 z-40 px-4 pt-4">
+  <nav
+    aria-label="Principal"
+    class="mx-auto flex max-w-[1152px] items-center justify-between gap-2 rounded-card border border-graphite-edge bg-obsidian-canvas/90 px-4 py-2 shadow-nav backdrop-blur"
+  >
+    <a href="#inicio" class="flex items-center gap-2">
+      <span class="grid size-8 place-items-center rounded-button bg-cloud-white text-obsidian-canvas">
+        <GraduationCap size={16} aria-hidden="true" />
+      </span>
+      <span class="leading-tight">
+        <span class="block text-nav-control font-semibold">{SITE.brand}</span>
+        <span class="block text-caption text-fog">{SITE.teacher}</span>
+      </span>
+    </a>
+
+    <ul class="hidden items-center gap-2 md:flex">
+      {
+        NAV.filter((item) => item.id !== 'inicio').map((item) => (
+          <li>
+            <a
+              href={`#${item.id}`}
+              class="rounded-button px-3 py-2 text-nav-control font-medium text-fog transition-colors hover:text-cloud-white"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <MailLink class="btn-pale" subject="Clases particulares - Consulta">Quiero empezar</MailLink>
+  </nav>
+</header>

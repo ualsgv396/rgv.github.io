@@ -1,0 +1,16 @@
+---
+/**
+ * Enlace de correo estático. Lleva un mailto completo de respaldo y el script
+ * del Layout lo cambia a Gmail web en ordenador.
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { mailtoHref } from '@/lib/mail';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  subject?: string;
+}
+
+const { subject = 'Clases particulares - Consulta', ...rest } = Astro.props;
+---
+
+<a href={mailtoHref(subject)} data-mail-subject={subject} {...rest}><slot /></a>
