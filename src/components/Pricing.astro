@@ -1,0 +1,29 @@
+---
+import { PLANS } from '@/data/site';
+import ShowQr from '@/islands/ShowQr';
+import PriceCard from './PriceCard.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="tarifas" class="scroll-mt-24 border-t border-graphite-edge">
+  <div class="mx-auto max-w-[1152px] px-4 py-16 lg:py-32">
+    <SectionHeading eyebrow="Modalidades y precios" title="Lo que cuesta, sin letra pequeña." />
+
+    <div class="mt-12 grid gap-4 lg:grid-cols-2">
+      <!-- Tarifas apiladas -->
+      <div class="flex flex-col gap-4">
+        {PLANS.map((plan) => <PriceCard plan={plan} />)}
+      </div>
+
+      <!-- Compartir: isla interactiva (se hidrata al hacerse visible) -->
+      <aside class="card flex flex-col justify-between gap-8 p-4 shadow-frame sm:p-6" aria-label="Compartir esta web">
+        <div>
+          <p class="text-caption text-ash uppercase">Pásalo a tu clase</p>
+          <h3 class="mt-2 text-feature-heading font-semibold">¿Os apuntáis varios? En grupo reducido sale a cuenta.</h3>
+          <p class="mt-2 text-body text-fog">Enséñales el código QR o mándales el enlace.</p>
+        </div>
+        <ShowQr client:visible />
+      </aside>
+    </div>
+  </div>
+</section>

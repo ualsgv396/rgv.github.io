@@ -1,0 +1,44 @@
+---
+import { ArrowUpRight, Clock, Mail } from 'lucide-react';
+import { SITE } from '@/data/site';
+import MailLink from './MailLink.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="contacto" class="scroll-mt-24 border-t border-graphite-edge">
+  <div class="mx-auto max-w-[1152px] px-4 py-16 lg:py-32">
+    <SectionHeading
+      eyebrow="Contacto y horarios"
+      title="Escríbeme y lo hablamos."
+      description="Cuéntame qué estudias y cuándo es el examen. Con eso ya podemos empezar."
+    />
+
+    <div class="mt-12 grid gap-4 lg:grid-cols-12">
+      <div class="card flex flex-col p-4 sm:p-6 lg:col-span-5">
+        <h3 class="flex items-center gap-2 text-nav-control font-medium text-fog">
+          <Clock size={16} aria-hidden="true" /> Horario de clases
+        </h3>
+        <p class="mt-6 text-feature-heading font-semibold">{SITE.schedule}</p>
+      </div>
+
+      <!-- Tarjeta pálida: la conversión principal del apartado -->
+      <MailLink
+        subject="Clases particulares - Consulta"
+        class="group flex flex-col justify-between gap-12 rounded-card border border-white/10 bg-paper-white p-4 text-charcoal-surface shadow-pale transition-colors hover:bg-cloud-white sm:p-6 lg:col-span-7"
+      >
+        <span class="flex items-center justify-between">
+          <Mail size={28} aria-hidden="true" />
+          <ArrowUpRight
+            size={20}
+            className="text-ash transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </span>
+        <span>
+          <b class="block text-feature-heading font-semibold">Escríbeme por Gmail</b>
+          <span class="mt-1 block text-nav-control text-ash">{SITE.email}</span>
+        </span>
+      </MailLink>
+    </div>
+  </div>
+</section>

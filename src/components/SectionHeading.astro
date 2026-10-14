@@ -1,0 +1,16 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}
+const { eyebrow, title, description } = Astro.props;
+---
+
+<div class="grid gap-4 lg:grid-cols-12 lg:items-end">
+  <div class="lg:col-span-7">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2 class="mt-4 text-[30px] leading-[1.11] font-medium sm:text-section-heading">{title}</h2>
+  </div>
+  {description && <p class="text-body text-fog lg:col-span-5 lg:justify-self-end">{description}</p>}
+</div>
