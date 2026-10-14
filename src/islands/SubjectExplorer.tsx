@@ -16,6 +16,8 @@ interface Props {
 }
 
 const LOGO = '/img/logoUal.png';
+// Sello de la UAL como marca de agua: invertido a blanco y fundido con el fondo oscuro
+const logoClass = 'pointer-events-none absolute select-none invert mix-blend-screen';
 
 export default function SubjectExplorer({ subjects, cursos = [1, 2] }: Props) {
   const [curso, setCurso] = useState<Curso>(2);
@@ -191,7 +193,7 @@ function SubjectCard({ subject: s, onOpen, onAsk }: { subject: Subject; onOpen: 
       className={`${slideClass} card flex cursor-pointer flex-col overflow-hidden shadow-card`}
     >
       <div className="relative flex min-h-48 flex-1 flex-col overflow-hidden border-b border-graphite-edge bg-true-black p-4">
-        <img src={LOGO} alt="" aria-hidden="true" className="pointer-events-none absolute -right-4 -bottom-4 size-32 opacity-[.08] invert" />
+        <img src={LOGO} alt="" aria-hidden="true" className={`${logoClass} -right-6 -bottom-6 size-40 opacity-20`} />
         <span className="w-fit rounded-badge border border-graphite-edge px-2 py-0.5 text-caption text-fog">
           {s.cuatri}º cuatrimestre · {s.kind}
         </span>
@@ -241,7 +243,7 @@ function SubjectCard({ subject: s, onOpen, onAsk }: { subject: Subject; onOpen: 
 function MoreCard() {
   return (
     <div className={`${slideClass} relative flex min-h-48 flex-col justify-center overflow-hidden rounded-card border border-dashed border-graphite-edge p-4`}>
-      <img src={LOGO} alt="" aria-hidden="true" className="pointer-events-none absolute -right-4 -bottom-4 size-32 opacity-[.06] invert" />
+      <img src={LOGO} alt="" aria-hidden="true" className={`${logoClass} -right-6 -bottom-6 size-40 opacity-20`} />
       <p className="text-subheading font-medium">Y más asignaturas por concretar...</p>
       <p className="mt-1 text-nav-control text-fog">
         ¿Buscas otra?{' '}
@@ -261,7 +263,7 @@ function EmptyState({ curso, cuatri }: { curso: Curso; cuatri: Cuatri }) {
       animate={{ opacity: 1, y: 0 }}
       className="relative mt-8 overflow-hidden rounded-card border border-dashed border-graphite-edge p-6 sm:p-8"
     >
-      <img src={LOGO} alt="" aria-hidden="true" className="pointer-events-none absolute -right-6 -bottom-6 size-40 opacity-[.06] invert" />
+      <img src={LOGO} alt="" aria-hidden="true" className={`${logoClass} -right-8 -bottom-8 size-48 opacity-20`} />
       <p className="text-caption text-ash uppercase">
         {curso}º curso · {cuatri}º cuatrimestre
       </p>
@@ -319,7 +321,7 @@ function SubjectModal({ subject: s, onClose, onAsk }: { subject: Subject; onClos
         </button>
 
         <div className="relative overflow-hidden border-b border-graphite-edge bg-true-black p-6 shadow-frame">
-          <img src={LOGO} alt="" aria-hidden="true" className="pointer-events-none absolute -right-6 -bottom-6 size-40 opacity-[.08] invert" />
+          <img src={LOGO} alt="" aria-hidden="true" className={`${logoClass} -right-8 -bottom-8 size-48 opacity-20`} />
           <span className="rounded-badge border border-graphite-edge px-2 py-0.5 text-caption text-fog">
             {s.curso}º curso · {s.cuatri}º cuatrimestre
           </span>
