@@ -1,6 +1,8 @@
 import { useEffect, useState, type ComponentType } from 'react';
 import { motion, type Transition } from 'motion/react';
-import { BookOpen, House, MessageSquare, Send, Wallet, type LucideProps } from 'lucide-react';
+import { BookOpen, House, MessageSquare, Wallet, type LucideProps } from 'lucide-react';
+import GmailIcon from '@/components/icons/GmailIcon';
+import { SITE } from '@/data/site';
 import { openMail } from '@/lib/mail';
 
 /* ============================================================
@@ -60,6 +62,7 @@ export default function Dock() {
               className="group relative"
               style={{ transformOrigin: 'bottom' }}
               whileHover={{ y: -4 }}
+              whileTap={{ scale: 0.9 }}
               animate={{ scale: bouncing === id ? 1.25 : 1, y: bouncing === id ? -6 : 0 }}
               transition={itemSpring}
             >
@@ -72,7 +75,7 @@ export default function Dock() {
                   bounce(id);
                 }}
                 className={`grid size-10 place-items-center rounded-full transition-colors ${
-                  isActive ? 'bg-graphite-edge text-cloud-white' : 'text-fog hover:text-cloud-white'
+                  isActive ? 'bg-graphite-edge text-cloud-white shadow-[0_0_0_1px_var(--color-accent-line),0_0_14px_-4px_var(--accent)]' : 'text-fog hover:bg-accent-soft hover:text-cloud-white'
                 }`}
               >
                 <Icon size={18} aria-hidden="true" />
@@ -80,7 +83,7 @@ export default function Dock() {
               <Tooltip label={label} />
               <span
                 aria-hidden="true"
-                className={`absolute -bottom-1.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-cloud-white transition-opacity duration-300 ${
+                className={`absolute -bottom-1.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_var(--accent)] transition-opacity duration-300 ${
                   isActive ? 'opacity-100' : 'opacity-0'
                 }`}
               />
@@ -94,6 +97,7 @@ export default function Dock() {
           className="group relative"
           style={{ transformOrigin: 'bottom' }}
           whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.9 }}
           animate={{ scale: bouncing === 'mail' ? 1.25 : 1, y: bouncing === 'mail' ? -6 : 0 }}
           transition={itemSpring}
         >
@@ -104,9 +108,9 @@ export default function Dock() {
               bounce('mail');
               openMail('Clases particulares - Consulta');
             }}
-            className="grid size-10 place-items-center rounded-full bg-paper-white text-charcoal-surface shadow-pale transition-colors hover:bg-cloud-white"
+            className="grid size-10 place-items-center rounded-full bg-paper-white text-charcoal-surface shadow-pale transition-[background-color,box-shadow] hover:bg-cloud-white hover:shadow-[var(--shadow-pale),0_0_16px_-2px_var(--accent)]"
           >
-            <Send size={18} aria-hidden="true" />
+            <GmailIcon size={20} variant={SITE.gmailIcon} />
           </button>
           <Tooltip label="Escríbeme" />
         </motion.li>

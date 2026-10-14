@@ -11,6 +11,8 @@ export const SITE = {
   teacherFirstName: 'Rafael',
   email: 'isqrafael@gmail.com',
   schedule: 'De lunes a viernes, mañanas y tardes',
+  /** Logo de Gmail en los botones de correo: 'color' (corporativo) o 'mono' (adaptado al tema oscuro) */
+  gmailIcon: 'color' as 'color' | 'mono',
 };
 
 export type Curso = 1 | 2;

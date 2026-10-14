@@ -16,7 +16,8 @@ import SectionHeading from './SectionHeading.astro';
       </div>
 
       <!-- Compartir: isla interactiva (se hidrata al hacerse visible) -->
-      <aside class="card flex flex-col justify-between gap-8 p-4 shadow-frame sm:p-6" aria-label="Compartir esta web">
+      <aside class="surface-raised card-interactive relative flex flex-col justify-between gap-8 overflow-hidden p-4 shadow-frame sm:p-6" aria-label="Compartir esta web">
+        <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-accent opacity-10 blur-3xl"></div>
         <div>
           <p class="text-caption text-ash uppercase">Pásalo a tu clase</p>
           <h3 class="mt-2 text-feature-heading font-semibold">¿Os apuntáis varios? En grupo reducido sale a cuenta.</h3>
