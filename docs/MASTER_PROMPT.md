@@ -24,7 +24,7 @@ Respeta siempre lo que se describe aquí: estructura, tokens de diseño, textos,
 - **Iconos:** `lucide-react`. En los `.astro` se renderizan sin JavaScript (la clase se pasa con `className`, no `class`).
 - **QR:** `qrcode.react` (`QRCodeSVG` para mostrar, `QRCodeCanvas` oculto a 1024 px para descargar).
 - **Fuente:** Inter (Google Fonts), sustituto de matterFont, con `font-feature-settings: "clig" 0, "liga" 0`.
-- **Despliegue:** Netlify. `netlify.toml` ejecuta `npm run build` y publica `dist/` con Node 22.
+- **Despliegue:** Vercel. `vercel.json` (framework `astro`) ejecuta `npm run build` y publica `dist/`; cada push a `main` se publica en producción.
 - **Requisitos locales:** Node ≥ 22.12. Comandos: `npm run dev` (http://localhost:4321), `npm run build`, `npm run preview`.
 
 ### Estructura de carpetas
