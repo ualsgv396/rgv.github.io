@@ -11,7 +11,7 @@ npm run build     # genera la web estática en dist/
 npm run preview   # sirve dist/ para revisarla antes de publicar
 ```
 
-Netlify usa `netlify.toml`: ejecuta `npm run build` y publica `dist/`.
+Se despliega en **Vercel** con `vercel.json`: ejecuta `npm run build` y publica `dist/`. Cada push a `main` genera un despliegue de producción.
 
 ## Estructura
 
